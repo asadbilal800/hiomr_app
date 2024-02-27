@@ -1,1 +1,159 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global styles and other imported style files */
+
+.form {
+    font-family: Raleway;
+}
+
+.title {
+    font-family: Cinzel !important;
+    color: #002952;
+    text-align: center; 
+}
+
+label, .cinzel {
+    font-family: Cinzel;
+    font-size: 20px;
+    color: #000
+}
+
+.radio, .raleway {
+  font-family: Raleway !important;
+  font-size: 20px;
+}
+
+input[type=radio] {
+    width: 20px;
+    height: 20px;
+}
+
+#userMessage, #navMessage {
+    font-family: Raleway;
+    font-size: 28px;
+}
+
+.steps {
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    width: 100%;
+    display: inline-flex;
+    justify-content: center
+}
+
+.step {
+    height: 50px;
+    width: 50px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: #03a9f4;
+    opacity: 0.5
+}
+
+.step.active {
+    color: #fff;
+    background-color: #03a9f4;
+    opacity: 1;
+}
+
+.step.completed {
+    background-color: #002952;
+    color: #003366;
+}
+
+.material-symbols-rounded {
+      font-size: 100px !important;
+}
+
+.navbutton {
+    background: rgba(255, 255, 255, 0.0); /* White background with 0% opacity */
+    border: none;
+    /*border-radius: 20%; */
+    color: #03a9f4;
+  }
+  
+    .navbutton:hover {
+      opacity: 0.5;
+    }
+  
+    /*This keeps the nav buttons the same color after clicking*/
+    .navbutton:visited {
+    color: #03a9f4 !important;
+}
+
+.btn-hiomr {
+    background-color: #002952 !important;
+    color: white !important;
+  }
+  
+  .btn-hiomr:hover {
+    background-color: #03a9f4 !important;
+  }
+  
+  .hiomr {
+    background-color: #002952 !important;
+  }
+  
+  a, a:visited {
+      color: blue;
+      text-decoration: none !important;
+      cursor: pointer;
+    }
+  
+  a:hover {
+    color: #03a9f4;
+  }
+  
+  .browser {
+      color: #03a9f4;
+      text-decoration: none;
+  }
+
+  /*The navigation in between pages */
+#navWhiteout {
+  width:100%;
+  height:100%; /* make sure you have set parents to a height of 100% too */
+  position: absolute;
+  left:0; top:0;
+  z-index:10 ; /* To make sure it is on top */
+  background-color: white;
+  /*opacity: 0.9; */
+}
+
+.fadefast { 
+    animation: fadeIn 0.5s;
+    -webkit-animation: fadeIn 0.5s;
+    -moz-animation: fadeIn 0.5s;
+    -o-animation: fadeIn 0.5s;
+    -ms-animation: fadeIn 0.5s;
+  }
+  
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @-moz-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @-webkit-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @-o-keyframes fadeIn {
+    0% { opacity: 0; }
+    90% { opacity: 0.9; }
+  }
+  
+  @-ms-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
