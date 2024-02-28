@@ -28,12 +28,18 @@
               <div class="col-sm-3 col-form-label" title="Required">
                 <label>Email*</label></div>
               <div class="col-sm-9">
-              <input required name="email" id='emailId' type="email" class="form-control form-control-lg" tabindex="1"
+              <input required 
+              name="email" 
+              id='emailId'
+              formControlName="email"
+              type="email" 
+              class="form-control form-control-lg" 
+              tabindex="1"
               placeholder="Where the report/notification should be sent"
-              title="Where you want the report/notification to go"/>
-              <!--oninput="validateEmailFormat('emailId')"-->
-              <!--onblur="checkEmailMatchDB('emailId')"-->
-              <!--/>-->
+              title="Where you want the report/notification to go"
+              oninput="validateEmailFormat('emailId')"
+              onblur="checkEmailMatchDB('emailId')"
+              />
               <div class="valid-feedback">Looks like an email.</div>
               <div class="invalid-feedback">Keep typing until it's a complete email</div>
               </div> 
@@ -46,10 +52,18 @@
             <div class="col-sm-3 col-form-label" title="Required">
               <label>Your Name*</label></div>
               <div class="col-sm-9">
-                <input required name="name" id='uploaderName' type="text" class="form-control form-control-lg" tabindex="2"
-                placeholder="Helpful in case of any uploading issues" minlength="2"
+                <input required 
+                name="name" 
+                id='uploaderName'
+                formControlName="uploaderName" 
+                type="text" 
+                class="form-control form-control-lg" 
+                tabindex="2"
+                placeholder="Helpful in case of any uploading issues" 
+                minlength="2"
                 title="This is in case of any problems, we can directly ask for the correct person to reupload, etc."
-                oninput="document.getElementById('uploaderName').classList.add('is-valid')"/>
+                oninput="document.getElementById('uploaderName').classList.add('is-valid')"
+                />
                 <div class="valid-feedback">"I read in a book once that a rose by any other name would smell as sweet, but I was never able to believe it. A rose just couldn’t smell as sweet if it was a thistle or a skunk cabbage." LMM</div>
                 <div class="invalid-feedback">Must be 2 or more characters. Sorry, Mr. T.</div>
                 <!-- <div class="invalid-tooltip">Enter your tooltip error here!</div> -->
@@ -62,8 +76,15 @@
               <div class="col-sm-9 raleway">Check above email for typos, then retype email below </div>-->
               <div class="col-sm-3 col-form-label mt-2"><label>Verify Email*</label></div>
               <div class="col-sm-9 mt-2">
-                <input onpaste="return false" id="recheckEmailinput" type="email"  class="form-control form-control-lg" placeholder="Please retype email"
-                oninput="validateEmailFormat('recheckEmailinput')"/> 
+                <input 
+                onpaste="return false" 
+                id="recheckEmailinput"
+                formControlName="recheckEmailinput"  
+                type="email"  
+                class="form-control form-control-lg" 
+                placeholder="Please retype email"
+                oninput="validateEmailFormat('recheckEmailinput')"
+                /> 
                 <div class="valid-feedback">Looks like the emails match.</div>
                 <div class="invalid-feedback">Keep typing until they match</div>
              </div>
