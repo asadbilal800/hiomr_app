@@ -12,44 +12,40 @@
                    
           <div class="row mt-1 mb-3">
                     <div class="col-sm-3 col-form-label"><label>Confirmation Sent</label></div>
-                    <div class="col-sm-4"> 
+                    <div class="col-sm-8 position-relative">
+                        <div class="input-group"> 
                     <input 
                     id ="confirm-email" 
                     formControlName="confirm-email"
                     class="form-control form-control-lg" 
                     title="Confirm Email Address" 
                     disabled/>
-                    </div>
-                    <!--<div class="col-sm-1 col-form-label"><label>Submitted</label></div>-->
-                    <div class="col-sm-3 position-relative">
-                        <input 
+                    <input 
                         id="confirm-submitted-by"
                         formControlName="confirm-submitted-by" 
                         class="form-control form-control-lg" 
                         title="Submitted By"
                         disabled/>
-                      </div>
-                  </div>
+                    </div>
+                    </div>
+            </div>
   
           <div class="row mb-3">
                     <div class="col-sm-3 col-form-label"><label>Patient</label></div>
-                    <div class="col-sm-2 position-relative">
-                      <input 
+                    <div class="col-sm-8 position-relative">
+                      <div class="input-group">
+                        <input 
                       id="confirm-patient"
                       formControlName="confirm-patient" 
                       class="form-control form-control-lg" 
                       title="First Name" 
                       disabled/>
-                    </div>
-                    <div class="col-sm-2 position-relative">
-                        <input 
+                      <input 
                         
-                        formControlName="confirm-patient" 
+                        formControlName="confirm-patient-last" 
                         class="form-control form-control-lg" 
                         title="Last Name" 
                         disabled/>
-                      </div>
-                      <div class="col-sm-2 position-relative">
                         <input 
                         type="date"
                         id="birth"
@@ -57,19 +53,25 @@
                         class="form-control form-control-lg" 
                         title="DOB" 
                         disabled/>
-                      </div>
-                      <div class="col-sm-1 position-relative">
-                        <input 
-                        
-                        formControlName="confirm-sex" 
-                        class="form-control form-control-lg" 
-                        title="Sex assigned at Birth" 
-                        disabled/>
-                      </div>
+                    
+                        <select 
+                      class="form-select form-select-lg"
+                      id="confirm-sex"
+                      formControlName="confirm-sex"                    
+                      title="Sex assigned at birth"
+                      disabled
+                      >
+                      <option value="1">M</option>
+                      <option value="2">F</option>
+                      <option value="9">I</option>
+                    </select>
+
+                    </div>
+                    </div>
                   </div>
             <div class="row mb-3">
                     <div class="col-sm-3 col-form-label"><label>Images</label></div>
-                    <div class="col-sm-7 position-relative">
+                    <div class="col-sm-8 position-relative">
                       <input 
                       id="confirm-images" 
                       formControlName="confirm-images"
@@ -79,7 +81,7 @@
                   </div>
             <div class="row mb-3">
                     <div class="col-sm-3 col-form-label"><label>Reason</label></div>
-                    <div class="col-sm-7 position-relative">
+                    <div class="col-sm-8 position-relative">
                       <input 
                       id="confirm-reason" 
                       formControlName="confirm-reason"
@@ -87,6 +89,16 @@
                       disabled/>
                     </div>
             </div>
+            <div class="row mb-3">
+                <div class="col-sm-3 col-form-label"><label>Notes</label></div>
+                <div class="col-sm-8 position-relative">
+                  <input 
+                  id="confirm-notes" 
+                  formControlName="confirm-notes"
+                  class="form-control form-control-lg" 
+                  disabled/>
+                </div>
+        </div>
               
      </div>
   </form> 
