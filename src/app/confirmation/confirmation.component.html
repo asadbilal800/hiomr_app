@@ -12,21 +12,22 @@
                    
           <div class="row mt-1 mb-3">
                     <div class="col-sm-3 col-form-label"><label>Confirmation Sent</label></div>
-                    <div class="col-sm-8 position-relative">
-                        <div class="input-group"> 
+                    <div class="col-sm-4">  
                     <input 
                     id ="confirm-email" 
                     formControlName="confirm-email"
                     class="form-control form-control-lg" 
                     title="Confirm Email Address" 
                     disabled/>
+                    </div>
+                    <div class="col-sm-2 col-form-label px-0"><label>Submitted By</label></div>
+                    <div class="col-sm-2 ps-0">
                     <input 
                         id="confirm-submitted-by"
                         formControlName="confirm-submitted-by" 
-                        class="form-control form-control-lg" 
+                        class="form-control form-control-lg ms-0 px-0" 
                         title="Submitted By"
                         disabled/>
-                    </div>
                     </div>
             </div>
   
@@ -43,7 +44,7 @@
                       <input 
                         
                         formControlName="confirm-patient-last" 
-                        class="form-control form-control-lg" 
+                        class="form-control form-control-lg pe-0" 
                         title="Last Name" 
                         disabled/>
                         <input 
@@ -55,7 +56,7 @@
                         disabled/>
                     
                         <select 
-                      class="form-select form-select-lg"
+                      class="form-select form-select-lg pe-0"
                       id="confirm-sex"
                       formControlName="confirm-sex"                    
                       title="Sex assigned at birth"
