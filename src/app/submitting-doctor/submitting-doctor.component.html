@@ -1,0 +1,90 @@
+
+<!-- Neither Bootstrap nor Font Awesome Icons work if these are not present on this page -->
+<!-- Font Awesome Icons CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<!-- Bootstrap 5.3 Styling -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+<div>
+    <h1 class="title">Case Submission Form</h1>
+      <div class="steps justify-content-center">
+        <span class="step active" title='Practice|Doctor Info'><i class="fa-solid fa-hospital"></i></span>
+        <span class="step" title='Patient Info'><i class="fa-solid fa-user"></i></span>
+        <span class="step" title='Reasons'><i class="fa-solid fa-address-card"></i></span>
+        <span class="step" title='Radiologist'><i class="fa-solid fa-user-doctor"></i></span>
+        <span class="step" title='Confirmation'><i class="fa-solid fa-check-to-slot"></i></span>
+      </div>
+  </div>
+   
+<div class="form container mt-4" id="submittingDoctor">
+  <div class="col-12 mt-0">
+            <div class="row mt-0 mb-3">
+            <h5 class="text-center raleway" id='uploaderHelloHeading'></h5></div>
+            
+            <!-- White Space Empty Rows -->     
+            <div class="row mt-4"></div>
+            <div class="row mt-4"></div>
+            
+
+            <div class="row mt-3">
+            <div class="col-sm-3"><label>Immediate Submitting Doctor*</label></div>
+            <div class="col-sm-9 raleway">
+            <!--List of current referring doctors from the practice-->
+            <div id='generateDoctors'></div>
+            </div>
+            </div>
+            
+            <!-- White Space Empty Rows -->
+            <div class="row mt-4"></div>
+
+            <!--New doctor radio choice-->
+            <div class="row mt-4 align-items-center">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-auto pe-0">
+            <div class="form-check">
+            <input 
+            class="form-check-input" 
+            value='new' 
+            type="radio" 
+            name="docRadio" 
+            tabindex="1">
+            <label class="form-check-label radio" for="docRadio">I am submitting for Dr.</label>
+            </div>
+            </div>
+            <div class="col-sm-auto mx-0 px-1">
+            <div class="input-group">
+            <input 
+            name="newDoctorFirstName" 
+            id='newDoctorFirstName' 
+            formControlName="newDoctorFirstName"
+            type="text" 
+            class="form-control form-control-lg text" 
+            placeholder="First Name" 
+            size="10" 
+            tabindex="2"
+            oninput="checkInputsValidation('newDoctorFirstName')"/>
+            <input 
+            name="newDoctorLastName" 
+            id='newDoctorLastName'   
+            formControlName="newDoctorLastName"
+            type="text" 
+            class="form-control form-control-lg text" 
+            placeholder="Last Name"    
+            size="10" 
+            tabindex="3"
+            oninput="checkInputsValidation('newDoctorLastName')"/> 
+            <!--<div class="invalid-tooltip">Must be 2 or more characters. Sorry, Mr. T!</div>-->
+            </div>
+            </div>
+            </div>
+
+            <!-- White Space Empty Rows -->     
+            <div class="row mt-4"></div>
+            <div class="row mt-4"></div>
+
+            <!-- User Message -->
+            <div class="row mt-4">
+            <div class="col text-center" id="userMessage"></div> 
+            </div>
+</div>
+</div>

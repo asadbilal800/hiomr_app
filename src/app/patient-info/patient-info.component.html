@@ -1,0 +1,145 @@
+
+<!-- Neither Bootstrap nor Font Awesome Icons work if these are not present on this page -->
+<!-- Font Awesome Icons CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<!-- Bootstrap 5.3 Styling -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+<form class="form container needs-validation" novalidate>
+    <div class="col-12">
+                
+                <div class="row mt-0" id="ImageType" title="Note the images you are uploading">
+                  <div class="col-sm-3 col-form-label"><label>I am Uploading*</label></div>
+                  <div class="col-sm position-relative">
+                    <div class="input-group input-group-lg">
+                      <label class="input-group-text" for="ImageType">Image Type</label>
+                    <select 
+                    class="form-select form-select-lg ImageType-Class" 
+                    id="ImageType" 
+                    formControlName="ImageType"
+                    tabindex="2">
+                      <option value="1" selected>CBCT</option>
+                      <option value="2">PAN</option>
+                      <option value="3">Intraoral Image or Set (FMX or BWX or PA or Occlusal)</option>
+                      <option value="4">CEPH</option>
+                      <option value="5">MRI</option>
+                      <option value="6">MDCT</option>
+                      <option value="7">Ultrasound</option>
+                      <option value="9">Other (Including any other 📷📄)</option>
+                    </select>
+                    </div>
+                  </div>
+          
+                  <div class="col-sm position-relative">
+                    <div class="input-group input-group-lg">
+                    <label class="input-group-text" for="dateOfImage">Image Date</label>
+                    <input required
+                    id='dateOfImage'
+                    formControlName="dateOfImage" 
+                    type="date"
+                    class="form-control form-control-lg dateOfImage-Class"
+                    tabindex="3"
+                    oninput="checkInputsValidation('dateOfImage')" 
+                    />
+                    <!-- <div class="invalid-tooltip">Please complete this field</div> -->
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="row mb-0"title="Note any additional CBCTs or image sets you upload. This way we can verify that we received everything you send.">
+                  <div>
+                  <label class="col-3 col-form-label">Another CBCT/Image? 
+                    <!--Duplicate Line Button-->
+                    <button  
+                    type="button" 
+                    class="btn btn-light btn-sm bg-transparent" 
+                    title="Describe Another Image You Are Uploading"
+                    onclick="copyLine()">➕</button>
+                          <button onclick="deleteLine()" type="button" class="btn btn-light btn-sm bg-transparent" title="Delete Extra Line">❌</button></label>
+                  </div>           
+                  </div>
+  
+  
+                <div class="row mb-2 align-items-center" title="Helpful for receipts and billing. Patient names will be ignored here">
+                  <div for="theirpatientnumber" class="col-sm-3 col-form-label"><label>Your Internal <br> Patient ID</label></div>
+                  <div class="col-sm position-relative">
+                    <input
+                  id='theirpatientnumber'
+                  formControlName="theirpatientnumber"
+                  placeholder="Optional: Used in invoices/non-encrypted messages (No Names)"
+                  type="text"
+                  class="form-control form-control-lg"
+                  tabindex="6"/>
+                  </div>
+                </div>
+  
+                <div class="row mb-3">
+                  <div class="col-sm-3 col-form-label">
+                    <label>Patient Name*</label>
+                  </div>
+                  <div class="col-sm position-relative">
+                    <label class="col-sm-3 col-form-label" hidden
+                      >pfirst</label>
+                    <input required                   
+                      id="pFirstName"
+                      formControlName="pFirstName"
+                      type="text"
+                      class="form-control form-control-lg"
+                      placeholder="First Name"
+                      tabindex="7"
+                      oninput="checkInputsValidation('pFirstName')"
+                    />
+                    <!-- <div class="invalid-tooltip">Please complete this field</div> -->
+                  </div>
+                  <div class="col-sm position-relative">
+                    <label hidden>plast</label>
+                    <input required                   
+                      id="pLastName"
+                      formControlName="pLastName"
+                      type="text"
+                      class="form-control form-control-lg"
+                      placeholder="Last Name"
+                      tabindex="7"
+                      oninput="checkInputsValidation('pLastName')"
+                    />
+                    <!-- <div class="invalid-tooltip">Please complete this field</div> -->
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-sm-3 col-form-label">
+                    <label>Birth*</label>
+                  </div>
+                  <div class="col-sm position-relative">
+                    <label hidden>birthday</label>
+                    <input required                   
+                      id="birth"
+                      formControlName="birth"
+                      type="date"
+                      class="form-control form-control-lg"
+                      title="When they came screaming into the world"
+                      tabindex="8"
+                      oninput="checkInputsValidation('birth')"
+                    />
+                    <!-- <div class="invalid-tooltip">Please complete this field</div> -->
+                  </div>
+                  <div class="col-sm position-relative">
+                    <label hidden>sex</label>
+                    <select required
+                      class="form-select form-select-lg"
+                      id="sex"
+                      formControlName="sex"                    
+                      title="Sex assigned at birth"
+                      tabindex="9"
+                      oninput="checkInputsValidation('sex')"
+                    >
+                      <option disabled selected value>Sex Assigned at Birth</option>
+                      <option value="1">Male</option>
+                      <option value="2">Female</option>
+                      <option value="9">Intersex</option>
+                    </select>
+                    <!-- <div class="invalid-tooltip">Please complete this field</div> -->
+                  </div>
+                </div>
+                <div>
+                </div>
+                </form> 
