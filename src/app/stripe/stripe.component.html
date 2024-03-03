@@ -1,0 +1,113 @@
+
+    <div class="spinner-border position-absolute top-50 start-50 d-none" role="status" id='spinner' style='z-index:99'>
+    <span class="visually-hidden">Loading...</span>
+    </div>
+    
+  
+  <div class='d-flex justify-content-center mt-1 dropdown-center' id='chooseAutopay'>
+      <button type="button" class="btn btn-payment dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" id='autopayButton' title='Preauthorize payment'>
+              <span id="payment-span">Authorize Autopay<br>With Discount</span> </button> 
+  
+    <div class="dropdown-menu" style="width: 700px;">
+      <div class='container-fluid'>
+    <form id="payment-form" class='mx-3'>
+  
+      <div id="payment-element">
+        <!-- Elements will create form elements here -->
+      </div>
+      <button id="submit" hidden>submit </button>
+      <div id="error-message">
+        <!-- Display error message to your customers here -->
+      </div>
+    </form>
+    <div class="alert alert-danger text-center mx-0 my-2 border-danger" id="stripe-error">Whoops, looks like there's an error.
+      Verify that all the above info is correct, and that you didn't just spend all your money in Vegas.</div>
+    <div class="alert alert-success text-center mx-0 my-2 border-success" id="stripe-success">Payment Preauthorization Successful
+    </div>
+    
+    <p class="stripe-text mb-0 text-start" id="stripe-text">Terms: This authorizes a charge <span style="font-weight:bold">ONLY</span> when your report is sent/released. <span style="font-weight:bold">All transactions encrypted and hosted by Stripe.</span><br>Greater bulk discounts available. See fee schedule for more information. 
+      <a href="https://stripe.com/docs/security/stripe" target="_blank" class='stripe-link' title='Security policies open in a new window'><strong>Stripe Security</strong></a>
+      <a href="https://www.healthyimageomr.com/about/" target="_blank" class='stripe-link'  title='Security policies open in a new window'><strong>| HIOMR Security & Fees</strong></a></p>
+  
+      <div class='d-flex justify-content-center mt-1' id='stripeAuthorizeButton'>
+    <button type="button" onclick="submitIntentForm(event)" class="btn btn-payment" id='StripeButton'>
+              <span>First Case Fee ($50)</span> </button>
+    </div>
+  
+    <div class='d-flex justify-content-center mt-1' id='stripeLogoInside'>
+      <a href="https://stripe.com/" target="_blank" title='Link opens in a new window'><img src="https://cdn.brandfolder.io/KGT2DTA4/at/rvgw5pc69nhv9wkh7rw8ckv/Powered_by_Stripe_-_blurple.svg" class="stripe-logo"  /></a>
+  </div>
+      
+    </div>
+      </div>
+  </div>
+  
+  <div class='container-fluid mb-1' >
+  <div class='row' id='invoiceMessage'><p class='raleway text-center align-middle mb-0'> OR </p></div>
+  <div class='d-flex justify-content-center'>
+      <button type="button" onclick="chooseInvoicing()" id='chooseInvoices' class="btn btn-payment" title='Send us an invoice after report is complete'>
+              <span>Invoice After<br>Without Discount</span> </button>
+              </div>
+              </div>
+  
+  <!--Prepayment Discount Dropdown Table-->
+    <div class="dropdown-center text-center" title='Dropdown Image' id='discountDropdown'>
+    <a class="dropdown-toggle stripe-text stripe-link"  data-bs-toggle="dropdown" aria-expanded="false"><strong>Autopay vs Invoice After</strong></a>
+      <div class="dropdown-menu" style="width: 600px;">
+        <div class='container-fluid'>
+    <table class="table table-sm stripe-text mb-0">
+    <thead>
+      <tr>
+        <th scope="col">First Case Fees</th>
+        <th scope="col">Preauthorize payment now</th>
+        <th scope="col">Pay after with invoice</th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      <tr>
+        <th scope="row">Standard Case Fee</th>
+        <td>$150</td>
+        <td>$150</td>
+      </tr>
+      <tr>
+        <th scope="row">First Case Discount</th>
+        <td>-$50</td>
+        <td></td>
+      </tr>
+      <tr>
+        <th scope="row">Digital Autopay Discount*</th>
+        <td>-$50</td>
+        <td></td>
+      </tr>
+      <tr>
+        <th scope="row">First Case Fee</th>
+        <td class="table-active">$50</td>
+        <td class="table-active">$150</td>
+      </tr>
+      <tr>
+        <th scope="row">Report Release</th>
+        <td>Upon completion</td>
+        <td>After payment received</td>
+      </tr>
+      <tr>
+        <th scope="row">Fee Charged</th>
+        <td>When the report is sent</td>
+        <td>When you pay the invoice</td>
+      </tr>
+      <tfoot>
+      <tr>
+        <th scope="row"></th>
+        <td colspan="2">*Discount continues for future cases. See the FAQ page. <br>Preauthorize/Digital Autopay is required for rush/stat reports.</td>
+      </tr>
+      </tfoot>
+    </tbody>
+    </table>
+    </div>
+    </div> 
+      </div>
+      <!--Prepayment Discount Dropdown Table--> 
+  
+  
+  <div class='d-flex justify-content-center mt-1' id='stripeLogoOutside'>
+      <a href="https://stripe.com/" target="_blank" title='Link opens in a new window'><img src="https://cdn.brandfolder.io/KGT2DTA4/at/rvgw5pc69nhv9wkh7rw8ckv/Powered_by_Stripe_-_blurple.svg" class="stripe-logo"  /></a>
+  </div>
