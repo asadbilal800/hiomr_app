@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { IApiBaseActions, ParamsType } from '../interfaces/api-base-actions.interface';
@@ -11,10 +11,10 @@ export class ApiHandlerService implements IApiBaseActions {
   constructor(public httpClient: HttpClient) {
   }
 
+
   Get(url: string, params?: ParamsType) {
-    return this.httpClient
-      .get<ApiBaseResponse>(url, {params: this.createParams(params)})
-      .pipe(tap((x) => this.HandleResponse(x)));
+        return this.httpClient
+      .get<ApiBaseResponse>(url, {headers: new HttpHeaders({ 'Content-Type': 'application/json' })});
   }
 
   Post(url: string, data: any, params?: ParamsType,headers?:any) {

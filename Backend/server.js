@@ -1,19 +1,25 @@
 // Importing required modules
 const express = require('express');
+const cors = require('cors');
 
 // Creating an instance of Express
 const app = express();
 const port = 3000; // on default it is this.
 
-// Define the /checkEmail endpoint
-app.get('/checkEmail', (req, res) => {
- //will call sql db to check if it exists.
-});
+app.use(cors({
+  origin: 'http://localhost:4200',
+  methods: 'POST,GET,PUT,OPTIONS,DELETE'
+}));
 
-function isValidEmailFormat(email) {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-}
+// Define the /checkEmail endpoint
+app.get('/checkEmailDB', async (req, res) => {
+    res.json({ message: 'Email not found from server' });
+  });
+ 
+ 
+ 
+
+
 
 // Start the server
 app.listen(port, () => {

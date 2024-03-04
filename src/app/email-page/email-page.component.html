@@ -37,8 +37,7 @@
               tabindex="1"
               placeholder="Where the report/notification should be sent"
               title="Where you want the report/notification to go"
-              oninput="validateEmailFormat('emailId')"
-              onblur="checkEmailMatchDB('emailId')"
+              (blur)="checkEmailMatchDB('emailId')"
               />
               <div class="valid-feedback">Looks like an email.</div>
               <div class="invalid-feedback">Keep typing until it's a complete email</div>
@@ -83,7 +82,6 @@
                 type="email"  
                 class="form-control form-control-lg" 
                 placeholder="Please retype email"
-                oninput="validateEmailFormat('recheckEmailinput')"
                 /> 
                 <div class="valid-feedback">Looks like the emails match.</div>
                 <div class="invalid-feedback">Keep typing until they match</div>
