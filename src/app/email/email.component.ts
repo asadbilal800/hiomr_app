@@ -3,11 +3,11 @@ import { ApiHandlerService } from '../shared/services/api-handler.service';
 import { environment } from '../../environments/environment';
 
 @Component({
-  selector: 'app-email-page',
+  selector: 'app-email',
   standalone: true,
   imports: [],
-  templateUrl: './email-page.component.html',
-  styleUrl: './email-page.component.css'
+  templateUrl: './email.component.html',
+  styleUrl: './email.component.css'
 })
 export class EmailPageComponent {
 
