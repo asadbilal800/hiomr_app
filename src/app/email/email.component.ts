@@ -1,20 +1,42 @@
 import { Component } from '@angular/core';
 import { ApiHandlerService } from '../shared/services/api-handler.service';
 import { environment } from '../../environments/environment';
+import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import { Observable, debounceTime, map, catchError, of,pipe } from 'rxjs';
 
 @Component({
   selector: 'app-email',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './email.component.html',
   styleUrl: './email.component.css'
 })
 export class EmailPageComponent {
 
-  constructor(private apiService: ApiHandlerService){}
+  myForm: FormGroup;
+  constructor(private apiService: ApiHandlerService,private formBuilder: FormBuilder){
+    this.myForm = this.formBuilder.group({
+      email: [this.emailAsyncValidator()],
+      uploaderName: ['', [Validators.required, Validators.minLength(2)]],
+      recheckEmailinput: ['', Validators.email],
+      // Add more form controls as needed
+    });
+  }
 
-  async checkEmailMatchDB(id: string){
-      let res = await this.apiService.Get(environment.api_url+'checkEmailDB').toPromise();
+   checkEmailMatchDB(id: string){
+      return this.apiService.Get(environment.api_url+'checkEmailDB');
+  }
+
+  emailAsyncValidator(): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      const email = control.value;
+
+      return this.checkEmailMatchDB(email).pipe(
+        debounceTime(300),
+        map(isAvailable => (isAvailable ? null : { emailTaken: true })),
+        catchError(() => of(null)) // Handle errors (optional)
+      );
+    };
   }
 
 } 
