@@ -11,4 +11,6 @@ export class WhoopsComponent {
 
   magnifyingGlass = "/assets/Magnifying Glass SVG.svg"
 
+  coronal = "src/assets/Image Guidelines/General Pain Coronal.jpg"
+
 }
