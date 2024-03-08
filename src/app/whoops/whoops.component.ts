@@ -9,4 +9,6 @@ import { Component } from '@angular/core';
 })
 export class WhoopsComponent {
 
+  magnifyingGlass = "/assets/Magnifying Glass SVG.svg"
+
 }
