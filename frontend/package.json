@@ -1,6 +1,7 @@
 {
   "name": "hiomr-app",
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -21,7 +22,9 @@
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-regular-svg-icons": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@google-cloud/cloud-sql-connector": "^1.2.3",
     "bootstrap": "^5.3.3",
+    "mysql2": "^3.9.2",
     "ngx-bootstrap": "^12.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
