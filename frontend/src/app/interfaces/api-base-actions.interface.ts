@@ -4,7 +4,7 @@ import {ApiBaseResponse} from './api-base-response.interface';
 export type ParamsType = { hideLoader?: boolean,retry?:boolean }
 
 export interface IApiBaseActions {
-  Get(url: string, params?: ParamsType): Observable<ApiBaseResponse>;
+  Get(url: string, params?: ParamsType);
 
   Post(url: string, data: any, params?: ParamsType): Observable<ApiBaseResponse>;
 

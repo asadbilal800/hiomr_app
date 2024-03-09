@@ -1,42 +1,58 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
-import { Observable, debounceTime, map, catchError, of } from 'rxjs';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { environment } from '../../../environments/environment.prod';
 import { ApiHandlerService } from '../../services/api-handler.service';
 
 @Component({
   selector: 'app-email',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule],
   templateUrl: './email.component.html',
   styleUrl: './email.component.css',
 })
 export class EmailPageComponent {
 
-  myForm: FormGroup;
+  emailForm: FormGroup;
+  saveEmailCheck: boolean = false;
+  emailFound = false;
   constructor(private apiService: ApiHandlerService,private formBuilder: FormBuilder){
-    this.myForm = this.formBuilder.group({
-      email: [this.emailAsyncValidator()],
-      uploaderName: ['', [Validators.required, Validators.minLength(2)]],
-      recheckEmailinput: ['', Validators.email],
-      // Add more form controls as needed
-    });
+
+    this.emailForm = this.formBuilder.group({
+      email: ['', [Validators.email,Validators.required]],
+      name: ['', [Validators.required, Validators.minLength(2)]],
+      recheckEmail: ['', [Validators.required,Validators.email]],
+    },{ validators: this.matchEmailsValidator.bind(this) });
+
   }
+
+  matchEmailsValidator(form: FormGroup): ValidationErrors | null {
+    let  email = form.get('email')?.value;
+    let  recheckEmail = form.get('recheckEmail')?.value;
+    return email === recheckEmail ? null : { notMatched: true };
+  }
+
+  async checkEmailFromDB(){
+    let emailValue = this.emailForm.get('email')?.value
+    if(emailValue){
+      let response = await this.checkEmailMatchDB(emailValue);
+      if(response?.IsSuccessful)
+      this.emailFound = true;
+    }   
+    }
 
    checkEmailMatchDB(id: string){
-      return this.apiService.Get(environment.api_url+'checkEmailDB');
+      return this.apiService.Get(environment.api_url+'checkEmailDB').toPromise();
   }
 
-  emailAsyncValidator(): AsyncValidatorFn {
-    return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      const email = control.value;
-
-      return this.checkEmailMatchDB(email).pipe(
-        debounceTime(300),
-        map(isAvailable => (isAvailable ? null : { emailTaken: true })),
-        catchError(() => of(null)) // Handle errors (optional)
-      );
-    };
-  }
+      // Getter function to easily access form controls
+      get formControls() {
+        return this.emailForm.controls
+      }
+      
+      // Getter function to easily access form controls
+      get formControl() {
+       return this.emailForm
+      }
 
 } 
