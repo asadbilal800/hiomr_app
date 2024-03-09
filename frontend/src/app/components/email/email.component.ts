@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { ApiHandlerService } from '../shared/services/api-handler.service';
-import { environment } from '../../environments/environment';
 import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
-import { Observable, debounceTime, map, catchError, of,pipe } from 'rxjs';
+import { Observable, debounceTime, map, catchError, of } from 'rxjs';
+import { environment } from '../../../environments/environment.prod';
+import { ApiHandlerService } from '../../services/api-handler.service';
 
 @Component({
   selector: 'app-email',
