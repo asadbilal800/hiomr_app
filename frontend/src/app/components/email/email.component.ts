@@ -9,7 +9,7 @@ import { ApiHandlerService } from '../../services/api-handler.service';
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './email.component.html',
-  styleUrl: './email.component.css'
+  styleUrl: './email.component.css',
 })
 export class EmailPageComponent {
 
