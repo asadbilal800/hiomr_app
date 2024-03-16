@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
-import { environment } from '../../../environments/environment.prod';
+import { environment } from '../../../environments/environment';
 import { ApiHandlerService } from '../../services/api-handler.service';
+import { EndpointURLS } from '../../global';
+import { EmailService } from '../../services/email.service';
 
 @Component({
   selector: 'app-email',
@@ -15,8 +17,8 @@ export class EmailPageComponent {
 
   emailForm: FormGroup;
   saveEmailCheck: boolean = false;
-  emailFound = false;
-  constructor(private apiService: ApiHandlerService,private formBuilder: FormBuilder){
+  emailFound:any = null;
+  constructor(private emailService: EmailService,private formBuilder: FormBuilder){
 
     this.emailForm = this.formBuilder.group({
       email: ['', [Validators.email,Validators.required]],
@@ -35,24 +37,20 @@ export class EmailPageComponent {
   async checkEmailFromDB(){
     let emailValue = this.emailForm.get('email')?.value
     if(emailValue){
-      let response = await this.checkEmailMatchDB(emailValue);
-      if(response?.IsSuccessful)
-      this.emailFound = true;
+      let response = await this.emailService.checkEmailMatchDB(emailValue);
+      this.emailFound = response?.response ? true : false;
     }   
     }
 
-   checkEmailMatchDB(id: string){
-      return this.apiService.Get(environment.api_url+'checkEmailDB').toPromise();
-  }
 
-      // Getter function to easily access form controls
-      get formControls() {
-        return this.emailForm.controls
-      }
+  // Getter function to easily access form controls
+  get formControls() {
+    return this.emailForm.controls
+  }
       
-      // Getter function to easily access form controls
-      get formControl() {
-       return this.emailForm
-      }
+  // Getter function to easily access form controls
+  get formControl() {
+    return this.emailForm
+  }
 
 } 

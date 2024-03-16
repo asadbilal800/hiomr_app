@@ -1,5 +1,5 @@
 export interface ApiBaseResponse {
   StatusCode: number;
-  Response: any;
+  response: any;
   IsSuccessful: boolean;
 }

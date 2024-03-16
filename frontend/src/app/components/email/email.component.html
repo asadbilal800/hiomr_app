@@ -48,7 +48,7 @@
         <!-- White Space Empty Row -->
         <div class="row mt-4"></div>
 
-        <div class="row mb-2" id='recheckEmail'>
+        <div class="row mb-2" id='recheckEmail' *ngIf="emailFound == false">
             <div class="col-sm-3 col-form-label mt-2"><label>Verify Email*</label></div>
             <div class="col-sm-9 mt-2">
               <input 
