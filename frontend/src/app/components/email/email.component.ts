@@ -5,6 +5,7 @@ import { environment } from '../../../environments/environment';
 import { ApiHandlerService } from '../../services/api-handler.service';
 import { EndpointURLS } from '../../global';
 import { EmailService } from '../../services/email.service';
+import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'app-email',
@@ -18,7 +19,7 @@ export class EmailPageComponent {
   emailForm: FormGroup;
   saveEmailCheck: boolean = false;
   emailFound:any = null;
-  constructor(private emailService: EmailService,private formBuilder: FormBuilder){
+  constructor(private emailService: EmailService,private formBuilder: FormBuilder,private sharedService:SharedService){
 
     this.emailForm = this.formBuilder.group({
       email: ['', [Validators.email,Validators.required]],
@@ -38,7 +39,10 @@ export class EmailPageComponent {
     let emailValue = this.emailForm.get('email')?.value
     if(emailValue){
       let response = await this.emailService.checkEmailMatchDB(emailValue);
-      this.emailFound = response?.response ? true : false;
+      this.emailFound = (response?.response != null) ? true : false;
+      if(response?.response?.length){
+        this.sharedService.emailRelatedData = response.response
+      }
     }   
     }
 
