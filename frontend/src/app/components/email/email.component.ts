@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
 export class EmailPageComponent {
 
   emailForm: FormGroup;
-  saveEmailCheck: boolean = false;
+  saveEmailFuture: boolean = false;
   emailFound:any = null;
   isVerified = false;
   constructor(
@@ -26,9 +26,9 @@ export class EmailPageComponent {
     private sharedService:SharedService,
     private router:Router
     ){
-
+    let storedEmailValue = localStorage.getItem('email');
     this.emailForm = this.formBuilder.group({
-      email: ['', [Validators.email,Validators.required]],
+      email: [storedEmailValue ?? '', [Validators.email,Validators.required]],
       name: ['', [Validators.required, Validators.minLength(2)]],
       recheckEmail: ['', [Validators.required,Validators.email]],
     },{ validators: this.matchEmailsValidator.bind(this) });
@@ -66,6 +66,9 @@ export class EmailPageComponent {
   }
 
   navigate(){
+    if(this.saveEmailFuture && !!this.emailForm.get('email')?.value) localStorage.setItem('email',this.emailForm.get('email')?.value);
+    else localStorage.removeItem('email');
+    
     let route:string =  this.emailFound ? RoutePaths.SubmittingDoctor : RoutePaths.MatchPractice;
     this.router.navigate([route]);
   }
