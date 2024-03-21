@@ -26,6 +26,8 @@ export class EmailPageComponent {
     private sharedService:SharedService,
     private router:Router
     ){
+
+    this.sharedService.isInProgress = true;
     let storedEmailValue = localStorage.getItem('email');
     this.emailForm = this.formBuilder.group({
       email: [storedEmailValue ?? '', [Validators.email,Validators.required]],
