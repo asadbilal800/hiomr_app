@@ -5,7 +5,8 @@ import { environment } from '../../../environments/environment';
 import { ApiHandlerService } from '../../services/api-handler.service';
 import { EndpointURLS } from '../../global';
 import { EmailService } from '../../services/email.service';
-import { SharedService } from '../../services/shared.service';
+import { RoutePaths, SharedService } from '../../services/shared.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-email',
@@ -19,7 +20,12 @@ export class EmailPageComponent {
   emailForm: FormGroup;
   saveEmailCheck: boolean = false;
   emailFound:any = null;
-  constructor(private emailService: EmailService,private formBuilder: FormBuilder,private sharedService:SharedService){
+  isVerified = false;
+  constructor(
+    private emailService: EmailService,private formBuilder: FormBuilder,
+    private sharedService:SharedService,
+    private router:Router
+    ){
 
     this.emailForm = this.formBuilder.group({
       email: ['', [Validators.email,Validators.required]],
@@ -35,7 +41,8 @@ export class EmailPageComponent {
     return email === recheckEmail ? null : { notMatched: true };
   }
 
-  async checkEmailFromDB(){
+  async checkEmailFromDB(reCheck:boolean = false){
+    if(reCheck && this.emailForm.hasError('notMatched')) return;
     let emailValue = this.emailForm.get('email')?.value
     if(emailValue){
       let response = await this.emailService.checkEmailMatchDB(emailValue);
@@ -43,6 +50,7 @@ export class EmailPageComponent {
       if(response?.response?.length){
         this.sharedService.emailRelatedData = response.response
       }
+    if(reCheck || this.emailFound) this.isVerified = true;
     }   
     }
 
@@ -55,6 +63,11 @@ export class EmailPageComponent {
   // Getter function to easily access form controls
   get formControl() {
     return this.emailForm
+  }
+
+  navigate(){
+    let route:string =  this.emailFound ? RoutePaths.SubmittingDoctor : RoutePaths.MatchPractice;
+    this.router.navigate([route]);
   }
 
 } 

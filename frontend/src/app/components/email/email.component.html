@@ -55,6 +55,7 @@
               formControlName="recheckEmail"
               id="recheckEmailinput"
               type="email"  class="form-control form-control-lg" 
+              (blur)="checkEmailFromDB(true)"
               placeholder="Please retype email"
               [ngClass]="{'is-invalid': formControl.hasError('notMatched') && (formControls['recheckEmail'].dirty || formControls['recheckEmail'].touched), 'is-valid': !formControl.hasError('notMatched') && (formControls['recheckEmail'].dirty || formControls['recheckEmail'].touched)}"
               />
@@ -71,6 +72,7 @@
 
         <!-- Save Email Row -->
         <div class="row mb-4 raleway" id="saveEmailRow" 
+        *ngIf="emailFound == false"
         title="So I don't have to keep typing each time it like a disgruntled pelican">
         <div class="col-sm-3"></div>
         <div class="col-sm-9">
@@ -80,6 +82,15 @@
         <label class="form-check-label raleway" for="saveEmailCheckbox"> Save my email on this page for the future so I don't have to keep typing it
         </label> 
         </div>
+        </div>
+
+        <!-- Nav Button Forward-->
+        <div class="col"
+        *ngIf="isVerified">
+        <a class="navbutton position-absolute top-50 end-0 translate-middle-y fadefast" 
+         (click)="navigate()" role="button">
+         <span class="material-symbols-rounded">arrow_circle_right</span>
+         </a>
         </div>
         
         <!-- White Space Empty Row -->
