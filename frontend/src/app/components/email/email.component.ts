@@ -68,10 +68,11 @@ export class EmailPageComponent {
   }
 
   navigate(){
+    
     if(this.saveEmailFuture && !!this.emailForm.get('email')?.value) localStorage.setItem('email',this.emailForm.get('email')?.value);
     else localStorage.removeItem('email');
     
-    let route:string =  this.emailFound ? RoutePaths.SubmittingDoctor : RoutePaths.MatchPractice;
+    let route:string =  'home/' + (this.emailFound ? RoutePaths.SubmittingDoctor : RoutePaths.MatchPractice);
     this.router.navigate([route]);
   }
 
