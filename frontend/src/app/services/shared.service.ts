@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class SharedService {
 
   emailRelatedData: any = {};
+  userData: any = {};
   isInProgress = false;
   constructor() { }
 }

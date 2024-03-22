@@ -22,12 +22,9 @@ export class MatchPracticeComponent {
     private sharedService:SharedService,
     private router:Router
     ){
-
-    this.sharedService.isInProgress = true;
-    let storedEmailValue = localStorage.getItem('email');
     this.matchPracticeForm = this.formBuilder.group({
-      email: [{value:storedEmailValue ?? '',disabled: true}, [Validators.email,Validators.required]],
-      name: [{value:'', disabled: true},, [Validators.required, Validators.minLength(2)]],
+      email: [{value:this.sharedService.emailRelatedData.email ?? '',disabled: true}, [Validators.email,Validators.required]],
+      name: [{value:this.sharedService.emailRelatedData.name ?? '', disabled: true}, [Validators.required, Validators.minLength(2)]],
       practiceName: ['', [Validators.required,Validators.email]],
     });
 

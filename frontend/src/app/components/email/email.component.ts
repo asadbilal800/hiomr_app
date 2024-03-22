@@ -50,7 +50,7 @@ export class EmailPageComponent {
       let response = await this.emailService.checkEmailMatchDB(emailValue);
       this.emailFound = (response?.response != null) ? true : false;
       if(response?.response?.length){
-        this.sharedService.emailRelatedData = response.response
+        this.sharedService.userData = response.response
       }
     if(reCheck || this.emailFound) this.isVerified = true;
     }   
@@ -71,6 +71,7 @@ export class EmailPageComponent {
     
     if(this.saveEmailFuture && !!this.emailForm.get('email')?.value) localStorage.setItem('email',this.emailForm.get('email')?.value);
     else localStorage.removeItem('email');
+    this.sharedService.emailRelatedData = this.emailForm.value;
     
     let route:string =  'home/' + (this.emailFound ? RoutePaths.SubmittingDoctor : RoutePaths.MatchPractice);
     this.router.navigate([route]);
