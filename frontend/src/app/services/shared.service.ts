@@ -11,7 +11,7 @@ export class SharedService {
 }
 
 export enum RoutePaths {
-  EmailPage = 'email-page',
+  EmailPage = 'email',
   SubmittingDoctor = 'submitting-doctor',
   MatchPractice = 'match-practice'
 }
