@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RoutePaths, SharedService } from '../../services/shared.service';
+declare var google: any;
+
 
 @Component({
   selector: 'app-match-practice',
@@ -11,7 +13,7 @@ import { RoutePaths, SharedService } from '../../services/shared.service';
   templateUrl: './match-practice.component.html',
   styleUrl: './match-practice.component.css',
 })
-export class MatchPracticeComponent {
+export class MatchPracticeComponent implements AfterViewInit {
 
   matchPracticeForm: FormGroup;
   saveEmailFuture: boolean = false;
@@ -28,6 +30,94 @@ export class MatchPracticeComponent {
       practiceName: ['', [Validators.required,Validators.email]],
     });
 
+  }
+  ngAfterViewInit(): void {
+    const script = document.createElement('script');
+    script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyA2t8G0nk86Vu-T8SMaPX2gaCHUzWGcBKA&libraries=places';
+    document.body.appendChild(script);
+    script.onload = function(){
+      // google.script.run.deletePractiseAddress();
+      let input: any = document.getElementById('practiseName');
+      const options = {
+        fields: ["ALL"],
+        strictBounds: false,
+        types: ["establishment"],
+        componentRestrictions: {country: "us"}
+        
+      };
+        var autocomplete: any = new google.maps.places.Autocomplete(input,options);
+        
+        // Add a listener to the Autocomplete object to capture the place details
+        autocomplete.addListener('place_changed', function() {
+          (document.getElementById("userMessage") as any).innerHTML = 'Matching you to this office, just a moment...' ;
+          var place: any = autocomplete.getPlace();
+          console.log(place);
+          var streetAddress = '';
+          var city = '';
+          var zip = '';
+          var phone = '';
+          var state = '';
+          var name = '';
+          var website = place?.website;
+          var practiseName;
+          var typedEmail;
+    
+    
+          if(place?.formatted_phone_number){
+            phone = place.formatted_phone_number
+          }
+    
+          if(place?.name){
+            name = place.name;
+            practiseName = place?.name;
+            const delimiter1 = ',';
+            const delimiter2 = ';';
+            const delimiter3 = '|';
+            practiseName = name.split(',').flatMap(x => x.split('|')).flatMap(x => x.split('-'))[0];
+            practiseName  = practiseName.replace(/[^a-zA-Z ]/g, "");
+            let practiceSubDetails = getSpecficAddress(place.address_components)
+            if(practiceSubDetails) sessionStorage.setItem('practiceSubDetails',practiceSubDetails);
+            else sessionStorage.removeItem('practiceSubDetails');
+            localStorage.setItem('practiceName',practiseName);
+    
+    
+          }
+          
+          // Loop through the address components of the place to find the street address, city, zip code, and phone number
+          place.address_components.forEach(function(component) {
+            if (component.types.includes('street_number')) {
+              streetAddress += component.long_name + ' ';
+            }
+            if (component.types.includes('route')) {
+              streetAddress += component.long_name;
+            }
+            if (component.types.includes('locality')) {
+              city = component.long_name;
+            }
+            if (component.types.includes('postal_code')) {
+              zip = component.long_name;
+            }
+    
+            if(component.types.includes('administrative_area_level_1')){
+              state = component.short_name;
+            }
+    
+          });
+    
+          let address = streetAddress + '|' + city + '|' + zip + '|' + phone + '|' + state + '|' + typedEmail + '|' + practiseName + "|" + website;
+          // google.script.run.setPractiseAddress(address);
+          // navigateAndStorePractiseName();
+        });
+    }
+    function getSpecficAddress(addressComponents) {
+      for (let i = 0; i < addressComponents.length; i++) {
+          const component = addressComponents[i];
+          if (component.types && component.types.includes("subpremise")) {
+              return component.long_name || null;
+          }
+      }
+      return null;
+  }
   }
 
   // Getter function to easily access form controls
