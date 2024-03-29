@@ -17,7 +17,7 @@ export class MatchPracticeComponent implements AfterViewInit {
 
   matchPracticeForm: FormGroup;
   saveEmailFuture: boolean = false;
-  foundPractice:any = false;
+  foundPractice:any = null;
   isVerified = false;
   constructor(
     private formBuilder: FormBuilder,
@@ -107,7 +107,7 @@ export class MatchPracticeComponent implements AfterViewInit {
     
           let address = streetAddress + '|' + city + '|' + zip + '|' + phone + '|' + state + '|' + typedEmail + '|' + practiseName + "|" + website;
           (window as any)._this.sharedService.practiceAddress = address;
-          // navigateAndStorePractiseName();
+          (window as any)._this.processMatchPracticeDetails();
         });
     }
     function getSpecficAddress(addressComponents) {
@@ -131,9 +131,11 @@ export class MatchPracticeComponent implements AfterViewInit {
     return this.matchPracticeForm
   }
 
-  navigate(){
-    
-    
+  processMatchPracticeDetails(){
+    alert('fire')
+  }
+
+  navigate(){  
     let route:string =  'home/' + (this.foundPractice ? RoutePaths.SubmittingDoctor : RoutePaths.Registration);
     this.router.navigate([route]);
   }

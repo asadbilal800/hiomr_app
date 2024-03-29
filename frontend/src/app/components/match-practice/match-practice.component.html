@@ -46,6 +46,7 @@
 
         <!-- Nav Button Forward-->
         <div class="col"
+        *ngIf="foundPractice == true || foundPractice == false"
         >
         <a class="navbutton position-absolute top-50 end-0 translate-middle-y fadefast" 
          (click)="navigate()" role="button">
