@@ -11,7 +11,8 @@ export class MatchPracticeService {
   constructor(private apiService: ApiHandlerService) { }
 
   
-  checkMatchPractice(email: string){
-    return this.apiService.Get(environment.api_url+ EndpointURLS.MatchPracticeDb+'?email='+email).toPromise();
+  checkMatchPractice(payload) {
+    return this.apiService.Post(environment.api_url + EndpointURLS.MatchPracticeDb,payload).toPromise();
 }
+
 }

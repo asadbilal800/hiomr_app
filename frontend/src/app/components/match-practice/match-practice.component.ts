@@ -3,6 +3,7 @@ import { AfterViewInit, Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RoutePaths, SharedService } from '../../services/shared.service';
+import { MatchPracticeService } from '../../services/match-practice.service';
 declare var google: any;
 
 
@@ -22,7 +23,8 @@ export class MatchPracticeComponent implements AfterViewInit {
   constructor(
     private formBuilder: FormBuilder,
     private sharedService:SharedService,
-    private router:Router
+    private router:Router,
+    private matchPracticeService: MatchPracticeService
     ){
     this.matchPracticeForm = this.formBuilder.group({
       email: [{value:this.sharedService.emailRelatedData.email ?? '',disabled: true}, [Validators.email,Validators.required]],
@@ -75,11 +77,11 @@ export class MatchPracticeComponent implements AfterViewInit {
             const delimiter2 = ';';
             const delimiter3 = '|';
             practiseName = name.split(',').flatMap(x => x.split('|')).flatMap(x => x.split('-'))[0];
-            practiseName  = practiseName.replace(/[^a-zA-Z ]/g, "");
+            practiseName  = practiseName.replace(/[^a-zA-Z ]/g, "").trim();
             let practiceSubDetails = getSpecficAddress(place.address_components)
-            if(practiceSubDetails) sessionStorage.setItem('practiceSubDetails',practiceSubDetails);
-            else sessionStorage.removeItem('practiceSubDetails');
-            localStorage.setItem('practiceName',practiseName);
+            // if(practiceSubDetails) sessionStorage.setItem('practiceSubDetails',practiceSubDetails);
+            // else sessionStorage.removeItem('practiceSubDetails');
+            // localStorage.setItem('practiceName',practiseName,state);
     
     
           }
@@ -107,7 +109,7 @@ export class MatchPracticeComponent implements AfterViewInit {
     
           let address = streetAddress + '|' + city + '|' + zip + '|' + phone + '|' + state + '|' + typedEmail + '|' + practiseName + "|" + website;
           (window as any)._this.sharedService.practiceAddress = address;
-          (window as any)._this.processMatchPracticeDetails();
+          (window as any)._this.processMatchPracticeDetails(practiseName,state);
         });
     }
     function getSpecficAddress(addressComponents) {
@@ -131,9 +133,22 @@ export class MatchPracticeComponent implements AfterViewInit {
     return this.matchPracticeForm
   }
 
-  processMatchPracticeDetails(){
-    alert('fire')
+ async processMatchPracticeDetails(practiseName:any,state:any){
+    if(this.sharedService.practiceAddress){
+      let payload:any = {
+        emailId: this.sharedService.generateUUID(),
+        emailName: this.matchPracticeForm.get('email')?.value,
+        practiceName: practiseName?.trim(),
+        stateName: state?.trim()
+      };
+      let result = await this.matchPracticeService.checkMatchPractice(payload);
+      if(result?.response){
+      this.foundPractice = true;
+      this.sharedService.matchPracticeData = result.response;
   }
+  else this.foundPractice = false;
+  }
+}
 
   navigate(){  
     let route:string =  'home/' + (this.foundPractice ? RoutePaths.SubmittingDoctor : RoutePaths.Registration);
