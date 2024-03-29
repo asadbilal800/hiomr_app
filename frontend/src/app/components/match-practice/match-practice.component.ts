@@ -17,7 +17,7 @@ export class MatchPracticeComponent implements AfterViewInit {
 
   matchPracticeForm: FormGroup;
   saveEmailFuture: boolean = false;
-  emailFound:any = null;
+  foundPractice:any = false;
   isVerified = false;
   constructor(
     private formBuilder: FormBuilder,
@@ -32,6 +32,7 @@ export class MatchPracticeComponent implements AfterViewInit {
 
   }
   ngAfterViewInit(): void {
+    (window as any)._this = this;
     const script = document.createElement('script');
     script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyA2t8G0nk86Vu-T8SMaPX2gaCHUzWGcBKA&libraries=places';
     document.body.appendChild(script);
@@ -105,7 +106,7 @@ export class MatchPracticeComponent implements AfterViewInit {
           });
     
           let address = streetAddress + '|' + city + '|' + zip + '|' + phone + '|' + state + '|' + typedEmail + '|' + practiseName + "|" + website;
-          // google.script.run.setPractiseAddress(address);
+          (window as any)._this.sharedService.practiceAddress = address;
           // navigateAndStorePractiseName();
         });
     }
@@ -132,10 +133,8 @@ export class MatchPracticeComponent implements AfterViewInit {
 
   navigate(){
     
-    if(this.saveEmailFuture && !!this.matchPracticeForm.get('email')?.value) localStorage.setItem('email',this.matchPracticeForm.get('email')?.value);
-    else localStorage.removeItem('email');
     
-    let route:string =  'home/' + (this.emailFound ? RoutePaths.SubmittingDoctor : RoutePaths.MatchPractice);
+    let route:string =  'home/' + (this.foundPractice ? RoutePaths.SubmittingDoctor : RoutePaths.Registration);
     this.router.navigate([route]);
   }
 

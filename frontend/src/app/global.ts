@@ -1,3 +1,4 @@
 export const EndpointURLS = {
-  CheckEmailDb: 'checkEmailDB'
+  CheckEmailDb: 'checkEmailDB',
+  MatchPracticeDb: 'checkMatchPractice'
 }
