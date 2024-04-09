@@ -27,5 +27,6 @@ export enum RoutePaths {
   EmailPage = 'email',
   SubmittingDoctor = 'submitting-doctor',
   MatchPractice = 'match-practice',
-  Registration = 'registration'
+  Registration = 'registration',
+  PatientForm = 'patientForm'
 }
