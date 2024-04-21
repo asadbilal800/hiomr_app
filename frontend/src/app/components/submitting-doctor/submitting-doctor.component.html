@@ -24,8 +24,8 @@
             <div class="col-sm-9 raleway">
             <!--List of current referring doctors from the practice-->
             <div *ngFor="let doctor of allUserData">
-              <label [for]="'doctorId_' + doctor.doctorid">
-                <input type="radio" [id]="'doctorId_' + doctor.doctorid"  [value]="doctor.firstName + ' ' + doctor.lastName">
+              <label [for]="doctor.doctorid">
+                <input type="radio" [id]="doctor.doctorid" [name]="doctor.doctorid">
                 I am submitting for Dr. {{ doctor.firstname }} {{ doctor.lastname }}
               </label>
               <br> <!-- Add a line break after each set of radio buttons -->
