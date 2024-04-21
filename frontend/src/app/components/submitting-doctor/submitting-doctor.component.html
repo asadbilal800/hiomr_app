@@ -25,7 +25,7 @@
             <!--List of current referring doctors from the practice-->
             <div *ngFor="let doctor of allUserData">
               <label [for]="doctor.doctorid">
-                <input type="radio" [id]="doctor.doctorid" [name]="doctor.doctorid">
+                <input type="radio" [id]="doctor.doctorid" name="docSelect">
                 I am submitting for Dr. {{ doctor.firstname }} {{ doctor.lastname }}
               </label>
               <br> <!-- Add a line break after each set of radio buttons -->
@@ -45,7 +45,7 @@
             class="form-check-input" 
             value='new' 
             type="radio" 
-            name="docRadio" 
+            name="docSelect"
             tabindex="1">
             <label class="form-check-label radio" for="docRadio">I am submitting for Dr.</label>
             </div>
