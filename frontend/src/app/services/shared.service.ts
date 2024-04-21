@@ -10,6 +10,8 @@ export class SharedService {
   isInProgress = false;
   practiceAddress:any;
   matchPracticeData: any = null as any;
+  selectedDoctorId: string ='';
+  newDoctorScenario =  false;
 
   constructor() { 
   }

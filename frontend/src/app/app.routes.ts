@@ -9,6 +9,7 @@ export const routes: Routes = [
   { path: 'submitting-doctor', loadComponent: () => import('./components/submitting-doctor/submitting-doctor.component').then(mod => mod.SubmittingDoctorComponent),canActivate:[AuthGuard] },
   { path: 'match-practice', loadComponent: () => import('./components/match-practice/match-practice.component').then(mod => mod.MatchPracticeComponent),canActivate:[AuthGuard]},
   { path: 'registration', loadComponent: () => import('./components/registration/registration.component').then(mod => mod.RegistrationComponent)},
+  { path: 'patientForm', loadComponent: () => import('./components/patient-info/patient-info.component').then(mod => mod.PatientInfoComponent),canActivate:[AuthGuard]},
   { path: '',   redirectTo: 'email', pathMatch: 'full'}, // Redirect empty path to email-page
 ]
 },

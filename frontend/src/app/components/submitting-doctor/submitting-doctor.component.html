@@ -25,7 +25,9 @@
             <!--List of current referring doctors from the practice-->
             <div *ngFor="let doctor of allUserData">
               <label [for]="doctor.doctorid">
-                <input type="radio" [id]="doctor.doctorid" name="docSelect">
+                <input type="radio" [id]="doctor.doctorid" name="docSelect" [value]="doctor.doctorid"
+                (change)="validate($event)"
+                >
                 I am submitting for Dr. {{ doctor.firstname }} {{ doctor.lastname }}
               </label>
               <br> <!-- Add a line break after each set of radio buttons -->
@@ -46,6 +48,8 @@
             value='new' 
             type="radio" 
             name="docSelect"
+            value=""
+            (change)="validate($event)"
             tabindex="1">
             <label class="form-check-label radio" for="docRadio">I am submitting for Dr.</label>
             </div>
@@ -53,25 +57,21 @@
             <div class="col-sm-auto mx-0 px-1">
             <div class="input-group">
             <input 
-            name="newDoctorFirstName" 
-            id='newDoctorFirstName' 
-            formControlName="newDoctorFirstName"
-            type="text" 
-            class="form-control form-control-lg text" 
-            placeholder="First Name" 
-            size="10" 
-            tabindex="2"
-            oninput="checkInputsValidation('newDoctorFirstName')"/>
+              type="text" 
+              class="form-control form-control-lg text" 
+              placeholder="First Name"    
+              size="10" 
+              [(ngModel)]="firstNameDoctor"
+              (ngModelChange)="onNameChange()"
+              /> 
             <input 
-            name="newDoctorLastName" 
-            id='newDoctorLastName'   
-            formControlName="newDoctorLastName"
             type="text" 
             class="form-control form-control-lg text" 
             placeholder="Last Name"    
             size="10" 
-            tabindex="3"
-            oninput="checkInputsValidation('newDoctorLastName')"/> 
+            [(ngModel)]="lastNameDoctor"
+            (ngModelChange)="onNameChange()"
+            /> 
             <!--<div class="invalid-tooltip">Must be 2 or more characters. Sorry, Mr. T!</div>-->
             </div>
             </div>
@@ -80,6 +80,15 @@
             <!-- White Space Empty Rows -->     
             <div class="row mt-4"></div>
             <div class="row mt-4"></div>
+
+        <!-- Nav Button Forward-->
+        <div class="col"
+        *ngIf="okToNavigate">
+        <a class="navbutton position-absolute top-50 end-0 translate-middle-y fadefast" 
+         (click)="navigate()" role="button">
+         <span class="material-symbols-rounded">arrow_circle_right</span>
+         </a>
+        </div>
 
             <!-- User Message -->
             <div class="row mt-4">
