@@ -23,8 +23,14 @@
             <div class="col-sm-3"><label>Immediate Submitting Doctor*</label></div>
             <div class="col-sm-9 raleway">
             <!--List of current referring doctors from the practice-->
-            <div id='generateDoctors'></div>
+            <div *ngFor="let doctor of allUserData">
+              <label [for]="'doctorId_' + doctor.doctorid">
+                <input type="radio" [id]="'doctorId_' + doctor.doctorid"  [value]="doctor.firstName + ' ' + doctor.lastName">
+                I am submitting for Dr. {{ doctor.firstname }} {{ doctor.lastname }}
+              </label>
+              <br> <!-- Add a line break after each set of radio buttons -->
             </div>
+            
             </div>
             
             <!-- White Space Empty Rows -->
