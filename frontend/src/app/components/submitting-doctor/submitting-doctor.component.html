@@ -5,18 +5,8 @@
 <!-- Bootstrap 5.3 Styling -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
-<div>
-    <h1 class="title">Case Submission Form</h1>
-      <div class="steps justify-content-center">
-        <span class="step active" title='Practice|Doctor Info'><i class="fa-solid fa-hospital"></i></span>
-        <span class="step" title='Patient Info'><i class="fa-solid fa-user"></i></span>
-        <span class="step" title='Reasons'><i class="fa-solid fa-address-card"></i></span>
-        <span class="step" title='Radiologist'><i class="fa-solid fa-user-doctor"></i></span>
-        <span class="step" title='Confirmation'><i class="fa-solid fa-check-to-slot"></i></span>
-      </div>
-  </div>
-   
-<div class="form container mt-4" id="submittingDoctor">
+
+  <div class="form container mt-4" id="submittingDoctor">
   <div class="col-12 mt-0">
             <div class="row mt-0 mb-3">
             <h5 class="text-center raleway" id='uploaderHelloHeading'></h5></div>
@@ -24,7 +14,10 @@
             <!-- White Space Empty Rows -->     
             <div class="row mt-4"></div>
             <div class="row mt-4"></div>
-            
+
+            <h5 class="text-center raleway">
+              {{'Hello ' +emailRelatedData.name +' from '+userData.practicename}}
+            </h5>            
 
             <div class="row mt-3">
             <div class="col-sm-3"><label>Immediate Submitting Doctor*</label></div>
