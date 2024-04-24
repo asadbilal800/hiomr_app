@@ -31,8 +31,8 @@ export class RegistrationComponent implements OnInit {
     practicePhoneNo2: [''], // optional field
     emailId: ['', [Validators.required, Validators.email]],
     billEmail: ['', [Validators.required, Validators.email]],
-    specialty: ['', Validators.required],
-    cbct: ['', Validators.required]
+    specialty: ['1', Validators.required],
+    cbct: ['1', Validators.required]
   });
 
   this.mapAddress();
@@ -69,15 +69,18 @@ export class RegistrationComponent implements OnInit {
   async doctorPracticeSave(){
     let payload = this.regForm.value;
     payload = {...payload,email: this.sharedService.emailRelatedData.email}
-    await this.registrationService.saveRegistration(payload); 
-    
+    return await this.registrationService.saveRegistration(payload); 
   }
 
   async navigateToPatientForm(){  
-    // await this.doctorPracticeSave();
-    // let route:string =  'home/' + (RoutePaths.PatientForm);
-    // this.router.navigate([route]);
-    console.log(this.regForm.value);
+     let res = await this.doctorPracticeSave();
+     if(res?.IsSuccessful){
+    let route:string =  'home/' + (RoutePaths.PatientForm);
+    this.router.navigate([route]);
+     }
+     else {
+      console.log('Seems like something went wrong.')
+     }
   }
 
 

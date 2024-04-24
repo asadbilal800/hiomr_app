@@ -63,7 +63,7 @@ export class MatchPracticeComponent implements AfterViewInit {
           var name = '';
           var website = place?.website;
           var practiseName;
-          var typedEmail;
+          var typedEmail = (window as any)._this.sharedService.emailRelatedData.email;
     
     
           if(place?.formatted_phone_number){
