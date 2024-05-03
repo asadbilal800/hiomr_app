@@ -15,7 +15,7 @@
 </ngx-dropzone>
 
 
-<form class="form container needs-validation" novalidate>
+<form class="form container needs-validation" [formGroup]="patientForm">
     <div class="col-12">
                 
                 <div class="row mt-0" id="ImageType" title="Note the images you are uploading">
@@ -25,8 +25,8 @@
                       <label class="input-group-text" for="ImageType">Image Type</label>
                     <select 
                     class="form-select form-select-lg ImageType-Class" 
-                    id="ImageType" 
-                    formControlName="ImageType"
+                    id="ImageType"
+                    (change)="selectedOption($event,'imageType')" 
                     tabindex="2">
                       <option value="1" selected>CBCT</option>
                       <option value="2">PAN</option>
@@ -43,13 +43,11 @@
                   <div class="col-sm position-relative">
                     <div class="input-group input-group-lg">
                     <label class="input-group-text" for="dateOfImage">Image Date</label>
-                    <input required
+                    <input 
                     id='dateOfImage'
-                    formControlName="dateOfImage" 
+                    formControlName="imageDate" 
                     type="date"
                     class="form-control form-control-lg dateOfImage-Class"
-                    tabindex="3"
-                    oninput="checkInputsValidation('dateOfImage')" 
                     />
                     <!-- <div class="invalid-tooltip">Please complete this field</div> -->
                     </div>
@@ -75,11 +73,11 @@
                   <div class="col-sm position-relative">
                     <input
                   id='theirpatientnumber'
-                  formControlName="theirpatientnumber"
+                  formControlName="internalId"
                   placeholder="Optional: Used in invoices/non-encrypted messages (No Names)"
                   type="text"
                   class="form-control form-control-lg"
-                  tabindex="6"/>
+                  />
                   </div>
                 </div>
   
@@ -90,27 +88,23 @@
                   <div class="col-sm position-relative">
                     <label class="col-sm-3 col-form-label" hidden
                       >pfirst</label>
-                    <input required                   
+                    <input                    
                       id="pFirstName"
-                      formControlName="pFirstName"
+                      formControlName="firstName"
                       type="text"
                       class="form-control form-control-lg"
                       placeholder="First Name"
-                      tabindex="7"
-                      oninput="checkInputsValidation('pFirstName')"
                     />
                     <!-- <div class="invalid-tooltip">Please complete this field</div> -->
                   </div>
                   <div class="col-sm position-relative">
                     <label hidden>plast</label>
-                    <input required                   
+                    <input                    
                       id="pLastName"
-                      formControlName="pLastName"
+                      formControlName="lastName"
                       type="text"
                       class="form-control form-control-lg"
                       placeholder="Last Name"
-                      tabindex="7"
-                      oninput="checkInputsValidation('pLastName')"
                     />
                     <!-- <div class="invalid-tooltip">Please complete this field</div> -->
                   </div>
@@ -123,24 +117,21 @@
                     <label hidden>birthday</label>
                     <input required                   
                       id="birth"
-                      formControlName="birth"
+                      formControlName="birthDate"
                       type="date"
                       class="form-control form-control-lg"
                       title="When they came screaming into the world"
-                      tabindex="8"
-                      oninput="checkInputsValidation('birth')"
                     />
-                    <!-- <div class="invalid-tooltip">Please complete this field</div> -->
                   </div>
                   <div class="col-sm position-relative">
                     <label hidden>sex</label>
-                    <select required
+                    <select 
                       class="form-select form-select-lg"
                       id="sex"
-                      formControlName="sex"                    
                       title="Sex assigned at birth"
                       tabindex="9"
-                      oninput="checkInputsValidation('sex')"
+                      (change)="selectedOption($event,'sex')" 
+
                     >
                       <option disabled selected value>Sex Assigned at Birth</option>
                       <option value="1">Male</option>
