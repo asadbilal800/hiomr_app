@@ -1,163 +1,165 @@
 
-<!-- Neither Bootstrap nor Font Awesome Icons work if these are not present on this page -->
-<!-- Font Awesome Icons CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<!-- Bootstrap 5.3 Styling -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-
-<form class="form container mt-4 needs-validation" novalidate>
-    <div class="col-11 offset-1">
+   <div class="col-11 offset-1 p-5">
                 <div class="panel-group checkbox_collapse" id="accordion">
                   <h3 class="cinzel">Reason for Case Submission</h3>
+
                   <div class="container ml-1 mb-2 groupCheckBoxes">
-                    <div class="form-check">
+
+                    <!-- implant analysis -->
+                    <div [ngClass] = "{'unselected': fetchProp(1,'isDisable'),'form-check': true}">
                       <input 
                       class="form-check-input required-check box-staus-check" 
-                      type="checkbox" 
-                      value="1" 
+                      type="checkbox"
+                      (input)="changeCheckBoxVal($event,1)"
                       id="Implant Analysis"
                       >
                       <label class="form-check-label" for="implnt">
                         <span style="font: 1em 'Raleway'; font-size: 22px">Implant Analysis:</span>
                         <span style="font: 1em 'Raleway'; font-size: 14px">If for an implant already in the mouth, include a current implant PA for comparison</span></label>
-                      <div class="implnt-box position-relative">
-                        <textarea class="form-control box-staus is-invalid" style="display:none" id='implntbox' placeholder="Planned implant number." style="width:60%"></textarea>
-                        <!-- <div class="invalid-tooltip">Please complete this field</div>  -->
+                      <div class="implnt-box position-relative" *ngIf="fetchProp(1,'checked')">
+                        <textarea (input)="onDescChange($event,1)" [ngClass] = "{'is-invalid': !fetchProp(1,'desc'),'is-valid': !!fetchProp(1,'desc'),'form-control box-staus': true}"  id='implntbox' placeholder="Planned implant number." style="width:60%"></textarea>
                       </div>
                     </div>
-                    <div class="form-check">
+
+                    <!-- TMJ -->
+                    <div  [ngClass] = "{'unselected': fetchProp(3,'isDisable'),'form-check': true}">
                       <input 
                       class="form-check-input required-check box-staus-check" 
                       type="checkbox" 
-                      value="3" 
+                      (input)="changeCheckBoxVal($event,3)"
                       id="TMJ Concerns" >
                       <label class="form-check-label" for="tmj">
                         <span style="font: 1em 'Raleway'; font-size: 22px">TMJ Concerns:</span>
                         <span style="font: 1em 'Raleway'; font-size: 14px">Only for patient symptoms or visual problems</span></label>
-                      <div class="tmj-box position-relative">
-                        <textarea class="form-control box-staus is-invalid" style="display:none" id="tmjbox" placeholder="Describe TMJ concerns and/or symptoms" style="width:60%"  ></textarea>
-                        <!-- <div class="invalid-tooltip">Please complete this field</div>  -->
+                      <div class="tmj-box position-relative" *ngIf="fetchProp(3,'checked')">
+                        <textarea (input)="onDescChange($event,3)" [ngClass] = "{'is-invalid': !fetchProp(3,'desc'),'is-valid': !!fetchProp(3,'desc'),'form-control box-staus': true}"  id="tmjbox" placeholder="Describe TMJ concerns and/or symptoms" style="width:60%"  ></textarea>
                       </div>
-                      <!-- <p id="8"></p> -->
                     </div>
-                    <div class="form-check">
+
+
+                    <!-- Pathology -->
+                    <div  [ngClass] = "{'unselected': fetchProp(4,'isDisable'),'form-check': true}">
                       <input 
                       class="form-check-input required-check box-staus-check" 
                       type="checkbox" 
-                      value="4" 
+                      (input)="changeCheckBoxVal($event,4)" 
                       id="Pathology-Radiology Concerns" >
                       <label class="form-check-label" for="path">
                         <span style="font: 1em 'Raleway'; font-size: 22px">Pathology/Radiology Concerns: </span>
                         <span style="font: 1em 'Raleway'; font-size: 14px">Only when you see something odd: swelling, destruction, etc.</span></label>
-                      <div class="path-box position-relative">
-                        <textarea class="form-control box-staus is-invalid" style="display:none" id="pathbox"  placeholder="Describe findings or concerns. Has the patient had any prior surgery, pathology, or procedures in the area?" style="width:60%" ></textarea>
+                      <div class="path-box position-relative" *ngIf="fetchProp(4,'checked')">
+                        <textarea (input)="onDescChange($event,4)" [ngClass] = "{'is-invalid': !fetchProp(4,'desc'),'is-valid': !!fetchProp(4,'desc'),'form-control box-staus': true}"  id="pathbox"  placeholder="Describe findings or concerns. Has the patient had any prior surgery, pathology, or procedures in the area?" style="width:60%" ></textarea>
                         <!-- <div class="invalid-tooltip">Please complete this field</div>  -->
                       </div>
                     </div>
-                    <div class="form-check">
+
+
+                    <!-- Endodontic -->
+                    <div  [ngClass] = "{'unselected': fetchProp(5,'isDisable'),'form-check': true}">
                       <input 
                       class="form-check-input required-check box-staus-check" 
-                      type="checkbox" 
-                      value="5" 
+                      type="checkbox"
+                      (input)="changeCheckBoxVal($event,5)" 
                       id="Endodontic Concerns" >
                       <label class="form-check-label" for="endo"> 
                         <span style="font: 1em 'Raleway'; font-size: 22px"> Endodontic Concerns:</span>
                         <span style="font: 1em 'Raleway'; font-size: 14px">Endo pain, suspected canal pathways, fractures</span></label>
-                      <div class="endo-box position-relative">
-                        <textarea class="form-control box-staus is-invalid" style="display:none" id="endobox" placeholder="Describe concerns. Include tooth number, region, symptoms, history of treatment" style="width:60%" ></textarea>
+                      <div class="endo-box position-relative" *ngIf="fetchProp(5,'checked')">
+                        <textarea (input)="onDescChange($event,5)" [ngClass] = "{'is-invalid': !fetchProp(5,'desc'),'is-valid': !!fetchProp(5,'desc'),'form-control box-staus': true}"  id="endobox" placeholder="Describe concerns. Include tooth number, region, symptoms, history of treatment" style="width:60%" ></textarea>
                         <!-- <div class="invalid-tooltip">Please complete this field</div> -->
                       </div>
                     </div>
-                    <div class="form-check">
+
+
+                    <!-- Surgical -->
+                    <div  [ngClass] = "{'unselected': fetchProp(6,'isDisable'),'form-check': true}">
                       <input 
                       class="form-check-input required-check box-staus-check" 
                       type="checkbox" 
-                      value="6" 
+                      (input)="changeCheckBoxVal($event,6)"
                       id="Surgical Concerns" >
                       <label class="form-check-label" for="surg">
                         <span style="font: 1em 'Raleway'; font-size: 22px">Surgical Concerns:</span>
                         <span style="font: 1em 'Raleway'; font-size: 14px">IANC, Tooth Proximity, etc. </span></label>
-                      <div class="surg-box position-relative">
-                        <textarea  class="form-control box-staus is-invalid" style="display:none" id="surgbox" placeholder="Describe concerns" style="width:60%" ></textarea>
+                      <div class="surg-box position-relative" *ngIf="fetchProp(6,'checked')">
+                        <textarea (input)="onDescChange($event,6)"  [ngClass] = "{'is-invalid': !fetchProp(6,'desc'),'is-valid': !!fetchProp(6,'desc'),'form-control box-staus': true}"  id="surgbox" placeholder="Describe concerns" style="width:60%" ></textarea>
                         <!-- <div class="invalid-tooltip">Please complete this field</div> -->
                       </div>
                     </div>
-                    <div class="form-check">
+
+                    <!-- Airway -->
+                    <div  [ngClass] = "{'unselected': fetchProp(7,'isDisable'),'form-check': true}">
                       <input 
                       class="form-check-input optional-check box-staus-check" 
                       type="checkbox"  
-                      value="7" 
+                      (input)="changeCheckBoxVal($event,7)"
                       id="Airway-Sleep Apnea" >
                       <label class="form-check-label" for="osa">
                         <span style="font: 1em 'Raleway'; font-size: 22px">Airway/Sleep Apnea:</span>
                         <span style="font: 1em 'Raleway'; font-size: 14px">When you or the
                                   patient suspects sleep apnea or airway issues </span></label>
-                      <div class="osa-box">
-                        <textarea class="form-control box-staus" style="display:none" id="osabox" placeholder="Optional: Describe any airway/breathing concerns or findings" style="width:60%"></textarea>
+                      <div class="osa-box" *ngIf="fetchProp(7,'checked')">
+                        <textarea (input)="onDescChange($event,7)" class="form-control box-staus"  id="osabox" placeholder="Optional: Describe any airway/breathing concerns or findings" style="width:60%"></textarea>
                       </div>
                     </div>
-                    <div class="form-check">
+
+                    <!-- Systemic -->
+                    <div  [ngClass] = "{'unselected': fetchProp(8,'isDisable'),'form-check': true}">
                       <input 
                       class="form-check-input required-check box-staus-check" 
                       type="checkbox" 
-                      value="8" 
+                      (input)="changeCheckBoxVal($event,8)"
                       id="Developmental or Systemic Concerns" >
                       <label class="form-check-label" for="syst">
                         <span style="font: 1em 'Raleway'; font-size: 22px">Systemic Concerns:</span>
                         <span style="font: 1em 'Raleway'; font-size: 14px">When you suspect a developmental/genetic or systemic condition</span></label>
-                      <div class="syst-box position-relative">
-                        <textarea class="form-control box-staus is-invalid" style="display:none" id="systbox" placeholder="Describe concerns or findings" style="width:60%" ></textarea>
-                        <!-- <div class="invalid-tooltip">Please complete this field</div> -->
+                      <div class="syst-box position-relative" *ngIf="fetchProp(8,'checked')">
+                        <textarea (input)="onDescChange($event,8)" [ngClass] = "{'is-invalid': !fetchProp(8,'desc'),'is-valid': !!fetchProp(8,'desc'),'form-control box-staus': true}"  id="systbox" placeholder="Describe concerns or findings" style="width:60%" ></textarea>
                       </div>
                     </div>
-                    <div class="form-check">
+
+
+                    <!-- Other concern -->
+                    <div  [ngClass] = "{'unselected': fetchProp(9,'isDisable'),'form-check': true}">
                       <input 
                       class="form-check-input required-check box-staus-check" 
                       type="checkbox" 
-                      value="9" 
+                      (input)="changeCheckBoxVal($event,9)"
                       id="Other Concerns or General Jaw Pain" >
                       <label class="form-check-label" for="other">
                         <span style="font: 1em 'Raleway'; font-size: 22px">Other Concerns or General Jaw Pain: </span>
                         <span style="font: 1em 'Raleway'; font-size: 14px">If it doesn't fit any of the above, describe below</span></label>
-                      <div class="other-box position-relative">
-                        <textarea class="form-control box-staus is-invalid" style="display:none" id="otherbox" placeholder="Describe concerns or findings" style="width:60%" ></textarea>
+                      <div class="other-box position-relative" *ngIf="fetchProp(9,'checked')">
+                        <textarea (input)="onDescChange($event,9)" [ngClass] = "{'is-invalid': !fetchProp(9,'desc'),'is-valid': !!fetchProp(9,'desc'),'form-control box-staus': true}"  id="otherbox" placeholder="Describe concerns or findings" style="width:60%" ></textarea>
                         <!-- <div class="invalid-tooltip">Please complete this field</div> -->
                       </div>
                     </div>
-                    <div class="form-check">
+
+                    <!-- overread -->
+                    <div  [ngClass] = "{'unselected': fetchProp(99,'isDisable'),'form-check': true}">
                       <input 
                       class="form-check-input last-check box-staus-check" 
                       type="checkbox" 
-                      value="99" 
+                      (input)="changeCheckBoxVal($event,99)"
+
                       id="Overread Alone">
                       <label class="form-check-label" for="ovrread">
                         <span style="font: 1em 'Raleway'; font-size: 22px"> Overread Alone:</span>
                         <span style="font: 1em 'Raleway'; font-size: 14px">No symptoms or concerns. This is always done with every above scan</span></label>
-                      <div class="ovrread-box ">
-                        <textarea class="form-control box-staus" style="display:none" id="ovrreadbox"  placeholder="Optional information" style="width:60%"></textarea>
+                      <div class="ovrread-box " *ngIf="fetchProp(99,'checked')">
+                        <textarea (input)="onDescChange($event,99)" class="form-control box-staus"  id="ovrreadbox"  placeholder="Optional information" style="width:60%"
+                        ></textarea>
                       </div>
                     </div>
                   </div>
-                  <p class='error-checkbox' id="9"></p>
-                  <!-- <h4>Patient Chief Complaint and/or Doctor Concerns</h4> -->
-                  <!-- Do I need both text areas? Does either one have the data for all the individual checkboxes? -->
-                  <div class="row mb-3">
-                    <label hidden>cc</label>
-                    <textarea 
-                    id='detailNotes' 
-                    readonly 
-                    title="detailNotes" 
-                    class="form-control getvaluetext" 
-                    style="display:none;"></textarea>
-                  </div>
-                  <textarea 
-                  id='totaldata' 
-                  readonly 
-                  title="totaldata" 
-                  name="totaltext" 
-                  class="form-control " 
-                  style="display:none;"></textarea>
-                  <div id='result' style="display:none;"></div>
                 </div>
                </div>
-               </form>
+
+         <!-- Nav Button Forward-->
+        <div class="col"
+        *ngIf="isValidated">
+        <a class="navbutton position-absolute top-50 end-0 translate-middle-y fadefast" 
+         (click)="navigate()" role="button">
+         <span class="material-symbols-rounded">arrow_circle_right</span>
+         </a>
+        </div>

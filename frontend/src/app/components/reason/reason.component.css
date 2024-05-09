@@ -1,0 +1,4 @@
+.unselected {
+    pointer-events: none; /* Disable mouse events */
+    opacity: 0.5; /* Reduce opacity to 50% */
+  }

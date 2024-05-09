@@ -13,6 +13,18 @@ export class SharedService {
   selectedDoctorId: string ='';
   newDoctorScenario =  false;
 
+  reasonArray =  [
+    {code: 1, name: "implant", isOverread: false, desc:"" , isDisable: false,checked: false},
+    {code: 3, name: "tmj", isOverread: false, desc:"" , isDisable: false,checked: false},
+    {code: 4, name: "pathology", isOverread: false, desc:"" , isDisable: false,checked: false},
+    {code: 5, name: "endodontic", isOverread: false, desc:"" , isDisable: false,checked: false},
+    {code: 6, name: "surgical", isOverread: false, desc:"" , isDisable: false,checked: false},
+    {code: 7, name: "airway", isOverread: false, desc:"" , isDisable: false,checked: false},
+    {code: 8, name: "systemic", isOverread: false, desc:"" , isDisable: false,checked: false},
+    {code: 9, name: "other", isOverread: false, desc:"" , isDisable: false,checked: false},
+    {code: 99, name: "ovveread", isOverread: true, desc:"" , isDisable: false,checked: false}
+  ];
+
   constructor() { 
   }
    generateUUID() {
@@ -30,5 +42,7 @@ export enum RoutePaths {
   SubmittingDoctor = 'submitting-doctor',
   MatchPractice = 'match-practice',
   Registration = 'registration',
-  PatientForm = 'patientForm'
+  PatientForm = 'patientForm',
+  Reason = 'reason',
+  Radiologist = 'radiologist'
 }
