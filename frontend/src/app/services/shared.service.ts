@@ -12,6 +12,9 @@ export class SharedService {
   matchPracticeData: any = null as any;
   selectedDoctorId: string ='';
   newDoctorScenario =  false;
+  patientInfoValues: any;
+  reasonInfoValues: any;
+  radiologistValues: any;
 
   reasonArray =  [
     {code: 1, name: "implant", isOverread: false, desc:"" , isDisable: false,checked: false},

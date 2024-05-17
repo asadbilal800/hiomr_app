@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { RoutePaths, SharedService } from '../../services/shared.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-patient-info',
@@ -15,9 +17,10 @@ export class PatientInfoComponent implements OnInit {
   patientForm: FormGroup = {} as any;
   sexType: string = '';
   imageType: string = '';
+  isVaidated = false;
 
 
-constructor(private formBuilder: FormBuilder){}
+constructor(private formBuilder: FormBuilder,private router: Router,private sharedService: SharedService){}
 
 ngOnInit(): void {
   this.patientForm = this.formBuilder.group({
@@ -27,6 +30,10 @@ ngOnInit(): void {
     lastName: ['', [Validators.required]], // string required
     birthDate: [null, [Validators.required]], // date object required
   }); 
+
+  this.patientForm.valueChanges.subscribe(res => {
+    this.IsValidated();
+  });
 }
 
 
@@ -47,9 +54,23 @@ selectedOption(event,type:string){
   }
   else this.sexType = event.target.value;
 
-  console.log(this.sexType);
-  console.log(this.imageType);
-  console.log(this.patientForm.value);
+  this.IsValidated();
+}
+
+IsValidated(){
+ this.isVaidated = (this.patientForm.valid && !!this.sexType && !!this.imageType) ? true : false;
+}
+
+accumalateValues(){
+  let values = {...this.patientForm.value,sexType: this.sexType,imageType: this.imageType};
+  this.sharedService.patientInfoValues = values;
+}
+
+
+navigate(){ 
+  this.accumalateValues();
+  let route:string =  'home/' + (RoutePaths.Reason);
+  this.router.navigate([route]);
 }
 
 }

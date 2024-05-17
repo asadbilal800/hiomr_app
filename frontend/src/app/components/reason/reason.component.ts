@@ -59,7 +59,6 @@ export class ReasonComponent {
   }
 
   navigate(){
-    
     let route:string =  'home/' + (RoutePaths.Radiologist);
     this.router.navigate([route]);
   }
