@@ -36,7 +36,8 @@ export class RadiologistComponent {
     let payload = {
       patientInfo: this.sharedService.patientInfoValues,
       reasonInfo: this.sharedService.reasonArray.filter(x => x.checked),
-      radiologistInfo: this.sharedService.radiologistValues
+      radiologistInfo: this.sharedService.radiologistValues,
+      emailRelatedData: this.sharedService.emailRelatedData
     }
     await this.patientService.savePatient(payload)
     
