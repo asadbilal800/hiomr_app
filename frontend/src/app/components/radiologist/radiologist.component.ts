@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { SharedService } from '../../services/shared.service';
+import { PatientService } from '../../services/patient.service';
 
 @Component({
   selector: 'app-radiologist',
@@ -14,7 +15,7 @@ export class RadiologistComponent {
   radioLogist: string;
   rush: string = '0'
   stat: string = '0'
-  constructor(private sharedService: SharedService)
+  constructor(private sharedService: SharedService,private patientService: PatientService)
   {}
 
   onStatRushValChange(e:any){
@@ -30,7 +31,14 @@ export class RadiologistComponent {
     this.sharedService.radiologistValues = values;
   }
 
-  submitPatientInfo(){
+  async submitPatientInfo(){
+    this.accumalateValues();
+    let payload = {
+      patientInfo: this.sharedService.patientInfoValues,
+      reasonInfo: this.sharedService.reasonArray.filter(x => x.checked),
+      radiologistInfo: this.sharedService.radiologistValues
+    }
+    await this.patientService.savePatient(payload)
     
   }
 
