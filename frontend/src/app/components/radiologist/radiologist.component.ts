@@ -1,17 +1,18 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-radiologist',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './radiologist.component.html',
   styleUrl: './radiologist.component.css'
 })
 export class RadiologistComponent {
 
   radioLogist: string;
-  rush: string;
-  stat: string;
+  rush: string = '0'
+  stat: string = '0'
   constructor()
   {}
 
@@ -22,6 +23,10 @@ export class RadiologistComponent {
     if(e.target.id == 'stat') {
       this.stat = (e.target.checked) ? '1' : '0'
     } 
+  }
+
+  submitPatientInfo(){
+    
   }
 
 }
