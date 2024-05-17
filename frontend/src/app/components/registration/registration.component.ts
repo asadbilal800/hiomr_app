@@ -68,7 +68,8 @@ export class RegistrationComponent implements OnInit {
 
   async doctorPracticeSave(){
     let payload = this.regForm.value;
-    payload = {...payload,email: this.sharedService.emailRelatedData.email}
+    this.sharedService.selectedDoctorId = this.sharedService.generateUUID();
+    payload = {...payload,email: this.sharedService.emailRelatedData.email,doctorId: this.sharedService.selectedDoctorId }
     return await this.registrationService.saveRegistration(payload); 
   }
 
