@@ -9,4 +9,19 @@ import { Component } from '@angular/core';
 })
 export class RadiologistComponent {
 
+  radioLogist: string;
+  rush: string;
+  stat: string;
+  constructor()
+  {}
+
+  onStatRushValChange(e:any){
+    if(e.target.id == 'rush') {
+      this.rush = (e.target.checked) ? '1' : '0'
+    } 
+    if(e.target.id == 'stat') {
+      this.stat = (e.target.checked) ? '1' : '0'
+    } 
+  }
+
 }
