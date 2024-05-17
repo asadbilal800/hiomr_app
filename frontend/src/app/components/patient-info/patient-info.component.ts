@@ -62,7 +62,7 @@ IsValidated(){
 }
 
 accumalateValues(){
-  let values = {...this.patientForm.value,sexType: this.sexType,imageType: this.imageType};
+  let values = {...this.patientForm.value,sexType: this.sexType,imageType: this.imageType,doctorId: this.sharedService.selectedDoctorId};
   this.sharedService.patientInfoValues = values;
 }
 

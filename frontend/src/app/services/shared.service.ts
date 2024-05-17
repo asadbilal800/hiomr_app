@@ -10,8 +10,12 @@ export class SharedService {
   isInProgress = false;
   practiceAddress:any;
   matchPracticeData: any = null as any;
+
+  //submitting doctor data:
   selectedDoctorId: string ='';
   newDoctorScenario =  false;
+
+  //patient related shared data:
   patientInfoValues: any;
   reasonInfoValues: any;
   radiologistValues: any;
