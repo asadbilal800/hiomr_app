@@ -1,4 +1,3 @@
-{{rush}}
 <div class="form container mt-4 ">
     <div class="col-12">
 
@@ -63,4 +62,95 @@
               <div class="col text-center" id="userMessageRadiologist"></div> 
               </div>
               </div>
+</div>
+
+
+
+<!-- additional changes to re-edit form (patient info) -->
+
+<div class="col-6" style="margin-left: 25%;margin-top:5%;">
+          
+  <div class="row mb-3">
+
+    <div class="col-sm position-relative">
+      <label >Patient First Name</label>
+      <input                    
+        id="pFirstName"
+        formControlName="firstName"
+        type="text"
+        class="form-control form-control-lg"
+        placeholder="First Name"
+      />
+      <!-- <div class="invalid-tooltip">Please complete this field</div> -->
+    </div>
+    <div class="col-sm position-relative">
+      <label >Patient First Name</label>
+      <input                    
+        id="pLastName"
+        formControlName="lastName"
+        type="text"
+        class="form-control form-control-lg"
+        placeholder="Last Name"
+      />
+      <!-- <div class="invalid-tooltip">Please complete this field</div> -->
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="row mb-2 align-items-center" title="Helpful for receipts and billing. Patient names will be ignored here">
+      <div for="theirpatientnumber" class="col-sm-3 col-form-label"><label>Your Internal <br> Patient ID</label></div>
+      <div class="col-sm position-relative">
+        <input
+      id='theirpatientnumber'
+      formControlName="internalId"
+      placeholder="Optional: Used in invoices/non-encrypted messages (No Names)"
+      type="text"
+      class="form-control form-control-lg"
+      />
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+
+    <div class="col-sm position-relative">
+      <label >birthday</label>
+      <input required                   
+        id="birth"
+        formControlName="birthDate"
+        type="date"
+        class="form-control form-control-lg"
+        title="When they came screaming into the world"
+      />
+    </div>
+    <div class="col-sm position-relative">
+      <label >sex</label>
+      <select 
+        class="form-select form-select-lg"
+        id="sex"
+        title="Sex assigned at birth"
+        tabindex="9"
+
+      >
+        <option disabled selected value>Sex Assigned at Birth</option>
+        <option value="1">Male</option>
+        <option value="2">Female</option>
+        <option value="9">Intersex</option>
+      </select>
+      <!-- <div class="invalid-tooltip">Please complete this field</div> -->
+    </div>
+  </div>
+
+  <div>
+  </div>
+</div>  
+
+
+<!-- additional changes to re-edit form (reason info) -->
+<div class="col-6" style="margin-left: 25%;margin-top:5%;">
+  <div class="row mb-3"></div>
+  <div class="row mb-3">
+    <label >Reasons</label>
+    <app-reason [hideHeading]="false"></app-reason>
+  </div>
 </div>

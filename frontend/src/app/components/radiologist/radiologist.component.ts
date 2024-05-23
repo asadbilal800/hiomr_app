@@ -2,13 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { SharedService } from '../../services/shared.service';
 import { PatientService } from '../../services/patient.service';
+import { ReasonComponent } from "../reason/reason.component";
 
 @Component({
-  selector: 'app-radiologist',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './radiologist.component.html',
-  styleUrl: './radiologist.component.css'
+    selector: 'app-radiologist',
+    standalone: true,
+    templateUrl: './radiologist.component.html',
+    styleUrl: './radiologist.component.css',
+    imports: [CommonModule, ReasonComponent]
 })
 export class RadiologistComponent {
 

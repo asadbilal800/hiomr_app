@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RoutePaths, SharedService } from '../../services/shared.service';
 import { Router } from '@angular/router';
 
@@ -14,6 +14,9 @@ export class ReasonComponent {
 
   reasonArray; any = [];
   isValidated = false;
+  @Input() hideHeading = true;
+
+
   constructor(public sharedService: SharedService,private router: Router){
     this.reasonArray = this.sharedService.reasonArray
   }
