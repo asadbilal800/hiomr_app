@@ -20,6 +20,9 @@ export class SharedService {
   reasonInfoValues: any;
   radiologistValues: any;
 
+  //disabled reason
+  reasonDisabled = false;
+
   reasonArray =  [
     {code: 1, name: "implant", isOverread: false, desc:"" , isDisable: false,checked: false},
     {code: 3, name: "tmj", isOverread: false, desc:"" , isDisable: false,checked: false},

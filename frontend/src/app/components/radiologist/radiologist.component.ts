@@ -16,8 +16,10 @@ export class RadiologistComponent {
   radioLogist: string;
   rush: string = '0'
   stat: string = '0'
-  constructor(private sharedService: SharedService,private patientService: PatientService)
-  {}
+  constructor(public sharedService: SharedService,private patientService: PatientService)
+  {
+    this.sharedService.reasonDisabled = true
+  }
 
   onStatRushValChange(e:any){
     if(e.target.id == 'rush') {
@@ -42,6 +44,15 @@ export class RadiologistComponent {
     }
     await this.patientService.savePatient(payload)
     
+  }
+
+  disabledReason(){
+    this.sharedService.reasonDisabled = !this.sharedService.reasonDisabled
+  }
+
+  disablePatient(id){
+    const button:any = document.getElementById(id);
+      button.disabled = !button.disabled;
   }
 
 }

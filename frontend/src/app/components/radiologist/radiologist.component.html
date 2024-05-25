@@ -2,7 +2,7 @@
     <div class="col-12">
 
                 <div class="row mb-3">
-                  <div class="col-sm-3 col-form-label"><label>Radiologist</label></div>
+                  <div class="col-sm-3 col-form-label"><label>Radiologist </label></div>
                   <div class="col-sm-6 position-relative">
                     <select 
                     id="Radiologist" 
@@ -31,7 +31,7 @@
                       (input)= "onStatRushValChange($event)"
                       >
                       <label class="form-check-label" for="rush">
-                        <span>Coming Soon: Rush/Same Day (Additional Fee Applied)</span></label>
+                        <span>Coming Soon: Rush/Same Day (Additional Fee Applied)</span> </label>
                     </div>
                     <!-- stat -->
                     <div class="form-check form-switch" >
@@ -73,23 +73,25 @@
   <div class="row mb-3">
 
     <div class="col-sm position-relative">
-      <label >Patient First Name</label>
+      <label >Patient First Name  <i (click)="disablePatient('pFirstName')" class="fas fa-edit" style="cursor: pointer;"> </i> </label>
       <input                    
         id="pFirstName"
-        formControlName="firstName"
         type="text"
         class="form-control form-control-lg"
         placeholder="First Name"
+        disabled
+        [(value)]="sharedService.patientInfoValues.firstName"
       />
       <!-- <div class="invalid-tooltip">Please complete this field</div> -->
     </div>
     <div class="col-sm position-relative">
-      <label >Patient First Name</label>
+      <label >Patient First Name<i (click)="disablePatient('pLastName')" class="fas fa-edit" style="cursor: pointer;"> </i> </label>
       <input                    
         id="pLastName"
-        formControlName="lastName"
         type="text"
         class="form-control form-control-lg"
+        disabled
+        [(value)]="sharedService.patientInfoValues.lastName"
         placeholder="Last Name"
       />
       <!-- <div class="invalid-tooltip">Please complete this field</div> -->
@@ -98,13 +100,14 @@
 
   <div class="row mb-3">
     <div class="row mb-2 align-items-center" title="Helpful for receipts and billing. Patient names will be ignored here">
-      <div for="theirpatientnumber" class="col-sm-3 col-form-label"><label>Your Internal <br> Patient ID</label></div>
+      <div for="theirpatientnumber" class="col-sm-3 col-form-label"><label>Your Internal <br> Patient ID<i (click)="disablePatient('theirpatientnumber')" class="fas fa-edit" style="cursor: pointer;"> </i> </label></div>
       <div class="col-sm position-relative">
         <input
       id='theirpatientnumber'
-      formControlName="internalId"
       placeholder="Optional: Used in invoices/non-encrypted messages (No Names)"
       type="text"
+      disabled
+      [(value)]="sharedService.patientInfoValues.internalId"
       class="form-control form-control-lg"
       />
       </div>
@@ -114,23 +117,25 @@
   <div class="row mb-3">
 
     <div class="col-sm position-relative">
-      <label >birthday</label>
-      <input required                   
+      <label >birthday<i (click)="disablePatient('birth')" class="fas fa-edit" style="cursor: pointer;"> </i> </label>
+      <input                    
         id="birth"
-        formControlName="birthDate"
+        disabled
+        [(value)]="sharedService.patientInfoValues.birthDate"
         type="date"
         class="form-control form-control-lg"
         title="When they came screaming into the world"
       />
     </div>
     <div class="col-sm position-relative">
-      <label >sex</label>
+      <label >sex<i (click)="disablePatient('sex')" class="fas fa-edit" style="cursor: pointer;"> </i> </label>
       <select 
         class="form-select form-select-lg"
         id="sex"
         title="Sex assigned at birth"
         tabindex="9"
-
+        disabled
+        [(value)]="sharedService.patientInfoValues.sexType"
       >
         <option disabled selected value>Sex Assigned at Birth</option>
         <option value="1">Male</option>
@@ -150,7 +155,7 @@
 <div class="col-6" style="margin-left: 25%;margin-top:5%;">
   <div class="row mb-3"></div>
   <div class="row mb-3">
-    <label >Reasons</label>
+    <label >Reasons     <i (click)="disabledReason()" class="fas fa-edit" style="cursor: pointer;"> </i> </label>
     <app-reason [hideHeading]="false"></app-reason>
   </div>
 </div>

@@ -2,3 +2,8 @@
     pointer-events: none; /* Disable mouse events */
     opacity: 0.5; /* Reduce opacity to 50% */
   }
+
+  .fully-disabled {
+  pointer-events: none;
+  opacity: 0.5;
+  }
