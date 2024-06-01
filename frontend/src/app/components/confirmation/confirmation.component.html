@@ -15,7 +15,7 @@
                     <div class="col-sm-4">  
                     <input 
                     id ="confirm-email" 
-                    formControlName="confirm-email"
+                    [value] = "uploadEmail"
                     class="form-control form-control-lg" 
                     title="Confirm Email Address" 
                     disabled/>
@@ -24,7 +24,7 @@
                     <div class="col-sm-2 ps-0">
                     <input 
                         id="confirm-submitted-by"
-                        formControlName="confirm-submitted-by" 
+                        [value] = "uploadPerson"
                         class="form-control form-control-lg ms-0 px-0" 
                         title="Submitted By"
                         disabled/>

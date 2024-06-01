@@ -23,6 +23,9 @@ export class SharedService {
   //disabled reason
   reasonDisabled = false;
 
+  //dbSavedDataOnSubmut
+  dbSavedData:any;
+
   reasonArray =  [
     {code: 1, name: "implant", isOverread: false, desc:"" , isDisable: false,checked: false},
     {code: 3, name: "tmj", isOverread: false, desc:"" , isDisable: false,checked: false},

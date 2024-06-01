@@ -35,15 +35,16 @@ export class RadiologistComponent {
   }
 
   async submitPatientInfo(){
-    this.accumalateValues();
+    // this.accumalateValues();
     let payload = {
       patientInfo: this.sharedService.patientInfoValues,
       reasonInfo: this.sharedService.reasonArray.filter(x => x.checked),
       radiologistInfo: this.sharedService.radiologistValues,
       emailRelatedData: this.sharedService.emailRelatedData
     }
-    await this.patientService.savePatient(payload)
-    
+    let res = await this.patientService.savePatient(payload);
+    let resultantSavedData = res.response;
+    this.saveDbSavedData(resultantSavedData);
   }
 
   disabledReason(){
@@ -53,6 +54,22 @@ export class RadiologistComponent {
   disablePatient(id){
     const button:any = document.getElementById(id);
       button.disabled = !button.disabled;
+  }
+
+  saveDbSavedData(resultantSavedData:any){
+    let savedData = {} as any;
+    if(resultantSavedData?.patientDoctorData?.length){
+       savedData.patient = resultantSavedData?.patientDoctorData[0];
+       savedData.uploadPerson = savedData.patient?.uploadperson;
+       savedData.uploadEmail = savedData.patient?.caseemail;
+       savedData.doctorName = (savedData?.patient?.doctorfirstname ?? '') + ' ' + (savedData?.patient?.doctorlastname ?? '');
+       delete savedData.patient.doctorfirstname;delete savedData.patient.doctorlastname;delete savedData.patient.caseemail;delete savedData.patient.uploadperson;
+    }
+    if(resultantSavedData?.reasonData?.length){
+      savedData.reasons = resultantSavedData?.reasonData;
+    }
+    this.sharedService = savedData;
+    debugger
   }
 
 }
