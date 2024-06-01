@@ -24,7 +24,29 @@ export class SharedService {
   reasonDisabled = false;
 
   //dbSavedDataOnSubmut
-  dbSavedData:any;
+  dbSavedData:any = {
+    "patient": {
+        "firstname": "p1",
+        "lastname": "p2",
+        "internalid": "1001",
+        "dob": "2024-04-30T19:00:00.000Z",
+        "sex": 1,
+        "submitted": "2024-05-28T15:10:38.000Z"
+    },
+    "uploadPerson": "asad",
+    "uploadEmail": "asadbilal800@gmail.com",
+    "doctorName": "dunn jacob",
+    "reasons": [
+        {
+            "patdocnotes": "tmj",
+            "reason": "3"
+        },
+        {
+            "patdocnotes": "impant",
+            "reason": "1"
+        }
+    ]
+};
 
   reasonArray =  [
     {code: 1, name: "implant", isOverread: false, desc:"" , isDisable: false,checked: false},
