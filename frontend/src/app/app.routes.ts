@@ -12,6 +12,8 @@ export const routes: Routes = [
   { path: 'patientForm', loadComponent: () => import('./components/patient-info/patient-info.component').then(mod => mod.PatientInfoComponent)},
   { path: 'reason', loadComponent: () => import('./components/reason/reason.component').then(mod => mod.ReasonComponent)},
   { path: 'radiologist', loadComponent: () => import('./components/radiologist/radiologist.component').then(mod => mod.RadiologistComponent)},
+  { path: 'confirmation', loadComponent: () => import('./components/confirmation/confirmation.component').then(mod => mod.ConfirmationComponent)},
+
 
   { path: '',   redirectTo: 'email', pathMatch: 'full'}, // Redirect empty path to email-page
 ]
