@@ -43,7 +43,7 @@ export class RadiologistComponent {
       emailRelatedData: this.sharedService.emailRelatedData
     }
     let res = await this.patientService.savePatient(payload);
-    let resultantSavedData = res.response;
+    let resultantSavedData = (res.response)?.data;
     this.saveDbSavedData(resultantSavedData);
   }
 
@@ -68,8 +68,7 @@ export class RadiologistComponent {
     if(resultantSavedData?.reasonData?.length){
       savedData.reasons = resultantSavedData?.reasonData;
     }
-    this.sharedService = savedData;
-    debugger
+    this.sharedService.dbSavedData = savedData;
   }
 
 }

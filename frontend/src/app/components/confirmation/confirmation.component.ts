@@ -1,30 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../../services/shared.service';
+import { DatePipe } from '@angular/common';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-confirmation',
   standalone: true,
   imports: [],
   templateUrl: './confirmation.component.html',
-  styleUrl: './confirmation.component.css'
+  styleUrl: './confirmation.component.css',
+  providers:[DatePipe]
 })
 export class ConfirmationComponent implements OnInit {
   doctorName:string = '';
   uploadPerson: string = '';
   uploadEmail:string = '';
-  patient:any;
   reasons:any = '';
-  patientFirstname: string;
-  patientLastname: string;
-  patientInternalId: string;
-  patientDob: Date;
-  patientSex: string;
-  constructor(public sharedService: SharedService){}
+  patient:string;
+  patientSex:string;
+  patientDob:string;
+  constructor(public sharedService: SharedService,private datePipe: DatePipe,private sanitizer: DomSanitizer){}
   ngOnInit(): void {
     this.patchData();
   }
 
   patchData(){
+    debugger
     if(this.sharedService.dbSavedData?.uploadEmail){
       this.uploadEmail = this.sharedService.dbSavedData?.uploadEmail
     }
@@ -38,36 +39,34 @@ export class ConfirmationComponent implements OnInit {
       let reasonLength = this.sharedService?.dbSavedData?.reasons?.length
       this.sharedService?.dbSavedData?.reasons.forEach((item,index) => {
         if(item?.reason){
-          this.reasons += (this.sharedService.reasonArray.find(x => x.code == +item.reason).name) + ' | ' + item.patdocnotes + " , ";
+          this.reasons += (this.sharedService.reasonArray.find(x => x.code == +item.reason).name) + ' | ' + item.patdocnotes + " \n";
         }
       });
+      this.reasons = this.sanitizer.bypassSecurityTrustHtml(this.reasons)
     }
-    if(this.sharedService.dbSavedData?.patient){
+    if (this.sharedService.dbSavedData?.patient) {
       let patient = this.sharedService.dbSavedData?.patient;
-      if(patient?.firstname){
-        this.patientFirstname = patient?.firstname
-      }
-
-      if(patient?.lastname){
-        this.patientLastname = patient?.lastname
-      }
-
-      if(patient?.internalid){
-        this.patientInternalId = patient?.internalid
-      }
-
-      if(patient?.dob){
-        this.patientDob = new Date(patient?.dob)
-      }
-
-      if(patient?.sex){
-        this.patientSex = (patient?.sex == 1 ? 'Male' : (patient?.sex == 2 ? 'Female': 'InterSex') );
-      }
-
-      debugger
-    }
-
-
+      let patientString = '';
     
+      if (patient?.firstname) {
+        patientString += `${patient.firstname} `;
+      }
+    
+      if (patient?.lastname) {
+        patientString += `${patient.lastname} `;
+      }
+    
+      if (patient?.internalid) {
+        patientString += `${patient.internalid} `;
+      }
+    
+      if (patient?.dob) {
+        this.patientDob = new Date(patient.dob) as any; 
+        this.patientDob = this.datePipe.transform(this.patientDob, 'dd, MMMM yyyy');
+      }
+    
+      this.patient = patientString;
+    }
+        
   }
 }

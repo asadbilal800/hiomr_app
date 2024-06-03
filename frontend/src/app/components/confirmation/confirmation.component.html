@@ -37,60 +37,57 @@
                       <div class="input-group">
                         <input 
                       id="confirm-patient"
-                      formControlName="confirm-patient" 
+                      [value]="patient"
                       class="form-control form-control-lg" 
                       title="First Name" 
                       disabled/>
-                      <input 
-                        
-                        formControlName="confirm-patient-last" 
-                        class="form-control form-control-lg pe-0" 
-                        title="Last Name" 
-                        disabled/>
                         <input 
-                        type="date"
+                        type="text"
                         id="birth"
-                        formControlName="confirm-birth" 
+                        [value]="patientDob"
                         class="form-control form-control-lg" 
                         title="DOB" 
                         disabled/>
                     
-                        <select 
+                      <select 
                       class="form-select form-select-lg pe-0"
                       id="confirm-sex"
                       formControlName="confirm-sex"                    
                       title="Sex assigned at birth"
                       disabled
                       >
-                      <option value="1">M</option>
-                      <option value="2">F</option>
-                      <option value="9">I</option>
+                      <option selected value="1">M</option>
+
                     </select>
 
                     </div>
                     </div>
                   </div>
 
-            <div class="row mb-3">
-                    <div class="col-sm-3 col-form-label"><label>Reason</label></div>
+                  <div class="row mb-3">
+                    <div class="col-sm-3 col-form-label"><label>Doctor</label></div>
                     <div class="col-sm-8 position-relative">
                       <input 
                       id="confirm-reason" 
-                      formControlName="confirm-reason"
+                      [value]="doctorName"
                       class="form-control form-control-lg" 
                       disabled/>
                     </div>
             </div>
+
             <div class="row mb-3">
-                <div class="col-sm-3 col-form-label"><label>Notes</label></div>
-                <div class="col-sm-8 position-relative">
-                  <input 
-                  id="confirm-notes" 
-                  formControlName="confirm-notes"
-                  class="form-control form-control-lg" 
-                  disabled/>
-                </div>
-        </div>
+                    <div class="col-sm-3 col-form-label"><label>Reason</label></div>
+                    <div class="col-sm-8 position-relative">
+                      <textarea
+                      id="confirm-reason" 
+                      [innerHtml]="reasons"
+                      class="form-control form-control-lg" 
+                      disabled
+                      rows="3" 
+                      >
+                    </textarea>
+                    </div>
+            </div>
               
      </div>
   </form> 
