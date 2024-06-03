@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { SharedService } from '../../services/shared.service';
+import { RoutePaths, SharedService } from '../../services/shared.service';
 import { PatientService } from '../../services/patient.service';
 import { ReasonComponent } from "../reason/reason.component";
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-radiologist',
@@ -16,7 +17,7 @@ export class RadiologistComponent {
   radioLogist: string;
   rush: string = '0'
   stat: string = '0'
-  constructor(public sharedService: SharedService,private patientService: PatientService)
+  constructor(public sharedService: SharedService,private patientService: PatientService,private router: Router)
   {
     this.sharedService.reasonDisabled = true
   }
@@ -35,7 +36,7 @@ export class RadiologistComponent {
   }
 
   async submitPatientInfo(){
-    // this.accumalateValues();
+    this.accumalateValues();
     let payload = {
       patientInfo: this.sharedService.patientInfoValues,
       reasonInfo: this.sharedService.reasonArray.filter(x => x.checked),
@@ -45,6 +46,8 @@ export class RadiologistComponent {
     let res = await this.patientService.savePatient(payload);
     let resultantSavedData = (res.response)?.data;
     this.saveDbSavedData(resultantSavedData);
+    let route:string =  'home/' + (RoutePaths.Confirmation);
+    this.router.navigate([route]);
   }
 
   disabledReason(){

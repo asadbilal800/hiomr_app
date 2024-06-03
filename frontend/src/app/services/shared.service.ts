@@ -58,5 +58,6 @@ export enum RoutePaths {
   Registration = 'registration',
   PatientForm = 'patientForm',
   Reason = 'reason',
-  Radiologist = 'radiologist'
+  Radiologist = 'radiologist',
+  Confirmation ='confirmation'
 }

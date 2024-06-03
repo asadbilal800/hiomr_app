@@ -25,7 +25,7 @@ export class ConfirmationComponent implements OnInit {
   }
 
   patchData(){
-    debugger
+    
     if(this.sharedService.dbSavedData?.uploadEmail){
       this.uploadEmail = this.sharedService.dbSavedData?.uploadEmail
     }
