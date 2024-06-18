@@ -18,11 +18,14 @@ export class PatientInfoComponent implements OnInit {
   sexType: string = '';
   imageType: string = '';
   isVaidated = false;
+  userData:any;
 
 
 constructor(private formBuilder: FormBuilder,private router: Router,private sharedService: SharedService){}
 
-ngOnInit(): void {
+async ngOnInit() {
+  this.userData = this.sharedService.userData[0];
+  if(this.userData?.payment != 1) await this.sharedService.initStripe();
   this.patientForm = this.formBuilder.group({
     imageDate: [null, [Validators.required]], // date object required
     internalId: ['', [Validators.required]], // string required
