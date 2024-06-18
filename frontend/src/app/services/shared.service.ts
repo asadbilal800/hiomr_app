@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { loadStripe } from '@stripe/stripe-js';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +28,9 @@ export class SharedService {
   //dbSavedDataOnSubmut
   dbSavedData = {} as any;
 
+  //shared global variable
+  stripe:any;
+
 
   reasonArray =  [
     {code: 1, name: "implant", isOverread: false, desc:"" , isDisable: false,checked: false},
@@ -40,6 +45,10 @@ export class SharedService {
   ];
 
   constructor() { 
+  }
+
+  async initStripe(){
+    this.stripe = await loadStripe(environment.publishableStripeKey);
   }
    generateUUID() {
     const ho = (n, p) => n.toString(16).padStart(p, 0); /// Return the hexadecimal text representation of number `n`, padded with zeroes to be of length `p`

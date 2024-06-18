@@ -9,7 +9,8 @@ export const environment = {
   driveFolderId: "0AFtJBV_Z9gitUk9PVA",
   dbUser : 'asad',
   dbuUserPwd : 'TbqFxKQd4!z%nrj',
-  dbConnectionURL : 'jdbc:google:mysql://mainframe-312100:us-west3:database/production_image_omr'
+  dbConnectionURL : 'jdbc:google:mysql://mainframe-312100:us-west3:database/production_image_omr',
+  publishableStripeKey: 'pk_test_z4u1ziJew0NQrA5RDTEIu1IJ'
 };
 
 /*
