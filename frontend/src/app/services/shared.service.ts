@@ -30,6 +30,7 @@ export class SharedService {
 
   //shared global variable
   stripe:any;
+  stripeCustomerId:any;
 
 
   reasonArray =  [

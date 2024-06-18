@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { RoutePaths, SharedService } from '../../services/shared.service';
 import { Router } from '@angular/router';
+import { StripeService } from '../../stripe.service';
 
 @Component({
   selector: 'app-patient-info',
@@ -18,14 +19,14 @@ export class PatientInfoComponent implements OnInit {
   sexType: string = '';
   imageType: string = '';
   isVaidated = false;
-  userData:any;
 
 
-constructor(private formBuilder: FormBuilder,private router: Router,private sharedService: SharedService){}
+constructor(private stripeService:StripeService, private formBuilder: FormBuilder,private router: Router,private sharedService: SharedService){}
 
 async ngOnInit() {
-  this.userData = this.sharedService.userData[0];
-  if(this.userData?.payment != 1) await this.sharedService.initStripe();
+
+
+  await this.initStripeRelatedDataIfRequired();
   this.patientForm = this.formBuilder.group({
     imageDate: [null, [Validators.required]], // date object required
     internalId: ['', [Validators.required]], // string required
@@ -37,6 +38,15 @@ async ngOnInit() {
   this.patientForm.valueChanges.subscribe(res => {
     this.IsValidated();
   });
+}
+
+async initStripeRelatedDataIfRequired(){
+  let userData = this.sharedService.userData[0];
+  if(userData?.payment != 1) {
+    await this.sharedService.initStripe();
+    let stripeCustomer = await  this.stripeService.setupStripeCustomer();
+    if(stripeCustomer) this.sharedService.stripeCustomerId = stripeCustomer;
+  }
 }
 
 
