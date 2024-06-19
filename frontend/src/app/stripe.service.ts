@@ -13,7 +13,8 @@ export class StripeService {
 
   async setupStripeCustomer(){
     let emailRelatedData = this.sharedService.emailRelatedData;
-    let body = {name: emailRelatedData.name,email: emailRelatedData.email};
+    let userData = this.sharedService.userData[0];
+    let body = {name: emailRelatedData.name,email: emailRelatedData.email,practiceid: userData.practiceid};
     return await this.apiService.Post(environment.api_url+ EndpointURLS.StripeCustomer,body).toPromise();
 
   }
