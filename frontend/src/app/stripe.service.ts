@@ -18,4 +18,9 @@ export class StripeService {
     return await this.apiService.Post(environment.api_url+ EndpointURLS.StripeCustomer,body).toPromise();
 
   }
+
+  async setupIntentCall(){
+    let body = {payment_method_types: ['card'],customer: this.sharedService.stripeCustomerId};
+    return await this.apiService.Post(environment.api_url+ EndpointURLS.SetupIntentStripe,body).toPromise();
+  }
 }

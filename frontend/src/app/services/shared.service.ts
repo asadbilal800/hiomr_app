@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { loadStripe } from '@stripe/stripe-js';
+import { Stripe, loadStripe } from '@stripe/stripe-js';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -29,7 +29,7 @@ export class SharedService {
   dbSavedData = {} as any;
 
   //shared global variable
-  stripe:any;
+  stripe:Stripe;
   stripeCustomerId:any;
 
 
