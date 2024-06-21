@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../../services/shared.service';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
+import { StripeComponent } from '../stripe/stripe.component';
 
 @Component({
   selector: 'app-confirmation',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, StripeComponent],
   templateUrl: './confirmation.component.html',
   styleUrl: './confirmation.component.css',
   providers:[DatePipe]
@@ -19,11 +20,12 @@ export class ConfirmationComponent implements OnInit {
   patient:string;
   patientSex:string;
   patientDob:string;
+  userData:any;
   constructor(public sharedService: SharedService,private datePipe: DatePipe,private sanitizer: DomSanitizer){}
   ngOnInit(): void {
     this.patchData();
+    this.userData = this.sharedService.userData[0];
   }
-
   patchData(){
     
     if(this.sharedService.dbSavedData?.uploadEmail){

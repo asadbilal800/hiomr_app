@@ -1,16 +1,11 @@
-
-<!-- Neither Bootstrap nor Font Awesome Icons work if these are not present on this page -->
-<!-- Font Awesome Icons CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<!-- Bootstrap 5.3 Styling -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<ng-container *ngIf="userData?.payment != 1">
+<app-stripe></app-stripe>
+</ng-container>
 
 <form class="form container">
     <div class="col-12">
-  <!--<h4 class="title">Confirmation Receipt</h4>-->
   
-                   
-          <div class="row mt-1 mb-3">
+                    <div class="row mt-1 mb-3">
                     <div class="col-sm-3 col-form-label"><label>Confirmation Sent</label></div>
                     <div class="col-sm-4">  
                     <input 
@@ -90,4 +85,4 @@
             </div>
               
      </div>
-  </form> 
+</form> 
