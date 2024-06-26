@@ -7,4 +7,5 @@ export const EndpointURLS = {
   PatientInfo: 'patientInfo',
   StripeCustomer: 'stripeCustomer',
   SetupIntentStripe: 'setupIntentStripe',
+  UpdatePaymentBit: 'updatePaymentBit'
 }

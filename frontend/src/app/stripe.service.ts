@@ -23,4 +23,9 @@ export class StripeService {
     let body = {payment_method_types: ['card'],customer: this.sharedService.stripeCustomerId};
     return await this.apiService.Post(environment.api_url+ EndpointURLS.SetupIntentStripe,body).toPromise();
   }
+
+  async updatePaymentBit(){
+    let userData = this.sharedService.userData[0];
+    return await this.apiService.Get(environment.api_url+ EndpointURLS.UpdatePaymentBit+'?practiceId='+userData.practiceid).toPromise();
+}
 }

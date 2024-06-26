@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { StripeService } from '../../stripe.service';
-import { SharedService } from '../../services/shared.service';
-import { StripeElement, StripeElements, StripePaymentElement } from '@stripe/stripe-js';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { StripeElements, StripePaymentElement } from '@stripe/stripe-js';
+import { SharedService } from '../../services/shared.service';
+import { StripeService } from '../../stripe.service';
 
 @Component({
   selector: 'app-stripe',
@@ -15,7 +15,8 @@ export class StripeComponent implements OnInit {
   stripeElement:StripeElements;
   paymentElement:StripePaymentElement;
   invoiceChoosed = false;
-  constructor(private stripeService: StripeService,private sharedSerice: SharedService,private sharedService: SharedService){
+  paymentSuccess = false;
+  constructor(private stripeService: StripeService,private sharedSerice: SharedService){
 
   }
 
@@ -53,16 +54,16 @@ export class StripeComponent implements OnInit {
 
   async  finalizeStripe(){
     document.getElementById("StripeButton").innerHTML = 'Sending...';
-    document.getElementById("chooseInvoices").classList.add('d-none');
-    document.getElementById("invoiceMessage").classList.add('d-none');
-    document.getElementById('stripe-text').style.display = 'block'
-    document.getElementById('stripe-error').style.display = 'none';
     const {error} = await this.sharedSerice.stripe.confirmSetup({
       elements: this.stripeElement,
       redirect:"if_required"
     });
     if (error) {this.showErrorMessageStripe();} 
-    else { this.showSuccessMessageStripe();}
+    else { 
+      this.showSuccessMessageStripe();
+      this.stripeService.updatePaymentBit();
+
+    }
   }
   
    showErrorMessageStripe(){
@@ -70,13 +71,10 @@ export class StripeComponent implements OnInit {
       document.getElementById('stripe-error').style.display = 'block'
       document.getElementById("StripeButton").innerHTML = 'First Case Fee ($50)';
       document.getElementById('stripe-success').style.display = 'none'
-      document.getElementById("stripe-body").style.cursor = "auto";
   }
   
   showSuccessMessageStripe(){
-    let practiceId = localStorage.getItem('practiceId');
-    //set PAYMENT BIT HERE
-    localStorage.setItem('payment','1');
+      this.paymentSuccess = true;
       document.getElementById('stripe-text').style.display = 'none'
       document.getElementById('stripe-error').style.display = 'none'
       document.getElementById('stripe-success').style.display = 'block'
@@ -84,17 +82,12 @@ export class StripeComponent implements OnInit {
       document.getElementById('discountDropdown').classList.add('d-none');
       document.getElementById('stripeAuthorizeButton').classList.add('d-none');
       document.getElementById('stripeLogoInside').classList.add('d-none');
-      var buttons = document.getElementsByClassName("stripe-link"); 
-      for(var i = 0; i < buttons.length; i++){
-          (buttons[i] as any).style.cursor = "pointer"};
-      document.getElementById("submitAnotherCaseButton").style.cursor = "pointer";
-      document.getElementById("stripe-body").style.cursor = "auto";
       document.getElementById("payment-span").innerHTML = "Preauthorization Successful";
       document.getElementById("autopayButton").classList.replace('btn-payment','btn-success');
   }
+
    chooseInvoicing(){
-    // google.script.run.chooseInvoices(practiceId);
-    // this.sharedService.userData[0].payment = 1;
+    this.stripeService.updatePaymentBit();
     this.invoiceChoosed = true;
   }
 }

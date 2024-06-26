@@ -36,6 +36,7 @@
       </div>
 </div>
   
+<ng-container *ngIf="!paymentSuccess">
   <div *ngIf="!invoiceChoosed" class='container-fluid mb-1' >
   <p class='raleway text-center align-middle mb-0'> OR </p>
   <div  class='d-flex justify-content-center'>
@@ -43,6 +44,7 @@
               <span>Invoice After<br>Without Discount</span> </button>
               </div>
   </div>
+</ng-container> 
 
   <div *ngIf="invoiceChoosed" style="text-align: center;">
     Invoice for the standard fee will be sent to the billing email after report completion
