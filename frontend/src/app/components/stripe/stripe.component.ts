@@ -2,18 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { StripeService } from '../../stripe.service';
 import { SharedService } from '../../services/shared.service';
 import { StripeElement, StripeElements, StripePaymentElement } from '@stripe/stripe-js';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-stripe',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './stripe.component.html',
   styleUrl: './stripe.component.css'
 })
 export class StripeComponent implements OnInit {
   stripeElement:StripeElements;
   paymentElement:StripePaymentElement;
-  constructor(private stripeService: StripeService,private sharedSerice: SharedService){
+  invoiceChoosed = false;
+  constructor(private stripeService: StripeService,private sharedSerice: SharedService,private sharedService: SharedService){
 
   }
 
@@ -89,5 +91,10 @@ export class StripeComponent implements OnInit {
       document.getElementById("stripe-body").style.cursor = "auto";
       document.getElementById("payment-span").innerHTML = "Preauthorization Successful";
       document.getElementById("autopayButton").classList.replace('btn-payment','btn-success');
+  }
+   chooseInvoicing(){
+    // google.script.run.chooseInvoices(practiceId);
+    // this.sharedService.userData[0].payment = 1;
+    this.invoiceChoosed = true;
   }
 }

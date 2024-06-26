@@ -1,4 +1,5 @@
-<div class='d-flex justify-content-center mt-1 dropdown-center' id='chooseAutopay'>
+
+<div *ngIf="!invoiceChoosed" class='d-flex justify-content-center mt-1 dropdown-center' id='chooseAutopay'>
       <button type="button" class="btn btn-payment dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" id='autopayButton' title='Preauthorize payment'>
               <span id="payment-span">Authorize Autopay<br>With Discount</span> </button> 
   
@@ -33,15 +34,29 @@
       
     </div>
       </div>
-  </div>
+</div>
   
-  <div class='container-fluid mb-1' >
-  <div class='row' id='invoiceMessage'><p class='raleway text-center align-middle mb-0'> OR </p></div>
-  <div class='d-flex justify-content-center'>
-      <button type="button" onclick="chooseInvoicing()" id='chooseInvoices' class="btn btn-payment" title='Send us an invoice after report is complete'>
+  <div *ngIf="!invoiceChoosed" class='container-fluid mb-1' >
+  <p class='raleway text-center align-middle mb-0'> OR </p>
+  <div  class='d-flex justify-content-center'>
+      <button type="button" (click)="chooseInvoicing()" id='chooseInvoices' class="btn btn-payment" title='Send us an invoice after report is complete'>
               <span>Invoice After<br>Without Discount</span> </button>
               </div>
-              </div>
+  </div>
+
+  <div *ngIf="invoiceChoosed" style="text-align: center;">
+    Invoice for the standard fee will be sent to the billing email after report completion
+  </div>
+  
+  
+
+
+
+
+
+
+
+
   
   <!--Prepayment Discount Dropdown Table-->
     <div class="dropdown-center text-center" title='Dropdown Image' id='discountDropdown'>
@@ -99,7 +114,7 @@
     </div>
     </div> 
       </div>
-      <!--Prepayment Discount Dropdown Table--> 
+  <!--Prepayment Discount Dropdown Table--> 
   
   
   <div class='d-flex justify-content-center mt-1' id='stripeLogoOutside'>
