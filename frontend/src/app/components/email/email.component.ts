@@ -1,12 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
-import { environment } from '../../../environments/environment';
-import { ApiHandlerService } from '../../services/api-handler.service';
-import { EndpointURLS } from '../../global';
+import { Router } from '@angular/router';
 import { EmailService } from '../../services/email.service';
 import { RoutePaths, SharedService } from '../../services/shared.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-email',
@@ -21,6 +18,7 @@ export class EmailPageComponent implements OnInit {
   saveEmailFuture: boolean = false;
   emailFound:any = null;
   isVerified = false;
+  previousInputEmailValue:string = '';
   constructor(
     private emailService: EmailService,private formBuilder: FormBuilder,
     private sharedService:SharedService,
@@ -48,16 +46,17 @@ export class EmailPageComponent implements OnInit {
 
   async checkEmailFromDB(reCheck:boolean = false){
     if(reCheck && this.emailForm.hasError('notMatched')) return;
-    let emailValue = this.emailForm.get('email')?.value
-    if(emailValue){
+    if(!this.emailForm.get('email').errors){
+    let emailValue = this.emailForm.get('email')?.value;
+    if(emailValue && this.previousInputEmailValue != emailValue){
       let response = await this.emailService.checkEmailMatchDB(emailValue);
       this.emailFound = (response?.response != null) ? true : false;
-      if(response?.response?.length){
-        this.sharedService.userData = response.response
-      }
-    if(reCheck || this.emailFound) this.isVerified = true;
-    }   
+      if(response?.response?.length) this.sharedService.userData = response.response
+      if(reCheck || this.emailFound) this.isVerified = true;
+      this.previousInputEmailValue = emailValue
     }
+  }
+  }
 
 
   // Getter function to easily access form controls
