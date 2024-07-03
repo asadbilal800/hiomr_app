@@ -45,17 +45,19 @@ export class EmailPageComponent implements OnInit {
   }
 
   async checkEmailFromDB(reCheck:boolean = false){
-    if(reCheck && this.emailForm.hasError('notMatched')) return;
+    if(reCheck && this.emailForm.hasError('notMatched')) {this.isVerified = false; return;}
     if(!this.emailForm.get('email').errors){
     let emailValue = this.emailForm.get('email')?.value;
-    if(emailValue && this.previousInputEmailValue != emailValue){
+    if((emailValue && this.previousInputEmailValue != emailValue) || reCheck){
       let response = await this.emailService.checkEmailMatchDB(emailValue);
       this.emailFound = (response?.response != null) ? true : false;
       if(response?.response?.length) this.sharedService.userData = response.response
-      if(reCheck || this.emailFound) this.isVerified = true;
+      if(reCheck) this.isVerified = true;
+      else this.isVerified = this.emailFound;
       this.previousInputEmailValue = emailValue
     }
   }
+  console.log(this.emailForm)
   }
 
 
