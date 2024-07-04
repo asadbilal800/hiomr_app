@@ -66,7 +66,8 @@ export class EmailPageComponent implements OnInit {
   checkIfAllVerified(){
     if(this.emailForm.status == 'VALID') this.isVerified = true;
     else if(this.emailFound && !this.emailForm.get('email').errors && !this.emailForm.get('name').errors)
-      this.isVerified = true
+      this.isVerified = true;
+    else this.isVerified = false;
   }
 
 
@@ -100,13 +101,14 @@ export class EmailPageComponent implements OnInit {
   }
 
   navigate(){
-    
-    if(this.saveEmailFuture && !!this.emailForm.get('email')?.value) localStorage.setItem('email',this.emailForm.get('email')?.value);
-    else localStorage.removeItem('email');
-    this.sharedService.emailRelatedData = this.emailForm.value;
-    
-    let route:string =  'home/' + (this.emailFound ? RoutePaths.SubmittingDoctor : RoutePaths.MatchPractice);
-    this.router.navigate([route]);
+      if(this.isVerified){
+      if(this.saveEmailFuture && !!this.emailForm.get('email')?.value) localStorage.setItem('email',this.emailForm.get('email')?.value);
+      else localStorage.removeItem('email');
+      this.sharedService.emailRelatedData = this.emailForm.value;
+      
+      let route:string =  'home/' + (this.emailFound ? RoutePaths.SubmittingDoctor : RoutePaths.MatchPractice);
+      this.router.navigate([route]);
+      }
   }
 
 } 
