@@ -34,8 +34,13 @@ export class EmailPageComponent implements OnInit {
     },{ validators: this.matchEmailsValidator.bind(this) });
 
   }
-  ngOnInit(): void {
+  async ngOnInit() {
     window['processToken'] = this.processToken;
+    if(localStorage.getItem('email')){
+      let email = localStorage.getItem('email');
+      this.emailForm.patchValue({'email': email});
+      await  this.checkEmailFromDB();
+    }
   }
 
   matchEmailsValidator(form: FormGroup): ValidationErrors | null {
@@ -57,7 +62,6 @@ export class EmailPageComponent implements OnInit {
       this.previousInputEmailValue = emailValue
     }
   }
-  console.log(this.emailForm)
   }
 
 
