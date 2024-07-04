@@ -31,7 +31,7 @@ export class EmailPageComponent implements OnInit {
       email: [storedEmailValue ?? '', [Validators.email,Validators.required]],
       name: ['', [Validators.required, Validators.minLength(2)]],
       recheckEmail: ['', [Validators.required,Validators.email]],
-    },{ validators: this.matchEmailsValidator.bind(this) });
+    },{ validators: this.matchEmailsValidator.bind(this),updateOn: 'blur' });
 
   }
   async ngOnInit() {
