@@ -57,11 +57,16 @@ export class EmailPageComponent implements OnInit {
       let response = await this.emailService.checkEmailMatchDB(emailValue);
       this.emailFound = (response?.response != null) ? true : false;
       if(response?.response?.length) this.sharedService.userData = response.response
-      if(reCheck) this.isVerified = true;
-      else this.isVerified = this.emailFound;
       this.previousInputEmailValue = emailValue
     }
   }
+  this.checkIfAllVerified();
+  }
+
+  checkIfAllVerified(){
+    if(this.emailForm.status == 'VALID') this.isVerified = true;
+    else if(this.emailFound && !this.emailForm.get('email').errors && !this.emailForm.get('name').errors)
+      this.isVerified = true
   }
 
 
