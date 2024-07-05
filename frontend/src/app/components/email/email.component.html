@@ -5,7 +5,7 @@
         <div class="row mt-4"></div>
         <div class="row mt-4"></div>
 
-        <div class="row mt-4 mb-2">
+        <div class="row">
           <div class="col-sm-3 col-form-label"><label>Email*</label></div>
           <div class="col-sm-9">
               <input formControlName="email" name="email" id='emailId' type="email"
@@ -14,21 +14,23 @@
                      (blur)="checkEmailFromDB()"
                      [ngClass]="{'is-invalid': formControls['email'].invalid && (formControls['email'].dirty || formControls['email'].touched), 'is-valid': formControls['email'].valid && (formControls['email'].dirty || formControls['email'].touched)}"
               />
-              <div *ngIf="formControls['email'].invalid && (formControls['email'].dirty || formControls['email'].touched)" class="invalid-feedback">
+              <div class="feedback-container">
+                <span class="invalid-feedback"
+                      [style.visibility]="formControls['email'].invalid && (formControls['email'].dirty || formControls['email'].touched) ? 'visible' : 'hidden'">
                   Keep typing until it's a complete email
+                </span>
+                <span class="valid-feedback"
+                      [style.visibility]="formControls['email'].valid && (formControls['email'].dirty || formControls['email'].touched) ? 'visible' : 'hidden'">
+                  Looks like a valid email.
+                </span>
               </div>
-              <div *ngIf="formControls['email'].valid && (formControls['email'].dirty || formControls['email'].touched)" class="valid-feedback">
-                Looks like a valid email.
-              </div>
+              
           </div>
       </div>
       
-      
+    
 
-        <!-- White Space Empty Row -->
-        <div class="row mt-4"></div>
-
-        <div class="row mt-4 mb-2">
+        <div class="row">
           <div class="col-sm-3 col-form-label"><label>Your Name*</label></div>
           <div class="col-sm-9">
             <input formControlName="name" name="name" id='uploaderName' type="text"
@@ -37,17 +39,18 @@
             placeholder="Helpful in case of any uploading issues"
             [ngClass]="{'is-invalid': formControls['name'].invalid && (formControls['name'].dirty || formControls['name'].touched), 'is-valid': formControls['name'].valid && (formControls['email'].dirty || formControls['email'].touched)}"
               />
-              <div *ngIf="formControls['name'].valid && (formControls['name'].dirty || formControls['name'].touched)" class="valid-feedback">
+              <div class="feedback-container">
+                <span class="valid-feedback"
+                      [style.visibility]="formControls['name'].valid && (formControls['name'].dirty || formControls['name'].touched) ? 'visible' : 'hidden'">
                   I read in a book once that a rose by any other name would smell as sweet, but I was never able to believe it. A rose just couldn’t smell as sweet if it was a thistle or a skunk cabbage." LMM
-              </div>
-              <div *ngIf="formControls['name'].invalid && (formControls['name'].dirty || formControls['name'].touched)" class="invalid-feedback">
-                Must be 2 or more characters. Sorry, Mr. T!
+                </span>
+                <span class="invalid-feedback"
+                      [style.visibility]="formControls['name'].invalid && (formControls['name'].dirty || formControls['name'].touched) ? 'visible' : 'hidden'">
+                  Must be 2 or more characters. Sorry, Mr. T!
+                </span>
               </div>
           </div>
       </div>
-
-        <!-- White Space Empty Row -->
-        <div class="row mt-4"></div>
 
         <div class="row mb-2" id='recheckEmail' *ngIf="emailFound == false">
             <div class="col-sm-3 col-form-label mt-2"><label>Verify Email*</label></div>
@@ -60,12 +63,16 @@
               placeholder="Please retype email"
               [ngClass]="{'is-invalid': formControl.hasError('notMatched') && (formControls['recheckEmail'].dirty || formControls['recheckEmail'].touched), 'is-valid': !formControl.hasError('notMatched') && (formControls['recheckEmail'].dirty || formControls['recheckEmail'].touched)}"
               />
-            <div *ngIf="!formControl.hasError('notMatched') && (formControls['recheckEmail'].dirty || formControls['recheckEmail'].touched)" class="valid-feedback">
-                Looks like the emails match.
-            </div>
-            <div *ngIf="formControl.hasError('notMatched') && (formControls['recheckEmail'].dirty || formControls['recheckEmail'].touched)" class="invalid-feedback">
-              Keep typing until they match.
-            </div> 
+              <div class="feedback-container">
+                <span class="valid-feedback"
+                      [style.visibility]="!formControl.hasError('notMatched') && (formControls['recheckEmail'].dirty || formControls['recheckEmail'].touched) ? 'visible' : 'hidden'">
+                  Looks like the emails match.
+                </span>
+                <span class="invalid-feedback"
+                      [style.visibility]="formControl.hasError('notMatched') && (formControls['recheckEmail'].dirty || formControls['recheckEmail'].touched) ? 'visible' : 'hidden'">
+                  Keep typing until they match.
+                </span>
+              </div>
            </div>
           </div>
 
