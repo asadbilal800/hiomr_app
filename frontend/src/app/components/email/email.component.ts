@@ -31,7 +31,7 @@ export class EmailPageComponent implements OnInit {
       email: [storedEmailValue ?? '', [Validators.email,Validators.required]],
       name: ['', [Validators.required, Validators.minLength(2)]],
       recheckEmail: ['', [Validators.required,Validators.email]],
-    },{ validators: this.matchEmailsValidator.bind(this),updateOn: 'blur' });
+    },{ validators: this.matchEmailsValidator.bind(this)});
 
   }
   async ngOnInit() {
@@ -46,7 +46,7 @@ export class EmailPageComponent implements OnInit {
   matchEmailsValidator(form: FormGroup): ValidationErrors | null {
     let  email = form.get('email')?.value;
     let  recheckEmail = form.get('recheckEmail')?.value;
-    return email === recheckEmail ? null : { notMatched: true };
+    return (email === recheckEmail && !!email && !!recheckEmail) ? null : { notMatched: true };
   }
 
   async checkEmailFromDB(reCheck:boolean = false){

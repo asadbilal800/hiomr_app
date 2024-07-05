@@ -32,7 +32,7 @@
           <div class="col-sm-3 col-form-label"><label>Your Name*</label></div>
           <div class="col-sm-9">
             <input formControlName="name" name="name" id='uploaderName' type="text"
-            (blur)="checkIfAllVerified()"
+            (input)="checkIfAllVerified()"
             class="form-control form-control-lg"
             placeholder="Helpful in case of any uploading issues"
             [ngClass]="{'is-invalid': formControls['name'].invalid && (formControls['name'].dirty || formControls['name'].touched), 'is-valid': formControls['name'].valid && (formControls['email'].dirty || formControls['email'].touched)}"
@@ -56,7 +56,7 @@
               formControlName="recheckEmail"
               id="recheckEmailinput"
               type="email"  class="form-control form-control-lg" 
-              (blur)="checkEmailFromDB(true)"
+              (input)="checkEmailFromDB(true)"
               placeholder="Please retype email"
               [ngClass]="{'is-invalid': formControl.hasError('notMatched') && (formControls['recheckEmail'].dirty || formControls['recheckEmail'].touched), 'is-valid': !formControl.hasError('notMatched') && (formControls['recheckEmail'].dirty || formControls['recheckEmail'].touched)}"
               />
