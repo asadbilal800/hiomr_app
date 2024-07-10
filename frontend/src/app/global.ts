@@ -4,6 +4,7 @@ export const EndpointURLS = {
   CheckToken: 'checkToken',
   Registration: 'saveRegistration',
   CaptchaLink: 'https://www.google.com/recaptcha/api/siteverify',
+  CallCaptcha:'callCaptcha',
   PatientInfo: 'patientInfo',
   StripeCustomer: 'stripeCustomer',
   SetupIntentStripe: 'setupIntentStripe',

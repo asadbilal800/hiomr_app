@@ -14,13 +14,7 @@ export class EmailService {
     return this.apiService.Get(environment.api_url+ EndpointURLS.CheckEmailDb+'?email='+email).toPromise();
 }
 
- async verifyCaptcha(token){
-  var secret = '6Ld77aEdAAAAAFe_FEqz2zb5LaYWLebKfGGGGWiN';
-  let payload = {
-    'secret' : secret,
-    'response': token
+  callCaptcha(token){
+  return this.apiService.Get(environment.api_url+ EndpointURLS.CallCaptcha+'?token='+token).toPromise();
   }
-  let response = await this.apiService.Post(EndpointURLS.CaptchaLink,payload).toPromise();
-  return JSON.parse(response?.response).success
-}
 }

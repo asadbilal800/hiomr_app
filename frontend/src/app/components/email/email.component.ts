@@ -19,6 +19,8 @@ export class EmailPageComponent implements OnInit {
   emailFound:any = null;
   isVerified = false;
   previousInputEmailValue:string = '';
+  emailButtonDisable = false;
+  isRobot= false;
   constructor(
     private emailService: EmailService,private formBuilder: FormBuilder,
     private sharedService:SharedService,
@@ -82,22 +84,36 @@ export class EmailPageComponent implements OnInit {
   }
 
   navigateInit(){
+    if(!this.emailButtonDisable && !this.isRobot){
+    this.emailButtonDisable = true;
     document.getElementById('trigger-captcha')?.click();
+    this.performCaptchaActivity();
+    }
+
   }
 
-  async  processToken(token){
-    let isHuman =  await this.checkToken(token)
-    if(isHuman){
-      this.navigate();
-    }
-    else {
-        (document as any).getElementById("userMessage").innerHTML = "ReCAPTCHA thinks you have a microprocessor for a brain. 🤖 Have you forgotten how to love?" ;
-        console.log("Failed recaptcha");
-    }
+  async performCaptchaActivity() {
+    setTimeout(async () => {
+      let token = window['token'];
+      let isHuman =  await this.checkToken(token)
+      if(isHuman){
+        this.navigate();
+      }
+      else {
+          (document as any).getElementById("userMessage").innerHTML = "ReCAPTCHA thinks you have a microprocessor for a brain. 🤖 Have you forgotten how to love?" ;
+          console.log("Failed recaptcha");
+          this.isRobot = true;
+      }
+      this.emailButtonDisable = false;
+    },2000)
+  }
+
+     processToken(token){
+    window['token'] = token;
   }
 
   async checkToken(token){
-   return this.emailService.verifyCaptcha(token);
+   return this.emailService.callCaptcha(token);
   }
 
   navigate(){
@@ -105,7 +121,6 @@ export class EmailPageComponent implements OnInit {
       if(this.saveEmailFuture && !!this.emailForm.get('email')?.value) localStorage.setItem('email',this.emailForm.get('email')?.value);
       else localStorage.removeItem('email');
       this.sharedService.emailRelatedData = this.emailForm.value;
-      
       let route:string =  'home/' + (this.emailFound ? RoutePaths.SubmittingDoctor : RoutePaths.MatchPractice);
       this.router.navigate([route]);
       }

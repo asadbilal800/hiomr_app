@@ -96,7 +96,7 @@
         <div class="col"
         *ngIf="isVerified">
         <a class="navbutton position-absolute top-50 end-0 translate-middle-y fadefast" 
-         (click)="navigate()" role="button">
+         (click)="navigateInit()" role="button">
          <span class="material-symbols-rounded">arrow_circle_right</span>
          </a>
         </div>
@@ -112,5 +112,5 @@
 
 </form>
 
-<button class="g-recaptcha" data-sitekey="6Ld77aEdAAAAAE4G0IST_3VLAEvJXXQuc7KYUlmZ" data-callback='processToken' hidden  id="trigger-captcha"> 
+<button class="g-recaptcha" data-sitekey="6LcnQWMeAAAAAES5VfHBykgnUHrYAz1SbhLAeaBN" data-callback='processToken' hidden  id="trigger-captcha"> 
 </button>
