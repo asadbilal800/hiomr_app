@@ -93,13 +93,15 @@
         </div>
 
         <!-- Nav Button Forward-->
-        <div class="col"
-        *ngIf="isVerified">
-        <a class="navbutton position-absolute top-50 end-0 translate-middle-y fadefast" 
-         (click)="navigateInit()" role="button">
-         <span class="material-symbols-rounded">arrow_circle_right</span>
-         </a>
-        </div>
+          <!-- Nav Button Forward-->
+          <div class="col"
+              [style.visibility]="isVerified ? 'visible' : 'hidden'">
+            <a class="navbutton position-absolute top-50 end-0 translate-middle-y fadefast" 
+              (click)="navigateInit()" role="button">
+              <span class="material-symbols-rounded">arrow_circle_right</span>
+            </a>
+          </div>
+
         
         <!-- White Space Empty Row -->
         <div class="row mt-4"></div>
