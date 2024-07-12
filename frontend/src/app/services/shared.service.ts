@@ -71,3 +71,14 @@ export enum RoutePaths {
   Radiologist = 'radiologist',
   Confirmation ='confirmation'
 }
+
+export const routePathHeaderPrecedence = {
+  'email':1,
+  'submitting-doctor':1,
+  'match-practice':1,
+  'registration':1,
+  'patientForm':2,
+  'reason':3,
+  'radiologist':4,
+  'confirmation':5
+};
