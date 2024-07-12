@@ -38,6 +38,7 @@ export class SubmittingDoctorComponent implements OnInit {
       this.okToNavigate = true;
     }
   else {
+    this.sharedService.selectedDoctorId = 'new'
     if(this.firstNameDoctor && this.lastNameDoctor){
       this.okToNavigate = true;
     }
@@ -46,7 +47,7 @@ export class SubmittingDoctorComponent implements OnInit {
   }
 
   onNameChange(){
-    if(this.firstNameDoctor && this.lastNameDoctor){
+    if(this.firstNameDoctor && this.lastNameDoctor && this.sharedService.selectedDoctorId == 'new'){
       this.okToNavigate = true;
     }
     else this.okToNavigate = false;
@@ -55,7 +56,14 @@ export class SubmittingDoctorComponent implements OnInit {
   navigate(){
     if(this.firstNameDoctor && this.lastNameDoctor){
       let guidDoctor = this.sharedService.generateUUID();
+      let userData = this.sharedService.userData[0];
       this.sharedService.selectedDoctorId = guidDoctor;
+      this.sharedService.newDoctorPayload = {
+        Id: this.sharedService.selectedDoctorId,
+        PracticeId: userData.practiceid,
+        FirstName: this.firstNameDoctor,
+        LastName: this.lastNameDoctor, 
+      };
       this.sharedService.newDoctorScenario = true;
     }
     let route:string =  'home/' + (RoutePaths.PatientForm);

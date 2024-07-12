@@ -5,6 +5,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { RoutePaths, SharedService } from '../../services/shared.service';
 import { Router } from '@angular/router';
 import { StripeService } from '../../stripe.service';
+import { SubmittingDoctorService } from '../../services/submitting-doctor.service';
 
 @Component({
   selector: 'app-patient-info',
@@ -21,12 +22,13 @@ export class PatientInfoComponent implements OnInit {
   isVaidated = false;
 
 
-constructor(private stripeService:StripeService, private formBuilder: FormBuilder,private router: Router,private sharedService: SharedService){}
+constructor(private submittingDoctorService: SubmittingDoctorService, private stripeService:StripeService, private formBuilder: FormBuilder,private router: Router,private sharedService: SharedService){}
 
 async ngOnInit() {
 
 
   await this.initStripeRelatedDataIfRequired();
+  this.checkIfNewDoctorScenario()
   this.patientForm = this.formBuilder.group({
     imageDate: [null, [Validators.required]], // date object required
     internalId: ['', [Validators.required]], // string required
@@ -38,6 +40,13 @@ async ngOnInit() {
   this.patientForm.valueChanges.subscribe(res => {
     this.IsValidated();
   });
+}
+
+checkIfNewDoctorScenario(){
+  if(this.sharedService.newDoctorScenario){
+    let payload = this.sharedService.newDoctorPayload;
+    this.submittingDoctorService.saveNewDoctor(payload);
+  }
 }
 
 async initStripeRelatedDataIfRequired(){

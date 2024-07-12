@@ -16,6 +16,7 @@ export class SharedService {
   //submitting doctor data:
   selectedDoctorId: string ='';
   newDoctorScenario =  false;
+  newDoctorPayload = {} as any;
 
   //patient related shared data:
   patientInfoValues: any;
