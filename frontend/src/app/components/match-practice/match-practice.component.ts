@@ -145,11 +145,10 @@ export class MatchPracticeComponent implements AfterViewInit {
       let result = await this.matchPracticeService.checkMatchPractice(payload);
       if(result?.response){
       this.foundPractice = true;
-      this.sharedService.matchPracticeData = result.response;
+      this.sharedService.userData = result.response;
   }
   else this.foundPractice = false;
 
-  debugger
   setTimeout(() => this.practiceNameInput.nativeElement.focus(),100);
   }
 }

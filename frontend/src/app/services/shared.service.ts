@@ -11,7 +11,6 @@ export class SharedService {
   userData: any = {};
   isInProgress = false;
   practiceAddress:any;
-  matchPracticeData: any = null as any;
 
   //submitting doctor data:
   selectedDoctorId: string ='';
