@@ -53,7 +53,6 @@ export class MatchPracticeComponent implements AfterViewInit {
         
         // Add a listener to the Autocomplete object to capture the place details
         autocomplete.addListener('place_changed', function() {
-          (document.getElementById("userMessage") as any).innerHTML = 'Matching you to this office, just a moment...' ;
           var place: any = autocomplete.getPlace();
           console.log(place);
           var streetAddress = '';
