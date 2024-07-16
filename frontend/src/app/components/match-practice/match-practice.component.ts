@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RoutePaths, SharedService } from '../../services/shared.service';
@@ -20,6 +20,7 @@ export class MatchPracticeComponent implements AfterViewInit {
   saveEmailFuture: boolean = false;
   foundPractice:any = null;
   isVerified = false;
+  @ViewChild('practiceInput') practiceNameInput: any;
   constructor(
     private formBuilder: FormBuilder,
     private sharedService:SharedService,
@@ -147,6 +148,9 @@ export class MatchPracticeComponent implements AfterViewInit {
       this.sharedService.matchPracticeData = result.response;
   }
   else this.foundPractice = false;
+
+  debugger
+  setTimeout(() => this.practiceNameInput.nativeElement.focus(),100);
   }
 }
 
