@@ -25,6 +25,7 @@ export class ConfirmationComponent implements OnInit {
   ngOnInit(): void {
     this.patchData();
     this.userData = this.sharedService.userData[0];
+    sessionStorage.setItem('userData',JSON.stringify(this.userData));
   }
   patchData(){
     

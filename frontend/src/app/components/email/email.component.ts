@@ -38,6 +38,10 @@ export class EmailPageComponent implements OnInit {
   }
   async ngOnInit() {
     window['processToken'] = this.processToken;
+    if(sessionStorage.getItem('userData')){
+      let userData = JSON.parse(sessionStorage.getItem('userData'));
+      this.sharedService.userData = [userData];
+    }
     if(localStorage.getItem('email')){
       let email = localStorage.getItem('email');
       this.emailForm.patchValue({'email': email});
@@ -52,6 +56,10 @@ export class EmailPageComponent implements OnInit {
   }
 
   async checkEmailFromDB(reCheck:boolean = false){
+    if(this.sharedService.userData?.length){
+      this.emailFound = true
+    }
+    else {
     if(reCheck && this.emailForm.hasError('notMatched')) {this.isVerified = false; return;}
     if(!this.emailForm.get('email').errors){
     let emailValue = this.emailForm.get('email')?.value;
@@ -63,6 +71,7 @@ export class EmailPageComponent implements OnInit {
     }
   }
   this.checkIfAllVerified();
+}
   }
 
   checkIfAllVerified(){

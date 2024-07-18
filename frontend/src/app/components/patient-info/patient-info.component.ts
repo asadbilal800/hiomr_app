@@ -16,19 +16,14 @@ import { SubmittingDoctorService } from '../../services/submitting-doctor.servic
 })
 export class PatientInfoComponent implements OnInit {
   public files: File[] = [];
-  patientForm: FormGroup = {} as any;
+  patientForm: FormGroup;
   sexType: string = '';
   imageType: string = '';
   isVaidated = false;
 
 
-constructor(private submittingDoctorService: SubmittingDoctorService, private stripeService:StripeService, private formBuilder: FormBuilder,private router: Router,private sharedService: SharedService){}
+constructor(private submittingDoctorService: SubmittingDoctorService, private stripeService:StripeService, private formBuilder: FormBuilder,private router: Router,private sharedService: SharedService){
 
-async ngOnInit() {
-
-
-  await this.initStripeRelatedDataIfRequired();
-  this.checkIfNewDoctorScenario()
   this.patientForm = this.formBuilder.group({
     imageDate: [null, [Validators.required]], // date object required
     internalId: ['', [Validators.required]], // string required
@@ -36,6 +31,14 @@ async ngOnInit() {
     lastName: ['', [Validators.required]], // string required
     birthDate: [null, [Validators.required]], // date object required
   }); 
+}
+
+async ngOnInit() {
+
+
+  await this.initStripeRelatedDataIfRequired();
+  this.checkIfNewDoctorScenario()
+
 
   this.patientForm.valueChanges.subscribe(res => {
     this.IsValidated();
