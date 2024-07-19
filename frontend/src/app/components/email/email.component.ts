@@ -21,6 +21,8 @@ export class EmailPageComponent implements OnInit {
   previousInputEmailValue:string = '';
   emailButtonDisable = false;
   isRobot= false;
+  userMessage:string = '';
+  
   constructor(
     private emailService: EmailService,private formBuilder: FormBuilder,
     private sharedService:SharedService,
@@ -57,16 +59,25 @@ export class EmailPageComponent implements OnInit {
 
   async checkEmailFromDB(reCheck:boolean = false){
     if(this.sharedService.userData?.length){
-      this.emailFound = true
+      this.userMessage = 'Locally checking your email, just a moment...';
+      setTimeout(() => {
+        this.emailFound = true;
+        this.userMessage = 'Just your name';
+      },2000);
+
     }
+
     else {
+    if(!reCheck) this.userMessage = 'Finding your email, just a moment...';
+    else this.userMessage = 'Checking again, just a moment...'
     if(reCheck && this.emailForm.hasError('notMatched')) {this.isVerified = false; return;}
     if(!this.emailForm.get('email').errors){
     let emailValue = this.emailForm.get('email')?.value;
     if((emailValue && this.previousInputEmailValue != emailValue) || reCheck){
       let response = await this.emailService.checkEmailMatchDB(emailValue);
       this.emailFound = (response?.response != null) ? true : false;
-      if(response?.response?.length) this.sharedService.userData = response.response
+      if(response?.response?.length) {this.sharedService.userData = response.response;this.userMessage='Email Found 👍'}
+      else {if(!reCheck) this.userMessage = "Check the email for typos and enter it again";}
       this.previousInputEmailValue = emailValue
     }
   }
@@ -75,9 +86,11 @@ export class EmailPageComponent implements OnInit {
   }
 
   checkIfAllVerified(){
-    if(this.emailForm.status == 'VALID') this.isVerified = true;
+    if(this.emailForm.status == 'VALID') {this.isVerified = true; this.userMessage = 'Ready 👍';}
     else if(this.emailFound && !this.emailForm.get('email').errors && !this.emailForm.get('name').errors)
-      this.isVerified = true;
+      {this.isVerified = true;
+       this.userMessage = 'Ready 👍'
+      }
     else this.isVerified = false;
   }
 
@@ -109,8 +122,7 @@ export class EmailPageComponent implements OnInit {
         this.navigate();
       }
       else {
-          (document as any).getElementById("userMessage").innerHTML = "ReCAPTCHA thinks you have a microprocessor for a brain. 🤖 Have you forgotten how to love?" ;
-          console.log("Failed recaptcha");
+          this.userMessage =  "ReCAPTCHA thinks you have a microprocessor for a brain. 🤖 Have you forgotten how to love?";
           this.isRobot = true;
       }
       this.emailButtonDisable = false;
