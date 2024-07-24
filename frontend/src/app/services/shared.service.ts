@@ -148,4 +148,28 @@ export const StatesUSA: { value: string, name: string }[] = [
   { value: 'AE', name: 'Armed Forces Others (AE)' }
 ];
 
+export const SpecialityDD: { value: string, name: string }[] = [
+  { value: '2', name: 'Endodontics' },
+  { value: '3', name: 'Periodontics' },
+  { value: '4', name: 'Prosthodontics' },
+  { value: '5', name: 'Orthodontics' },
+  { value: '6', name: 'Pediatrics' },
+  { value: '7', name: 'OMS' },
+  { value: '8', name: 'Pathology' },
+  { value: '9', name: 'Other' },
+];
 
+export const CBCTDD: { value: string, name: string }[] = [
+  { value: '2', name: 'iCat' },
+  { value: '3', name: 'Carestream Kodak' },
+  { value: '4', name: 'Planmeca' },
+  { value: '5', name: 'Instrumentarium' },
+  { value: '6', name: 'Morita' },
+  { value: '7', name: 'VaTech' },
+  { value: '8', name: 'NewTom' },
+  { value: '9', name: 'PreXion' },
+  { value: '10', name: 'Kavo' },
+  { value: '11', name: 'Dexis' },
+  { value: '99', name: 'Other' },
+
+];

@@ -113,14 +113,8 @@
               <select formControlName="specialty" class="form-select form-select-lg mb-3 " title="Specialty"
                   tabindex="12">
                   <option selected value="1">General</option>
-                  <option value="2">Endodontics</option>
-                  <option value="3">Periodontics</option>
-                  <option value="4">Prosthodontics</option>
-                  <option value="5">Orthodontics</option>
-                  <option value="6">Pediatrics</option>
-                  <option value="7">OMS</option>
-                  <option value="8">Pathology</option>
-                  <option value="9">Other</option>
+                  <option *ngFor="let state of specialityDD" [value]="state.value">{{ state.name }}</option>
+
               </select>
               <!--<div class="invalid-tooltip"> Enter your tool tip error here!</div>-->
           </div>
@@ -130,17 +124,8 @@
               <select formControlName="cbct" class="form-select form-select-lg mb-3 " title="CBCT Machine"
                   tabindex="13">
                   <option selected value="1">Sirona</option>
-                  <option value="2">iCat</option>
-                  <option value="3">Carestream Kodak</option>
-                  <option value="4">Planmeca</option>
-                  <option value="5">Instrumentarium</option>
-                  <option value="6">Morita</option>
-                  <option value="7">VaTech</option>
-                  <option value="8">NewTom</option>
-                  <option value="9">PreXion</option>
-                  <option value="10">Kavo</option>
-                  <option value="11">Dexis</option>
-                  <option value="99">Other</option>
+                  <option *ngFor="let state of CBCTDD" [value]="state.value">{{ state.name }}</option>
+
               </select>
               <!-- <div class="invalid-tooltip"> Enter your tool tip error here!</div> -->
           </div>

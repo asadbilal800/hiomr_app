@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RoutePaths, SharedService, StatesUSA } from '../../services/shared.service';
+import { CBCTDD, RoutePaths, SharedService, SpecialityDD, StatesUSA } from '../../services/shared.service';
 import { Router } from '@angular/router';
 import { RegistrationService } from '../../services/registration.service';
 
@@ -16,6 +16,8 @@ export class RegistrationComponent implements OnInit {
   
   regForm: FormGroup ={} as any;
   statesUSA = StatesUSA;
+  specialityDD = SpecialityDD;
+  CBCTDD = CBCTDD;
   constructor(private formBuilder: FormBuilder,private sharedService: SharedService,private router: Router,private registrationService: RegistrationService) {}
 
   ngOnInit(): void {
