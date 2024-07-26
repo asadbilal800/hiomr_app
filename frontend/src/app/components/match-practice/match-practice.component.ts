@@ -64,6 +64,7 @@ export class MatchPracticeComponent implements AfterViewInit {
           var website = place?.website;
           var practiseName;
           var typedEmail = (window as any)._this.sharedService.emailRelatedData.email;
+          let practiceSubDetails = null;
     
     
           if(place?.formatted_phone_number){
@@ -78,12 +79,7 @@ export class MatchPracticeComponent implements AfterViewInit {
             const delimiter3 = '|';
             practiseName = name.split(',').flatMap(x => x.split('|')).flatMap(x => x.split('-'))[0];
             practiseName  = practiseName.replace(/[^a-zA-Z ]/g, "").trim();
-            let practiceSubDetails = getSpecficAddress(place.address_components)
-            // if(practiceSubDetails) sessionStorage.setItem('practiceSubDetails',practiceSubDetails);
-            // else sessionStorage.removeItem('practiceSubDetails');
-            // localStorage.setItem('practiceName',practiseName,state);
-    
-    
+            practiceSubDetails = getSpecficAddress(place.address_components)
           }
           
           // Loop through the address components of the place to find the street address, city, zip code, and phone number
@@ -107,7 +103,7 @@ export class MatchPracticeComponent implements AfterViewInit {
     
           });
     
-          let address = streetAddress + '|' + city + '|' + zip + '|' + phone + '|' + state + '|' + typedEmail + '|' + practiseName + "|" + website;
+          let address = streetAddress + '|' + city + '|' + zip + '|' + phone + '|' + state + '|' + typedEmail + '|' + practiseName + "|" + website + "|" + (practiceSubDetails ?? null);
           (window as any)._this.sharedService.practiceAddress = address;
           (window as any)._this.processMatchPracticeDetails(practiseName,state);
         });

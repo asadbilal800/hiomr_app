@@ -66,6 +66,9 @@ export class RegistrationComponent implements OnInit {
     if (result.split('|')[6]) {
       this.regForm.patchValue({ practice: result.split('|')[6] });
     }
+    if ((result.split('|') || [])[8]) {
+      this.regForm.patchValue({ address2: result.split('|')[8] });
+    }
   }
   }
 
