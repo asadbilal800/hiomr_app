@@ -103,7 +103,7 @@ export class MatchPracticeComponent implements AfterViewInit {
     
           });
     
-          let address = streetAddress + '|' + city + '|' + zip + '|' + phone + '|' + state + '|' + typedEmail + '|' + practiseName + "|" + website + "|" + (practiceSubDetails ?? null);
+          let address = streetAddress + '|' + city + '|' + zip + '|' + phone + '|' + state + '|' + typedEmail + '|' + practiseName + "|" + website + "|" + (practiceSubDetails ?? '');
           (window as any)._this.sharedService.practiceAddress = address;
           (window as any)._this.processMatchPracticeDetails(practiseName,state);
         });
