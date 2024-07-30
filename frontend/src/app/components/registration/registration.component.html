@@ -8,14 +8,16 @@
           <div class="col-sm">
               <label class="col-sm-3 col-form-label" hidden>dfirst</label>
               <input formControlName="dFirstName" type="text" class="form-control form-control-lg "
-                  placeholder="First Name"  />
-              <!-- <div class="invalid-tooltip">Enter your tooltip error here!</div> -->
+                  placeholder="First Name" 
+                  [ngClass]="{'is-invalid': formControls['dFirstName'].invalid, 'is-valid': formControls['dFirstName'].valid}"
+                  />
           </div>
           <div class="col-sm ">
               <label class="form-label" hidden>dlast</label>
               <input formControlName="dLastName" type="text" class="form-control form-control-lg "
-                  placeholder="Last Name"  />
-              <!-- <div class="invalid-tooltip">Enter your tool tip error here!</div> -->
+                  placeholder="Last Name"
+                  [ngClass]="{'is-invalid': formControls['dLastName'].invalid, 'is-valid': formControls['dLastName'].valid}"
+                  />
           </div>
       </div>
 
@@ -23,8 +25,9 @@
           <div class="col-sm-3 col-form-label cinzel"><label>Practice*</label></div>
           <div class="col-sm-9">
               <input formControlName="practice" type="text" placeholder="Practice Name"
-                  class="form-control form-control-lg "  />
-              <!--<div class="invalid-tooltip">Enter your tool tip error here!</div>-->
+                  class="form-control form-control-lg "
+                  [ngClass]="{'is-invalid': formControls['practice'].invalid, 'is-valid': formControls['practice'].valid}"
+                  />
           </div>
       </div>
 
@@ -32,13 +35,13 @@
           <div class="col-sm-3 col-form-label"><label>Street Address*</label></div>
           <div class="col-sm-7">
               <input formControlName="street" type="text" placeholder="Practice Street Mailing Address"
-                  class="form-control form-control-lg "  />
-              <!--<div class="invalid-tooltip"> Enter your tool tip error here!</div>-->
+                  class="form-control form-control-lg "
+                  [ngClass]="{'street': formControls['street'].invalid, 'is-valid': formControls['street'].valid}"
+                  />
           </div>
           <div class="col-sm-2">
               <input formControlName="address2" type="text" placeholder="Suite/Office"
                   class="form-control form-control-lg " />
-              <!--<div class="invalid-tooltip"> Enter your tool tip error here!</div>-->
           </div>
       </div>
 
@@ -47,25 +50,26 @@
           <div class="col-sm-3 position-relative">
               <input formControlName="city" type="text" placeholder="City"
                   title="We built this city on rock and roll...What else would one put here?"
-                  class="form-control form-control-lg "  />
-              <!--<div class="invalid-tooltip">Enter your tool tip error here!</div>-->
+                  class="form-control form-control-lg " 
+                  [ngClass]="{'is-invalid': formControls['city'].invalid, 'is-valid': formControls['city'].valid}"
+                  />
           </div>
 
           <label class="col-sm-3 col-form-label" hidden></label>
           <div class="col-sm-3 position-relative">
               <select formControlName="state" class="form-select form-select-lg " title="US State/Territory"
+              [ngClass]="{'is-invalid': formControls['state'].invalid, 'is-valid': formControls['state'].valid}"
                   >
                   <option disabled selected value>State</option>
                   <option *ngFor="let state of statesUSA" [value]="state.value">{{ state.name }}</option>
               </select>
-              <!--<div class="invalid-tooltip">Enter your tool tip error here!</div>-->
           </div>
 
           <label class="col-sm-3 col-form-label" hidden></label>
           <div class="col-sm-3 position-relative">
               <input formControlName="zip" type="number" placeholder="Zip" 
+              [ngClass]="{'is-invalid': formControls['zip'].invalid, 'is-valid': formControls['zip'].valid}"
                   title="Five Digit Zip Code" class="form-control form-control-lg " />
-              <!--<div class="invalid-tooltip"> Enter your tool tip error here!</div>-->
           </div>
       </div>
 
@@ -73,8 +77,10 @@
           <div class="col-sm-3 col-form-label"><label>Contact Number*</label></div>
           <div class="col-sm-9">
               <input formControlName="practisePhoneNo" type="number" placeholder="Practice Phone Number"
-                  class="form-control form-control-lg "  />
-              <!--<div class="invalid-tooltip"> Enter your tool tip error here!</div>-->
+                  class="form-control form-control-lg "
+                  [ngClass]="{'is-invalid': formControls['practisePhoneNo'].invalid, 'is-valid': formControls['practisePhoneNo'].valid}"
+
+                  />
           </div>
       </div>
 
@@ -83,7 +89,6 @@
           <div class="col-sm-9 position-relative">
               <input formControlName="practicePhoneNo2" type="text" maxlength="10" pattern="^\d{10}$"
                   placeholder="Optional Secondary Contact Number" class="form-control form-control-lg"  />
-              <!-- <div class="invalid-tooltip"> Enter your tool tip error here!</div> -->
           </div>
       </div>
 
@@ -92,8 +97,10 @@
           <div class="col-sm-9">
               <input formControlName="emailId" type="email"
                   placeholder="Doctor/Practice Contact Email (This is your ID, your report destination, etc.)"
-                  class="form-control form-control-lg " title="Lowercase Email Address"  />
-              <!--<div class="invalid-tooltip">Keep typing until it's a complete email</div>-->
+                  class="form-control form-control-lg " title="Lowercase Email Address"  
+                  [ngClass]="{'is-invalid': formControls['emailId'].invalid, 'is-valid': formControls['emailId'].valid}"
+
+                  />
           </div>
       </div>
 
@@ -101,8 +108,10 @@
           <div class="col-sm-3 col-form-label"><label>Billing Email*</label></div>
           <div class="col-sm-9">
               <input formControlName="billEmail" type="email" placeholder="Email for Invoice/Receipt Person (if same, copy from above)"
-                  class="form-control form-control-lg " title="Lowercase Email Address"  />
-              <!--<div class="invalid-tooltip">Keep typing until it's a complete email</div>-->
+                  class="form-control form-control-lg " title="Lowercase Email Address" 
+                  [ngClass]="{'is-invalid': formControls['billEmail'].invalid, 'is-valid': formControls['billEmail'].valid}"
+
+                  />
           </div>
       </div>
 
@@ -116,7 +125,6 @@
                   <option *ngFor="let state of specialityDD" [value]="state.value">{{ state.name }}</option>
 
               </select>
-              <!--<div class="invalid-tooltip"> Enter your tool tip error here!</div>-->
           </div>
 
           <div class="col-sm position-relative">
@@ -127,7 +135,6 @@
                   <option *ngFor="let state of CBCTDD" [value]="state.value">{{ state.name }}</option>
 
               </select>
-              <!-- <div class="invalid-tooltip"> Enter your tool tip error here!</div> -->
           </div>
       </div>
 

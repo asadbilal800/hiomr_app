@@ -90,6 +90,11 @@ export class RegistrationComponent implements OnInit {
      }
   }
 
+    // Getter function to easily access form controls
+    get formControls() {
+      return this.regForm.controls
+    }
+
 
 
 
