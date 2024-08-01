@@ -118,14 +118,16 @@
       <div class="row mb-2 position-relative">
           <div class="col-sm-3 col-form-label"></div>
           <div class="col-sm">
-            <select formControlName="cbct" class="form-select form-select-lg mb-3">
+            <select formControlName="specialty" class="form-select form-select-lg mb-3"
+            [ngClass]="{'is-invalid': formControls['specialty'].invalid, 'is-valid': formControls['specialty'].valid}">
                 <option value="" disabled selected>Speciality</option>
                 <option *ngFor="let state of specialityDD" [value]="state.value" >{{ state.name }}</option>
               </select>
           </div>
 
           <div class="col-sm position-relative">
-            <select formControlName="cbct" class="form-select form-select-lg mb-3">
+            <select formControlName="cbct" class="form-select form-select-lg mb-3"
+            [ngClass]="{'is-invalid': formControls['cbct'].invalid, 'is-valid': formControls['cbct'].valid}">
                 <option value="" disabled selected>CBCT</option>
                 <option *ngFor="let state of CBCTDD" [value]="state.value">{{ state.name }}</option>
               </select>
