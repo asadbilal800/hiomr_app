@@ -34,8 +34,8 @@ export class RegistrationComponent implements OnInit {
     practicePhoneNo2: [''], // optional field
     emailId: ['', [Validators.required, Validators.email]],
     billEmail: ['', [Validators.required, Validators.email]],
-    specialty: ['1', Validators.required],
-    cbct: ['1', Validators.required]
+    specialty: ['', Validators.required],
+    cbct: ['', Validators.required]
   });
 
   this.mapAddress();

@@ -149,6 +149,7 @@ export const StatesUSA: { value: string, name: string }[] = [
 ];
 
 export const SpecialityDD: { value: string, name: string }[] = [
+  { value: '1', name: 'General' },
   { value: '2', name: 'Endodontics' },
   { value: '3', name: 'Periodontics' },
   { value: '4', name: 'Prosthodontics' },
@@ -160,6 +161,7 @@ export const SpecialityDD: { value: string, name: string }[] = [
 ];
 
 export const CBCTDD: { value: string, name: string }[] = [
+  { value: '1', name: 'Sirona' },
   { value: '2', name: 'iCat' },
   { value: '3', name: 'Carestream Kodak' },
   { value: '4', name: 'Planmeca' },
