@@ -19,7 +19,6 @@ export class MatchPracticeComponent implements AfterViewInit {
   matchPracticeForm: FormGroup;
   saveEmailFuture: boolean = false;
   foundPractice:any = null;
-  isVerified = false;
   @ViewChild('practiceInput') practiceNameInput: any;
   constructor(
     private formBuilder: FormBuilder,
@@ -151,6 +150,11 @@ export class MatchPracticeComponent implements AfterViewInit {
   navigate(){  
     let route:string =  'home/' + (this.foundPractice ? RoutePaths.SubmittingDoctor : RoutePaths.Registration);
     this.router.navigate([route]);
+  }
+
+  forcelyNavigateToPractice(){
+    this.foundPractice = false;
+    this.navigate();
   }
 
 } 
