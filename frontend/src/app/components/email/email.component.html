@@ -12,6 +12,7 @@
                      class="form-control form-control-lg"
                      placeholder="Where the report/notification should be sent"
                      (blur)="checkEmailFromDB()"
+                     onpaste="return false"
                      [ngClass]="{'is-invalid': formControls['email'].invalid && (formControls['email'].dirty || formControls['email'].touched), 'is-valid': formControls['email'].valid && (formControls['email'].dirty || formControls['email'].touched)}"
               />
               <div class="feedback-container">
@@ -61,6 +62,7 @@
               type="email"  class="form-control form-control-lg" 
               (input)="checkEmailFromDB(true)"
               placeholder="Please retype email"
+              onpaste="return false"
               [ngClass]="{'is-invalid': formControl.hasError('notMatched') && (formControls['recheckEmail'].dirty || formControls['recheckEmail'].touched), 'is-valid': !formControl.hasError('notMatched') && (formControls['recheckEmail'].dirty || formControls['recheckEmail'].touched)}"
               />
               <div class="feedback-container">

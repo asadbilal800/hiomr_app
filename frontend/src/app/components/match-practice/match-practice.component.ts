@@ -19,6 +19,7 @@ export class MatchPracticeComponent implements AfterViewInit {
   matchPracticeForm: FormGroup;
   saveEmailFuture: boolean = false;
   foundPractice:any = null;
+  isClickable = false;
   @ViewChild('practiceInput') practiceNameInput: any;
   constructor(
     private formBuilder: FormBuilder,
@@ -52,6 +53,7 @@ export class MatchPracticeComponent implements AfterViewInit {
         
         // Add a listener to the Autocomplete object to capture the place details
         autocomplete.addListener('place_changed', function() {
+          (window as any)._this.setClickableValue(true);
           var place: any = autocomplete.getPlace();
           console.log(place);
           var streetAddress = '';
@@ -143,13 +145,19 @@ export class MatchPracticeComponent implements AfterViewInit {
   }
   else this.foundPractice = false;
 
-  setTimeout(() => this.practiceNameInput.nativeElement.focus(),100);
+  setTimeout(() => this.practiceNameInput.nativeElement.focus(),50);
   }
 }
 
+ setClickableValue(value:boolean){
+  this.isClickable = value
+ }
+
   navigate(){  
+    if(this.foundPractice == true || this.foundPractice == false){
     let route:string =  'home/' + (this.foundPractice ? RoutePaths.SubmittingDoctor : RoutePaths.Registration);
     this.router.navigate([route]);
+    }
   }
 
   forcelyNavigateToPractice(){
