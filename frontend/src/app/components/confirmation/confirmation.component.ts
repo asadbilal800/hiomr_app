@@ -3,6 +3,7 @@ import { SharedService } from '../../services/shared.service';
 import { CommonModule, DatePipe } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { StripeComponent } from '../stripe/stripe.component';
+import { StripeService } from '../../stripe.service';
 
 @Component({
   selector: 'app-confirmation',
@@ -21,14 +22,21 @@ export class ConfirmationComponent implements OnInit {
   patientSex:string;
   patientDob:string;
   userData:any;
-  constructor(public sharedService: SharedService,private datePipe: DatePipe,private sanitizer: DomSanitizer){}
+  constructor(public sharedService: SharedService,private datePipe: DatePipe,private sanitizer: DomSanitizer,private stripeService:StripeService){}
+
   ngOnInit(): void {
     this.patchData();
     this.userData = this.sharedService.userData[0];
     sessionStorage.setItem('userData',JSON.stringify(this.userData));
+
+     this.makePaymentIfSetup();
   }
+
+  async makePaymentIfSetup(){
+    if(this.userData?.payment == 1 && this.userData?.paymentmethodid) await this.stripeService.updatePaymentBit(this.userData?.paymentmethodid);
+  }
+
   patchData(){
-    
     if(this.sharedService.dbSavedData?.uploadEmail){
       this.uploadEmail = this.sharedService.dbSavedData?.uploadEmail
     }

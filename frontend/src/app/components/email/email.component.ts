@@ -40,7 +40,7 @@ export class EmailPageComponent implements OnInit {
   }
   async ngOnInit() {
     window['processToken'] = this.processToken;
-    if(sessionStorage.getItem('userData')){
+    if(sessionStorage.getItem('userData') != undefined){
       let userData = JSON.parse(sessionStorage.getItem('userData'));
       this.sharedService.userData = [userData];
     }

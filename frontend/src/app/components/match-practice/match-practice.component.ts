@@ -143,7 +143,10 @@ export class MatchPracticeComponent implements AfterViewInit {
       this.foundPractice = true;
       this.sharedService.userData = result.response;
   }
-  else this.foundPractice = false;
+  else {
+    this.foundPractice = false;
+    this.sharedService.userData = [{practiceid: this.sharedService.generateUUID()}];
+  }
 
   setTimeout(() => this.practiceNameInput.nativeElement.focus(),50);
   }

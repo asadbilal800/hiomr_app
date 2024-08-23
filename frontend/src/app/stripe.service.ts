@@ -20,12 +20,17 @@ export class StripeService {
   }
 
   async setupIntentCall(){
-    let body = {payment_method_types: ['card'],customer: this.sharedService.stripeCustomerId};
+    let body = {payment_method_types: ['card'],customer:this.sharedService.stripeCustomerId};
     return await this.apiService.Post(environment.api_url+ EndpointURLS.SetupIntentStripe,body).toPromise();
   }
 
-  async updatePaymentBit(){
+  async updatePaymentBit(intentId){
     let userData = this.sharedService.userData[0];
-    return await this.apiService.Get(environment.api_url+ EndpointURLS.UpdatePaymentBit+'?practiceId='+userData.practiceid).toPromise();
-}
+    return await this.apiService.Get(`${environment.api_url}${EndpointURLS.UpdatePayment}?practiceId=${userData?.practiceid}&intentId=${intentId}`).toPromise();
+  }
+
+  
+  async makePayment(intentId){
+    return await this.apiService.Get(`${environment.api_url}${EndpointURLS.UpdatePayment}?intentId=${intentId}`).toPromise();
+  }
 }

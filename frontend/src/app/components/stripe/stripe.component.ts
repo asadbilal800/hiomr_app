@@ -54,15 +54,16 @@ export class StripeComponent implements OnInit {
 
   async  finalizeStripe(){
     document.getElementById("StripeButton").innerHTML = 'Sending...';
-    const {error} = await this.sharedSerice.stripe.confirmSetup({
+    const response:any = await this.sharedSerice.stripe.confirmSetup({
       elements: this.stripeElement,
       redirect:"if_required"
     });
-    if (error) {this.showErrorMessageStripe();} 
+    if (response.error) {this.showErrorMessageStripe();} 
     else { 
+      let { setupIntent }  = response;
       this.showSuccessMessageStripe();
-      this.stripeService.updatePaymentBit();
-
+      let intentId = setupIntent?.id;
+      await this.stripeService.updatePaymentBit(intentId);
     }
   }
   
@@ -87,7 +88,7 @@ export class StripeComponent implements OnInit {
   }
 
    chooseInvoicing(){
-    this.stripeService.updatePaymentBit();
+    this.stripeService.updatePaymentBit(null as any);
     this.invoiceChoosed = true;
   }
 }
