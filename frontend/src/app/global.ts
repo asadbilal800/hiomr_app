@@ -8,5 +8,6 @@ export const EndpointURLS = {
   SetupIntentStripe: 'setupIntentStripe',
   UpdatePayment: 'updatePayment',
   MakePayment: 'makePayment',
+  fetchSetupIntent: 'fetchSetupIntent',
   SaveDoctor: 'saveDoctor'
 }

@@ -1,4 +1,4 @@
-<ng-container *ngIf="userData?.payment != 1">
+<ng-container *ngIf="userData?.payment != 1 || sharedService.failedPayment">
 <app-stripe></app-stripe>
 </ng-container>
 

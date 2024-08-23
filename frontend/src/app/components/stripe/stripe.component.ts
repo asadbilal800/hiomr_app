@@ -25,7 +25,8 @@ export class StripeComponent implements OnInit {
   }
 
   async setupIntent(){
-    let responseBody = await this.stripeService.setupIntentCall();
+    let intentId = (this.sharedSerice.userData || [])[0]?.Setup_Intent_Id;
+    let responseBody = !this.sharedSerice.failedPayment ? await this.stripeService.setupIntentCall() : await this.stripeService.fetchSetupIntent(intentId);
     if(responseBody?.response){
       let res = responseBody.response
       let clientSecret  = res.client_secret;

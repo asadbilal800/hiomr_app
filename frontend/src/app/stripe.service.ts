@@ -29,8 +29,11 @@ export class StripeService {
     return await this.apiService.Get(`${environment.api_url}${EndpointURLS.UpdatePayment}?practiceId=${userData?.practiceid}&intentId=${intentId}`).toPromise();
   }
 
-  
   async makePayment(intentId){
     return await this.apiService.Get(`${environment.api_url}${EndpointURLS.UpdatePayment}?intentId=${intentId}`).toPromise();
+  }
+
+  async fetchSetupIntent(intentId){
+    return await this.apiService.Get(`${environment.api_url}${EndpointURLS.fetchSetupIntent}?intentId=${intentId}`).toPromise();
   }
 }

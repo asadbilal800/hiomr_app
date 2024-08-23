@@ -4,6 +4,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { StripeComponent } from '../stripe/stripe.component';
 import { StripeService } from '../../stripe.service';
+import { ApiBaseResponse } from '../../interfaces/api-base-response.interface';
 
 @Component({
   selector: 'app-confirmation',
@@ -22,6 +23,7 @@ export class ConfirmationComponent implements OnInit {
   patientSex:string;
   patientDob:string;
   userData:any;
+  failedPayment = false;
   constructor(public sharedService: SharedService,private datePipe: DatePipe,private sanitizer: DomSanitizer,private stripeService:StripeService){}
 
   ngOnInit(): void {
@@ -33,7 +35,12 @@ export class ConfirmationComponent implements OnInit {
   }
 
   async makePaymentIfSetup(){
-    if(this.userData?.payment == 1 && this.userData?.paymentmethodid) await this.stripeService.updatePaymentBit(this.userData?.paymentmethodid);
+    if(this.userData?.payment == 1 && this.userData?.Setup_Intent_Id) {
+     let response: ApiBaseResponse =  await this.stripeService.updatePaymentBit(this.userData?.Setup_Intent_Id);
+     if(!response.IsSuccessful){
+      this.sharedService.failedPayment = true;
+     }
+    }
   }
 
   patchData(){

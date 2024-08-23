@@ -31,6 +31,7 @@ export class SharedService {
   //shared global variable
   stripe:Stripe;
   stripeCustomerId:any;
+  failedPayment = false;
 
 
   reasonArray =  [
