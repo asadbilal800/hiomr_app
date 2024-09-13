@@ -1,19 +1,28 @@
 <div class="container">
 
-<!-- in app.component.html -->
-<ngx-dropzone (change)="onSelect($event)">
-	<ngx-dropzone-label>
-    <div style="font-size: 20px">
-      Drop Patient Files Here or Click to Browse <span class="browser"> My Computer </span> <br> <br>
-      Describe each image group/type you are uploading below.
-    </div>
-
-  </ngx-dropzone-label>
-	<ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
-		<ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-	</ngx-dropzone-preview>
-</ngx-dropzone>
-
+  <ngx-dropzone (change)="onSelect($event)">
+    <ngx-dropzone-label>
+      <div style="font-size: 20px">
+        Drop Patient Files Here or Click to Browse <span class="browser"> My Computer </span> <br> <br>
+        Describe each image group/type you are uploading below.
+      </div>
+    </ngx-dropzone-label>
+    
+    <ngx-dropzone-preview *ngFor="let f of originalFiles" [removable]="true" (removed)="onRemove(f)">
+      <ngx-dropzone-label>
+        <div class="file-info">
+          {{ f.name }} ({{ f.type }})
+        </div>
+        <div *ngIf="f.isUploading" class="progress-container">
+          <div class="progress-bar" [ngStyle]="{'width': f.progress + '%'}"></div>
+        </div>
+        <div *ngIf="f.uploaded">
+          <span class="checkbox-icon">✔️</span> Uploaded
+        </div>
+      </ngx-dropzone-label>
+    </ngx-dropzone-preview>
+  </ngx-dropzone>
+  
 
 <form class="form container needs-validation" [formGroup]="patientForm">
     <div class="col-12">

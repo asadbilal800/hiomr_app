@@ -6,6 +6,8 @@ import { RoutePaths, SharedService } from '../../services/shared.service';
 import { Router } from '@angular/router';
 import { StripeService } from '../../stripe.service';
 import { SubmittingDoctorService } from '../../services/submitting-doctor.service';
+import { PatientService } from '../../services/patient.service';
+import {cloneDeep} from 'lodash'
 
 @Component({
   selector: 'app-patient-info',
@@ -15,14 +17,16 @@ import { SubmittingDoctorService } from '../../services/submitting-doctor.servic
   styleUrl: './patient-info.component.css'
 })
 export class PatientInfoComponent implements OnInit {
-  public files: File[] = [];
+  public files: any[] = [];
+  public originalFiles: any[] = [];
   patientForm: FormGroup;
   sexType: string = '';
   imageType: string = '';
   isVaidated = false;
 
 
-constructor(private submittingDoctorService: SubmittingDoctorService, private stripeService:StripeService, private formBuilder: FormBuilder,private router: Router,private sharedService: SharedService){
+
+constructor(private patientService:PatientService, private submittingDoctorService: SubmittingDoctorService, private stripeService:StripeService, private formBuilder: FormBuilder,private router: Router,private sharedService: SharedService){
 
   this.patientForm = this.formBuilder.group({
     imageDate: [null, [Validators.required]], // date object required
@@ -64,13 +68,31 @@ async initStripeRelatedDataIfRequired(){
 
 
 onSelect(event) {
-  console.log(event);
-  this.files.push(...event.addedFiles);
+
+  this.uploadFiles();
+  const files = event.addedFiles;
+
+    for (let file of files) {
+      file.isUploading = true; 
+      file.progress = 0; 
+      this.files.push(file);
+      this.originalFiles.push(file);
+      this.simulateUpload(file);
+    }
 }
 
 onRemove(event) {
   console.log(event);
-  this.files.splice(this.files.indexOf(event), 1);
+  this.originalFiles.splice(this.files.indexOf(event), 1);
+}
+
+async uploadFiles(){
+  const formData = new FormData();
+    this.files.forEach(file => {
+      formData.append('files', file, file.name); // 'images' is the name of the field expected by the server
+    });
+    await this.patientService.uploadFiles(formData);
+    this.files = [];
 }
 
 selectedOption(event,type:string){
@@ -96,6 +118,20 @@ navigate(){
   this.accumalateValues();
   let route:string =  'home/' + (RoutePaths.Reason);
   this.router.navigate([route]);
+}
+
+simulateUpload(file: any) {
+  let progress = 0;
+  const interval = setInterval(() => {
+    progress += 10; // Increase progress by 10%
+    file.progress = progress;
+
+    if (progress >= 100) {
+      clearInterval(interval);
+      file.isUploading = false; // Mark upload as complete
+      file.uploaded = true
+    }
+  }, 300); // Update progress every 300ms
 }
 
 }

@@ -13,4 +13,10 @@ export class PatientService {
   savePatient(payload) {
     return this.apiService.Post(environment.api_url + EndpointURLS.PatientInfo,payload).toPromise();
 }
+
+uploadFiles(payload) {
+  return this.apiService.Post(environment.api_url + EndpointURLS.UploadFiles,payload).toPromise();
+}
+
+
 }

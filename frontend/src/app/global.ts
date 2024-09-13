@@ -9,5 +9,6 @@ export const EndpointURLS = {
   UpdatePayment: 'updatePayment',
   MakePayment: 'makePayment',
   fetchSetupIntent: 'fetchSetupIntent',
-  SaveDoctor: 'saveDoctor'
+  SaveDoctor: 'saveDoctor',
+  UploadFiles: 'uploadFiles'
 }
