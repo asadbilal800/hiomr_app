@@ -17,12 +17,12 @@ import {cloneDeep} from 'lodash'
   styleUrl: './patient-info.component.css'
 })
 export class PatientInfoComponent implements OnInit {
-  public files: any[] = [];
   public originalFiles: any[] = [];
   patientForm: FormGroup;
   sexType: string = '';
   imageType: string = '';
   isVaidated = false;
+  
 
 
 
@@ -47,6 +47,8 @@ async ngOnInit() {
   this.patientForm.valueChanges.subscribe(res => {
     this.IsValidated();
   });
+
+ if(this.sharedService.userData[0]?.practiceid) await this.patientService.makeBucket(this.sharedService.userData[0]?.practiceid);
 }
 
 checkIfNewDoctorScenario(){
@@ -68,31 +70,30 @@ async initStripeRelatedDataIfRequired(){
 
 
 onSelect(event) {
-
-  this.uploadFiles();
   const files = event.addedFiles;
-
-    for (let file of files) {
-      file.isUploading = true; 
-      file.progress = 0; 
-      this.files.push(file);
-      this.originalFiles.push(file);
-      this.simulateUpload(file);
-    }
+  this.originalFiles =  this.originalFiles.concat(files);
+  this.uploadFiles(files);
 }
 
 onRemove(event) {
-  console.log(event);
-  this.originalFiles.splice(this.files.indexOf(event), 1);
+  this.originalFiles.splice(this.originalFiles.indexOf(event), 1);
 }
 
-async uploadFiles(){
+async uploadFiles(files:any){
   const formData = new FormData();
-    this.files.forEach(file => {
+  files.forEach(file => {
+    file.isUploading = true; 
+    file.progress = 0; 
+    this.simulateUpload(file);
       formData.append('files', file, file.name); // 'images' is the name of the field expected by the server
     });
-    await this.patientService.uploadFiles(formData);
-    this.files = [];
+     let res = await this.patientService.uploadFiles(formData);
+     if(res.IsSuccessful){
+      files.forEach(file => {
+        file.isUploading = false; 
+        file.uploaded = true
+      })
+     }
 }
 
 selectedOption(event,type:string){
@@ -123,15 +124,13 @@ navigate(){
 simulateUpload(file: any) {
   let progress = 0;
   const interval = setInterval(() => {
-    progress += 10; // Increase progress by 10%
+    progress += Math.random() * 10; // Increase progress by 10%
     file.progress = progress;
 
-    if (progress >= 100) {
+    if (progress >= 80) {
       clearInterval(interval);
-      file.isUploading = false; // Mark upload as complete
-      file.uploaded = true
     }
-  }, 300); // Update progress every 300ms
+  }, 100);
 }
 
 }

@@ -10,5 +10,8 @@ export const EndpointURLS = {
   MakePayment: 'makePayment',
   fetchSetupIntent: 'fetchSetupIntent',
   SaveDoctor: 'saveDoctor',
-  UploadFiles: 'uploadFiles'
+  UploadFiles: 'uploadFiles',
+  MakeBucket: 'makeBucket',
+  uploadToBucket: 'uploadToBucket'
+
 }

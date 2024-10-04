@@ -19,4 +19,8 @@ uploadFiles(payload) {
 }
 
 
+async makeBucket(pracitceId){
+  return await this.apiService.Get(`${environment.api_url}${EndpointURLS.MakeBucket}?practiceId=${pracitceId}`).toPromise();
+}
+
 }
