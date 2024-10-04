@@ -24,7 +24,7 @@ async makeBucket(pracitceId){
 }
 
 async uploadToBcuket(pracitceId,patientId){
-  return await this.apiService.Get(`${environment.api_url}${EndpointURLS.uploadToBucket}?practiceId=${pracitceId}&?patientId=${patientId}`).toPromise();
+  return await this.apiService.Get(`${environment.api_url}${EndpointURLS.uploadToBucket}?practiceId=${pracitceId}&patientId=${patientId}`).toPromise();
 }
 
 }

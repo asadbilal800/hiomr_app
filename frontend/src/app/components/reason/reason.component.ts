@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { RoutePaths, SharedService } from '../../services/shared.service';
 import { Router } from '@angular/router';
+import { PatientService } from '../../services/patient.service';
 
 @Component({
   selector: 'app-reason',
@@ -10,15 +11,19 @@ import { Router } from '@angular/router';
   templateUrl: './reason.component.html',
   styleUrl: './reason.component.css'
 })
-export class ReasonComponent {
+export class ReasonComponent implements OnInit{
 
   reasonArray; any = [];
   isValidated = false;
   @Input() hideHeading = true;
 
 
-  constructor(public sharedService: SharedService,private router: Router){
+  constructor(public sharedService: SharedService,private router: Router,private patientService:PatientService){
     this.reasonArray = this.sharedService.reasonArray
+  }
+  async ngOnInit() {
+    //initiate upload to bucket
+   if(this.sharedService.patientInfoValues.hasFiles) await this.patientService.uploadToBcuket(this.sharedService.userData[0]?.practiceid,this.sharedService.patientInfoValues.Id);
   }
   
   changeCheckBoxVal(event:any,code:number){

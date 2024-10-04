@@ -22,9 +22,6 @@ export class RadiologistComponent implements OnInit{
     this.sharedService.reasonDisabled = true
   }
   async ngOnInit() {
-
-    //initiate upload to bucket
-   if(this.sharedService.patientInfoValues.hasFiles) await this.patientService.uploadToBcuket(this.sharedService.userData[0]?.practiceid,this.sharedService.patientInfoValues.Id);
   }
 
   onStatRushValChange(e:any){
