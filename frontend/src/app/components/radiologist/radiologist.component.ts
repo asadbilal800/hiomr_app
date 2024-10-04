@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RoutePaths, SharedService } from '../../services/shared.service';
 import { PatientService } from '../../services/patient.service';
 import { ReasonComponent } from "../reason/reason.component";
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
     styleUrl: './radiologist.component.css',
     imports: [CommonModule, ReasonComponent]
 })
-export class RadiologistComponent {
+export class RadiologistComponent implements OnInit{
 
   radioLogist: string;
   rush: string = '0'
@@ -20,6 +20,11 @@ export class RadiologistComponent {
   constructor(public sharedService: SharedService,private patientService: PatientService,private router: Router)
   {
     this.sharedService.reasonDisabled = true
+  }
+  async ngOnInit() {
+
+    //initiate upload to bucket
+   if(this.sharedService.patientInfoValues.hasFiles) await this.patientService.uploadToBcuket(this.sharedService.userData[0]?.practiceid,this.sharedService.patientInfoValues.Id);
   }
 
   onStatRushValChange(e:any){

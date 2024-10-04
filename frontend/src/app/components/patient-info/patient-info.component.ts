@@ -110,7 +110,7 @@ IsValidated(){
 }
 
 accumalateValues(){
-  let values = {...this.patientForm.value,sexType: this.sexType,imageType: this.imageType,doctorId: this.sharedService.selectedDoctorId};
+  let values = {...this.patientForm.value,Id: this.sharedService.generateUUID(),hasFiles: this.originalFiles.length ? true : false, sexType: this.sexType,imageType: this.imageType,doctorId: this.sharedService.selectedDoctorId};
   this.sharedService.patientInfoValues = values;
 }
 
