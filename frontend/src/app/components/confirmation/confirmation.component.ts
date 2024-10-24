@@ -27,6 +27,7 @@ export class ConfirmationComponent implements OnInit {
   constructor(public sharedService: SharedService,private datePipe: DatePipe,private sanitizer: DomSanitizer,private stripeService:StripeService){}
 
   ngOnInit(): void {
+    
     this.patchData();
     this.userData = this.sharedService.userData[0];
     sessionStorage.setItem('userData',JSON.stringify(this.userData));

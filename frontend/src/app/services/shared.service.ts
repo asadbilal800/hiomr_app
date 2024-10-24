@@ -70,7 +70,8 @@ export enum RoutePaths {
   PatientForm = 'patientForm',
   Reason = 'reason',
   Radiologist = 'radiologist',
-  Confirmation ='confirmation'
+  Confirmation ='confirmation',
+  VetifyPatient = 'verify'
 }
 
 export const routePathHeaderPrecedence = {
