@@ -12,6 +12,7 @@ export const routes: Routes = [
   { path: 'patientForm', loadComponent: () => import('./components/patient-info/patient-info.component').then(mod => mod.PatientInfoComponent),canActivate:[AuthGuard]},
   { path: 'reason', loadComponent: () => import('./components/reason/reason.component').then(mod => mod.ReasonComponent),canActivate:[AuthGuard]},
   { path: 'radiologist', loadComponent: () => import('./components/radiologist/radiologist.component').then(mod => mod.RadiologistComponent),canActivate:[AuthGuard]},
+  { path: 'verify', loadComponent: () => import('./components/verify-patient/verify-patient/verify-patient.component').then(mod => mod.VerifyPatientComponent),canActivate:[AuthGuard]},
   { path: 'confirmation', loadComponent: () => import('./components/confirmation/confirmation.component').then(mod => mod.ConfirmationComponent),canActivate:[AuthGuard]},
 
 

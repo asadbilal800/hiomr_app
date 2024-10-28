@@ -14,6 +14,8 @@ import { PatientService } from '../../../services/patient.service';
 
 })
 export class VerifyPatientComponent {
+
+  isSubmitted = false;
   constructor(public sharedService: SharedService,private patientService: PatientService,private router: Router){
     this.sharedService.reasonDisabled = true
   }
@@ -28,18 +30,32 @@ export class VerifyPatientComponent {
   }
 
   async submitPatientInfo(){
+    this.isSubmitted = true;
+    document.body.style.cursor = 'wait'
     let payload = {
       patientInfo: this.sharedService.patientInfoValues,
       reasonInfo: this.sharedService.reasonArray.filter(x => x.checked),
       radiologistInfo: this.sharedService.radiologistValues,
       emailRelatedData: this.sharedService.emailRelatedData
     }
+    try {
     let res = await this.patientService.savePatient(payload);
     let resultantSavedData = (res.response)?.data;
     
     this.saveDbSavedData(resultantSavedData);
     let route:string =  'home/' + (RoutePaths.Confirmation);
     this.router.navigate([route]);
+    }
+    catch(e){
+      this.isSubmitted = false;
+      document.body.style.cursor = 'default'
+
+    }
+    finally{
+      this.isSubmitted = false;
+      document.body.style.cursor = 'default'
+
+    }
   }
 
   saveDbSavedData(resultantSavedData:any){

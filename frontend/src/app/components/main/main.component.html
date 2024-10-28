@@ -29,11 +29,17 @@
       'active': currentRoute === 'radiologist',
       'completed': checkRoutePrecedenceForCompletion(4,['radiologist'])
     }" title='Radiologist'><i class="fa-solid fa-user-doctor"></i></span>
+        <span 
+        [ngClass]="{
+          'step': true, 
+          'active': currentRoute === 'verify',
+          'completed': checkRoutePrecedenceForCompletion(5,['verify'])
+        }" title='Confirmation'><i class="fa-solid fa-user-check"></i></span>
     <span 
     [ngClass]="{
       'step': true, 
       'active': currentRoute === 'confirmation',
-      'completed': checkRoutePrecedenceForCompletion(5,['confirmation'])
+      'completed': checkRoutePrecedenceForCompletion(6,['confirmation'])
     }" title='Confirmation'><i class="fa-solid fa-check-to-slot"></i></span>
   </div>
 </div>
