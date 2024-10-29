@@ -80,6 +80,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   async navigateToPatientForm(){  
+    document.body.style.cursor = 'wait'
      let res = await this.doctorPracticeSave();
      if(res?.IsSuccessful){
     let route:string =  'home/' + (RoutePaths.PatientForm);
