@@ -22,6 +22,7 @@ export class MainPageComponent implements OnInit {
         this.router.events.pipe(
             filter(event => event instanceof NavigationEnd)
           ).subscribe(() => {
+            document.body.style.cursor = 'default'
             this.currentRoute = (window.location.href.split('/')).pop();
           });
         }

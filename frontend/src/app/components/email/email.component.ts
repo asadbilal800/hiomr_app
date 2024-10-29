@@ -115,6 +115,7 @@ export class EmailPageComponent implements OnInit {
   }
 
   async performCaptchaActivity() {
+    document.body.style.cursor = 'wait'
     setTimeout(async () => {
       let token = window['token'];
       let isHuman =  await this.checkToken(token)
@@ -137,7 +138,7 @@ export class EmailPageComponent implements OnInit {
    return this.emailService.callCaptcha(token);
   }
 
-  navigate(){
+navigate(){
       if(this.isVerified){
       if(this.saveEmailFuture && !!this.emailForm.get('email')?.value) localStorage.setItem('email',this.emailForm.get('email')?.value);
       else localStorage.removeItem('email');
