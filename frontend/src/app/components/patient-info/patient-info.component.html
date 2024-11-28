@@ -11,7 +11,7 @@
     <ngx-dropzone-preview *ngFor="let f of originalFiles" [removable]="true" (removed)="onRemove(f)">
       <ngx-dropzone-label>
         <div class="file-info">
-          {{ f.name }} ({{ f.type }})
+          {{ f.name }}
         </div>
         <div *ngIf="f.isUploading" class="progress-container">
           <div class="progress-bar" [ngStyle]="{'width': f.progress + '%'}"></div>

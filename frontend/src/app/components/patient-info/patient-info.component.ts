@@ -7,14 +7,18 @@ import { Router } from '@angular/router';
 import { StripeService } from '../../stripe.service';
 import { SubmittingDoctorService } from '../../services/submitting-doctor.service';
 import { PatientService } from '../../services/patient.service';
-import {cloneDeep} from 'lodash'
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { PopupComponent } from '../popup/popup.component';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-patient-info',
   standalone: true,
   imports: [NgxDropzoneModule,CommonModule,ReactiveFormsModule],
   templateUrl: './patient-info.component.html',
-  styleUrl: './patient-info.component.css'
+  styleUrl: './patient-info.component.css',
+  providers:[BsModalService]
+
 })
 export class PatientInfoComponent implements OnInit {
   public originalFiles: any[] = [];
@@ -26,7 +30,7 @@ export class PatientInfoComponent implements OnInit {
 
 
 
-constructor(private patientService:PatientService, private submittingDoctorService: SubmittingDoctorService, private stripeService:StripeService, private formBuilder: FormBuilder,private router: Router,private sharedService: SharedService){
+constructor(private bsModalService:BsModalService,  private patientService:PatientService, private submittingDoctorService: SubmittingDoctorService, private stripeService:StripeService, private formBuilder: FormBuilder,private router: Router,private sharedService: SharedService){
 
   this.patientForm = this.formBuilder.group({
     imageDate: [null, [Validators.required]], // date object required
@@ -71,8 +75,43 @@ async initStripeRelatedDataIfRequired(){
 
 onSelect(event) {
   const files = event.addedFiles;
-  this.originalFiles =  this.originalFiles.concat(files);
-  this.uploadFiles(files);
+  const exeFiles = files.filter(file => file.name.toLowerCase().endsWith('.exe'));
+
+  if (exeFiles.length > 0) {
+    this.sharedService.bsModalRefToaster= this.bsModalService.show(PopupComponent, {
+      initialState: {
+        message: "Error: .exe files are not allowed",
+        showCloseButton:false
+      },
+      class: 'modal-dialog-centered' // Ensure modal is centered
+
+    });
+
+    this.sharedService.bsModalRefToaster.onHidden?.subscribe(() => {
+      this.originalFiles = []
+    });
+  }
+  else {
+  let newlyAddedTotalFiles =  this.originalFiles.concat(files);
+  if(newlyAddedTotalFiles.length <= 3) {
+  this.originalFiles = newlyAddedTotalFiles;
+  this.uploadFiles(this.originalFiles)
+  }
+  else {
+  //  this.popupService.openPopup("Max file limit is < 35",true)
+  this.sharedService.bsModalRefToaster = this.bsModalService.show(PopupComponent, {
+    initialState: {
+      message: "Max file limit is < 35",
+      showCloseButton:false
+    },
+    class: 'modal-dialog-centered' // Ensure modal is centered
+
+  });
+  this.sharedService.bsModalRefToaster.onHidden?.subscribe(() => {
+    this.originalFiles = []
+  });
+  }
+}
 }
 
 onRemove(event) {

@@ -46,6 +46,8 @@ export class SharedService {
     {code: 99, name: "ovveread", isOverread: true, desc:"" , isDisable: false,checked: false}
   ];
 
+  bsModalRefToaster:any;
+
   constructor() { 
   }
 
