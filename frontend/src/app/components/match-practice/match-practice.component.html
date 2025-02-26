@@ -1,13 +1,10 @@
 <form [formGroup]="matchPracticeForm" class="form container mt-4">
   <div class="col-12">
 
-        <!-- White Space Empty Rows -->     
-        <div class="row mt-4"></div>
-        <div class="row mt-4"></div>
-
+        <!-- Name from first page -->
         <div class="row mt-4 mb-2">
-          <div class="col-sm-3 col-form-label"><label>Your Name*</label></div>
-          <div class="col-sm-9">
+          <div class="col-sm-2 col-form-label"><label>Your Name*</label></div>
+          <div class="col-sm-5">
               <input formControlName="name" name="name" id='nameId' type="text"
                      class="form-control form-control-lg"
                      
@@ -19,10 +16,12 @@
 
         <!-- White Space Empty Row -->
         <div class="row mt-4"></div>
-
+        
+        
+        <!-- Email from first page -->
         <div class="row mt-4 mb-2">
-          <div class="col-sm-3 col-form-label"><label>Email*</label></div>
-          <div class="col-sm-9">
+          <div class="col-sm-2 col-form-label"><label>Email*</label></div>
+          <div class="col-sm-5">
             <input formControlName="email" name="email" id='email' type="text"
             class="form-control form-control-lg"
               />
@@ -32,9 +31,11 @@
         <!-- White Space Empty Row -->
         <div class="row mt-4"></div>
 
+
+        <!-- White Space Empty Row -->
         <div class="row mb-2" >
-            <div class="col-sm-3 col-form-label mt-2"><label>Practice Name*</label></div>
-            <div class="col-sm-9 mt-2">
+            <div class="col-sm-2 col-form-label mt-2"><label>Practice Name*</label></div>
+            <div class="col-sm-5 mt-2">
               <input 
               #practiceInput
               id="practiseName"
@@ -47,10 +48,14 @@
         <!-- White Space Empty Row -->
         <div class="row mt-4"></div>
 
+        <!-- I can't find my office -->
         <div class="row">
           <div class="col text-center">
           <button type="button" class="btn btn-sm btn-light" (click)="forcelyNavigateToPractice()">I can't find my office</button>
           </div>
+          <!--<div class="col text-center">
+            <button type="button" class="btn btn-sm btn-light">I will submit for multiple practices</button>
+            </div>-->
         </div>
 
 

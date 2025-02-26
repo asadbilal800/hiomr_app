@@ -12,13 +12,22 @@
 
 label, .cinzel {
     font-family: Cinzel;
-    font-size: 20px;
+    font-size: 18px;
     color: #000
 }
 
 .radio, .raleway {
   font-family: Raleway !important;
   font-size: 20px;
+}
+
+.helperText{
+  font-size: 16px;
+}
+
+input[type=checkbox] {
+  width: 40px;
+  height: 40px;
 }
 
 input[type=radio] {
@@ -157,3 +166,5 @@ input[type=radio] {
     0% { opacity: 0; }
     100% { opacity: 1; }
   }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
