@@ -24,12 +24,14 @@
   </ngx-dropzone>
   
 
-<form class="form container needs-validation" [formGroup]="patientForm">
+  <form class="form container needs-validation" [formGroup]="patientForm">
     <div class="col-12">
                 
                 <div class="row mt-0" id="ImageType" title="Note the images you are uploading">
-                  <div class="col-sm-3 col-form-label"><label>I am Uploading*</label></div>
-                  <div class="col-sm position-relative">
+                  <div class="col-sm-2 col-form-label"><label>Image*</label></div>
+                  
+                  <!--Image Selector-->
+                  <div class="col-sm-3 position-relative">
                     <div class="input-group input-group-lg">
                       <label class="input-group-text" for="ImageType">Image Type</label>
                     <select 
@@ -49,7 +51,7 @@
                     </div>
                   </div>
           
-                  <div class="col-sm position-relative">
+                  <div class="col-sm-3 position-relative">
                     <div class="input-group input-group-lg">
                     <label class="input-group-text" for="dateOfImage">Image Date</label>
                     <input 
@@ -63,10 +65,11 @@
                   </div>
                 </div>
   
+                <!--
                 <div class="row mb-0"title="Note any additional CBCTs or image sets you upload. This way we can verify that we received everything you send.">
                   <div>
-                  <label class="col-3 col-form-label">Another CBCT/Image? 
-                    <!--Duplicate Line Button-->
+                  <label class="col-2 col-form-label">Another Image? 
+                    <!--Duplicate Line Button--><!--
                     <button  
                     type="button" 
                     class="btn btn-light btn-sm bg-transparent" 
@@ -74,16 +77,16 @@
                     onclick="copyLine()">➕</button>
                           <button onclick="deleteLine()" type="button" class="btn btn-light btn-sm bg-transparent" title="Delete Extra Line">❌</button></label>
                   </div>           
-                  </div>
+                  </div>-->
   
   
                 <div class="row mb-2 align-items-center" title="Helpful for receipts and billing. Patient names will be ignored here">
-                  <div for="theirpatientnumber" class="col-sm-3 col-form-label"><label>Your Internal <br> Patient ID</label></div>
-                  <div class="col-sm position-relative">
+                  <div for="theirpatientnumber" class="col-sm-2 col-form-label"><label>Your Internal <br> Patient ID*</label></div>
+                  <div class="col-sm-6 position-relative">
                     <input
                   id='theirpatientnumber'
                   formControlName="internalId"
-                  placeholder="Optional: Used in invoices/non-encrypted messages (No Names)"
+                  placeholder="Used in invoices/non-encrypted messages (No Names)"
                   type="text"
                   class="form-control form-control-lg"
                   />
@@ -91,10 +94,10 @@
                 </div>
   
                 <div class="row mb-3">
-                  <div class="col-sm-3 col-form-label">
+                  <div class="col-sm-2 col-form-label">
                     <label>Patient Name*</label>
                   </div>
-                  <div class="col-sm position-relative">
+                  <div class="col-sm-3 position-relative">
                     <label class="col-sm-3 col-form-label" hidden
                       >pfirst</label>
                     <input                    
@@ -106,7 +109,7 @@
                     />
                     <!-- <div class="invalid-tooltip">Please complete this field</div> -->
                   </div>
-                  <div class="col-sm position-relative">
+                  <div class="col-sm-3 position-relative">
                     <label hidden>plast</label>
                     <input                    
                       id="pLastName"
@@ -119,10 +122,10 @@
                   </div>
                 </div>
                 <div class="row mb-3">
-                  <div class="col-sm-3 col-form-label">
+                  <div class="col-sm-2 col-form-label">
                     <label>Birth*</label>
                   </div>
-                  <div class="col-sm position-relative">
+                  <div class="col-sm-3 position-relative">
                     <label hidden>birthday</label>
                     <input required                   
                       id="birth"
@@ -132,7 +135,7 @@
                       title="When they came screaming into the world"
                     />
                   </div>
-                  <div class="col-sm position-relative">
+                  <div class="col-sm-3 position-relative">
                     <label hidden>sex</label>
                     <select 
                       class="form-select form-select-lg"

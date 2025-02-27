@@ -1,99 +1,136 @@
 <!-- additional changes to re-edit form (patient info) -->
 
-<div class="col-6" style="margin-left: 25%;margin-top:5%;">
-          
-    <div class="row mb-3">
-  
-      <div class="col-sm position-relative">
-        <label >Patient First Name  <i (click)="disablePatient('pFirstName')" class="fas fa-edit" style="cursor: pointer;"> </i> </label>
-        <input                    
-          id="pFirstName"
-          type="text"
-          class="form-control form-control-lg"
-          placeholder="First Name"
-          disabled
-          [(value)]="sharedService.patientInfoValues.firstName"
-        />
-        <!-- <div class="invalid-tooltip">Please complete this field</div> -->
-      </div>
-      <div class="col-sm position-relative">
-        <label >Patient First Name<i (click)="disablePatient('pLastName')" class="fas fa-edit" style="cursor: pointer;"> </i> </label>
-        <input                    
-          id="pLastName"
-          type="text"
-          class="form-control form-control-lg"
-          disabled
-          [(value)]="sharedService.patientInfoValues.lastName"
-          placeholder="Last Name"
-        />
-        <!-- <div class="invalid-tooltip">Please complete this field</div> -->
-      </div>
-    </div>
-  
-    <div class="row mb-3">
-      <div class="row mb-2 align-items-center" title="Helpful for receipts and billing. Patient names will be ignored here">
-        <div for="theirpatientnumber" class="col-sm-3 col-form-label"><label>Your Internal <br> Patient ID<i (click)="disablePatient('theirpatientnumber')" class="fas fa-edit" style="cursor: pointer;"> </i> </label></div>
-        <div class="col-sm position-relative">
-          <input
-        id='theirpatientnumber'
-        placeholder="Optional: Used in invoices/non-encrypted messages (No Names)"
-        type="text"
-        disabled
-        [(value)]="sharedService.patientInfoValues.internalId"
-        class="form-control form-control-lg"
-        />
-        </div>
-      </div>
-    </div>
-  
-    <div class="row mb-3">
-  
-      <div class="col-sm position-relative">
-        <label >birthday<i (click)="disablePatient('birth')" class="fas fa-edit" style="cursor: pointer;"> </i> </label>
-        <input                    
-          id="birth"
-          disabled
-          [(value)]="sharedService.patientInfoValues.birthDate"
-          type="date"
-          class="form-control form-control-lg"
-          title="When they came screaming into the world"
-        />
-      </div>
-      <div class="col-sm position-relative">
-        <label >sex<i (click)="disablePatient('sex')" class="fas fa-edit" style="cursor: pointer;"> </i> </label>
-        <select 
-          class="form-select form-select-lg"
-          id="sex"
-          title="Sex assigned at birth"
-          tabindex="9"
-          disabled
-          [(value)]="sharedService.patientInfoValues.sexType"
-        >
-          <option disabled selected value>Sex Assigned at Birth</option>
-          <option value="1">Male</option>
-          <option value="2">Female</option>
-          <option value="9">Intersex</option>
-        </select>
-        <!-- <div class="invalid-tooltip">Please complete this field</div> -->
-      </div>
-    </div>
-  
-    <div>
-    </div>
-  </div>  
-  
-  
-  <!-- additional changes to re-edit form (reason info) -->
-  <div class="col-6" style="margin-left: 25%;margin-top:5%;">
-    <div class="row mb-3"></div>
-    <div class="row mb-3">
-      <label >Reasons     <i (click)="disabledReason()" class="fas fa-edit" style="cursor: pointer;"> </i> </label>
-      <app-reason [hideHeading]="false"></app-reason>
-    </div>
-  </div>
+<div class="form container mt-4">
 
+  <div class="col-12">
+  
+      <!-- Their Patient ID Row -->
+      <div class="row mb-1 align-items-center">
+          <div class="col-sm-2 col-form-label">
+            <label for="theirpatientnumber">Your Internal <br> Patient ID</label>
+            </div>
+          <div class="col-sm-6 position-relative">
+            <span><i (click)="disablePatient('theirpatientnumber')" class="fas fa-edit" style="cursor: pointer;"> </i></span>
+          <input
+          id='theirpatientnumber'
+          type="text"
+          disabled
+          [(value)]="sharedService.patientInfoValues.internalId"
+          class="form-control form-control-lg"
+          />
+          </div>
+          <div class="col-sm-4 helperText"><p>Take 10 seconds to verify the info</p>
+            </div>
+      </div>
+  
+      <!-- Patient Name Row -->
+      <div class="row mb-1 align-items-center">
+        <div class="col-sm-2 position-relative">
+          <label >Patient Name  </label>
+          </div>
+           <div class="col-sm-3 position-relative">
+            <span><i (click)="disablePatient('pFirstName')" class="fas fa-edit" style="cursor: pointer;"> </i></span>
+          <input                    
+            id="pFirstName"
+            type="text"
+            class="form-control form-control-lg"
+            disabled
+            [(value)]="sharedService.patientInfoValues.firstName"
+          />
+          </div>
+        <!-- Last Name-->
+         <div class="col-sm-3 position-relative">
+          <span><i (click)="disablePatient('pLastName')" class="fas fa-edit" style="cursor: pointer;"> </i> </span>
+         <input                    
+            id="pLastName"
+            type="text"
+            class="form-control form-control-lg"
+            disabled
+            [(value)]="sharedService.patientInfoValues.lastName"
+          />
+          </div>      
+      </div>
+    
+      <!-- Patient Birth and Sex Row -->
+      <div class="row mb-1">
+    
+        <div class="col-sm-2 position-relative">
+          <label >Birth</label>
+          </div>
+          <div class="col-sm-3">
+            <span><i (click)="disablePatient('birth')" class="fas fa-edit" style="cursor: pointer;"> </i> </span>
+          <input                    
+            id="birth"
+            disabled
+            [(value)]="sharedService.patientInfoValues.birthDate"
+            type="date"
+            class="form-control form-control-lg"
+            title="When they came screaming into the world"
+          />
+        </div>
+        
+          <div class="col-sm-3">
+            <span><i (click)="disablePatient('sex')" class="fas fa-edit" style="cursor: pointer;"> </i></span>
+          <select 
+            class="form-select form-select-lg"
+            id="sex"
+            title="Sex assigned at birth"
+            disabled
+            [(value)]="sharedService.patientInfoValues.sexType"
+          >
+            <option disabled selected value>Sex Assigned at Birth</option>
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+            <option value="9">Intersex</option>
+          </select>
+          </div>
+        
+      </div>
+    
+    </div>  
+    
+    
+    <!-- additional changes to re-edit form (reason info) -->
+  
+      <div class="row mb-1">
+        <div class="col-sm-2 position-relative">
+          <label >Reasons</label> <!-- This should be an array. THEN if they need to edit anything, they just edit the text.-->
+          </div>
+          <div class="col-sm-1 position-relative">
+          <span> <i (click)="disabledReason()" class="fas fa-edit" style="cursor: pointer;"> </i> </span>
+          <app-reason [hideHeading]="false"></app-reason>
+            <!--
+            <input                    
+            id=""
+            type=""
+            class="form-control form-control-lg"
+            disabled
+            [(value)]=""
+          />-->
+          </div>
+          <!--
+          <div class="col-sm-5 position-relative">
+          <span> <i (click)="disabledReason()" class="fas fa-edit" style="cursor: pointer;"> </i> </span>
+          <app-reason [hideHeading]="false"></app-reason>
+            <input                    
+            id=""
+            type=""
+            class="form-control form-control-lg"
+            disabled
+            [(value)]=""
+          />
+          </div>
+          -->
+  
+      </div>
+    
   <!-- submit button -->
   <div  class="row mt-5 mb-3 d-grid col-9 mx-auto">
     <button  (click)="submitPatientInfo()" id="SubmitButton" class="btn btn-lg btn-hiomr fadefast" >{{!isSubmitted ?  'Authorize & Submit' : 'Submitting...'}}</button>
           </div>
+
+  
+    </div>
+
+
   

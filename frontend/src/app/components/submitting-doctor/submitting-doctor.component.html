@@ -1,98 +1,88 @@
-
-<!-- Neither Bootstrap nor Font Awesome Icons work if these are not present on this page -->
-<!-- Font Awesome Icons CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<!-- Bootstrap 5.3 Styling -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-
-
   <div class="form container mt-4" id="submittingDoctor">
-  <div class="col-12 mt-0">
-            <div class="row mt-0 mb-3">
-            <h5 class="text-center raleway" id='uploaderHelloHeading'></h5></div>
+
+    <div class="col-12">
             
-            <!-- White Space Empty Rows -->     
-            <div class="row mt-4"></div>
-            <div class="row mt-4"></div>
+      <!--
+      <div class="row mt-0 mb-3">
+      <h5 class="text-center raleway" id='uploaderHelloHeading'></h5></div>-->
+      
+      <!-- White Space Empty Rows -->     
+      <div class="row mt-4"></div>
+      <div class="row mt-4"></div>
 
-            <h5 class="text-center raleway">
-              {{'Hello ' +emailRelatedData.name +' from '+userData.practicename}}
-            </h5>            
+      <h5 class="text-center raleway">
+        {{'Hello ' +emailRelatedData.name +' from '+userData.practicename}}
+      </h5>            
 
-            <div class="row mt-3">
-            <div class="col-sm-3"><label>Immediate Submitting Doctor*</label></div>
-            <div class="col-sm-9 raleway">
-            <!--List of current referring doctors from the practice-->
-            <div *ngFor="let doctor of allUserData">
-              <label [for]="doctor.doctorid">
-                <input type="radio" [id]="doctor.doctorid" name="docSelect" [value]="doctor.doctorid"
-                (change)="validate($event)"
-                >
-                I am submitting for Dr. {{ doctor.firstname }} {{ doctor.lastname }}
-              </label>
-              <br> <!-- Add a line break after each set of radio buttons -->
-            </div>
-            
-            </div>
-            
-            <!-- White Space Empty Rows -->
-            <div class="row mt-4"></div>
+      <!-- Current Submitting Doctor -->
+      <div class="row mt-3 align-items-center">
+      <div class="col-sm-2 col-form-label"><label>Immediate Submitting Doctor*</label></div>
+      <div class="col-sm-6">
+      <!--List of current referring doctors from the practice-->
+      <div *ngFor="let doctor of allUserData">
+        <label [for]="doctor.doctorid" class='radio'>
+          <input 
+          class='radio'
+          type="radio" 
+          [id]="doctor.doctorid" 
+          name="docSelect" 
+          [value]="doctor.doctorid"
+          (change)="validate($event)"
+          >
+          I am submitting for Dr. {{ doctor.firstname }} {{ doctor.lastname }}
+        </label>
+        <br> <!-- Add a line break after each set of radio buttons -->
+      </div>
+      </div>
+      </div>
+      
+      <!-- White Space Empty Rows -->
+      <div class="row mt-4"></div>
 
-            <!--New doctor radio choice-->
-            <div class="row mt-4 align-items-center">
-            <div class="col-sm-3"></div>
-            <div class="col-sm-auto pe-0">
-            <div class="form-check">
-            <input 
-            class="form-check-input" 
-            value='new' 
-            type="radio" 
-            name="docSelect"
-            value=""
-            (change)="validate($event)"
-            tabindex="1">
-            <label class="form-check-label radio" for="docRadio">I am submitting for Dr.</label>
-            </div>
-            </div>
-            <div class="col-sm-auto mx-0 px-1">
-            <div class="input-group">
-            <input 
-              type="text" 
-              class="form-control form-control-lg text" 
-              placeholder="first name"    
-              size="10" 
-              [(ngModel)]="firstNameDoctor"
-              (ngModelChange)="onNameChange()"
-              /> 
-            <input 
-            type="text" 
-            class="form-control form-control-lg text" 
-            placeholder="last name"    
-            size="10" 
-            [(ngModel)]="lastNameDoctor"
-            (ngModelChange)="onNameChange()"
-            /> 
-            <!--<div class="invalid-tooltip">Must be 2 or more characters. Sorry, Mr. T!</div>-->
-            </div>
-            </div>
-            </div>
+      <!--New doctor radio choice row-->
+      <div class="row mt-4 align-items-center">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-auto pe-0"> <!--col-sm-auto -->
+      <div class="form-check">
+      <input 
+      class="form-check-input radio" 
+      value='new' 
+      type="radio" 
+      name="docSelect"
+      value=""
+      (change)="validate($event)"
+      >
 
-            <!-- White Space Empty Rows -->     
-            <div class="row mt-4"></div>
-            <div class="row mt-4"></div>
+      <label class="form-check-label radio" for="docRadio">I am submitting for Dr. </label>
+      </div>
+      </div>
+      <div class="col-sm-auto mx-0 px-1">
+      <div class="input-group">
+      <input 
+        type="text" 
+        class="form-control form-control-lg text radio" 
+        placeholder="First Name"    
+        size="10" 
+        [(ngModel)]="firstNameDoctor"
+        (ngModelChange)="onNameChange()"
+        /> 
+      <input 
+      type="text" 
+      class="form-control form-control-lg text raleway" 
+      placeholder="Last Name"    
+      size="10" 
+      [(ngModel)]="lastNameDoctor"
+      (ngModelChange)="onNameChange()"
+      /> 
+      <!--<div class="invalid-tooltip">Must be 2 or more characters. Sorry, Mr. T!</div>-->
+      </div>
+      </div>
+      </div>
 
-        <!-- Nav Button Forward-->
-        <div class="col"
-        *ngIf="okToNavigate">
-        <a class="navbutton position-absolute top-50 end-0 translate-middle-y fadefast" 
-         (click)="navigate()" role="button">
-         <span class="material-symbols-rounded">arrow_circle_right</span>
-         </a>
-        </div>
+      <!-- White Space Empty Rows -->     
+      <div class="row mt-4"></div>
+      <div class="row mt-4"></div>
 
-            <!-- User Message -->
-            <div class="row mt-4">
-            <div class="col text-center" id="userMessage"></div> 
-            </div>
 </div>
+
 </div>
