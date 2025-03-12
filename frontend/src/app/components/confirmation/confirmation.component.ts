@@ -55,10 +55,9 @@ export class ConfirmationComponent implements OnInit {
       this.doctorName = this.sharedService.dbSavedData?.doctorName
     }
     if(this.sharedService?.dbSavedData?.reasons?.length){
-      let reasonLength = this.sharedService?.dbSavedData?.reasons?.length
       this.sharedService?.dbSavedData?.reasons.forEach((item,index) => {
         if(item?.reason){
-          this.reasons += (this.sharedService.reasonArray.find(x => x.code == +item.reason).name) + ' | ' + item.patdocnotes + " \n";
+          this.reasons += (this.sharedService.reasonArray.find(x => x.code == +item.reason).name) + (item.patdocnotes ?  ' | ' : '')  + " \n";
         }
       });
       this.reasons = this.sanitizer.bypassSecurityTrustHtml(this.reasons)
