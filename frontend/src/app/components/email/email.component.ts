@@ -4,11 +4,13 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErr
 import { Router } from '@angular/router';
 import { EmailService } from '../../services/email.service';
 import { RoutePaths, SharedService } from '../../services/shared.service';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 @Component({
   selector: 'app-email',
   standalone: true,
-  imports: [FormsModule, CommonModule, ReactiveFormsModule],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule, MatTooltipModule],
   templateUrl: './email.component.html',
   styleUrl: './email.component.css',
 })

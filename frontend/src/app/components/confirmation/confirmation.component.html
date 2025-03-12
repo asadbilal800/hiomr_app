@@ -3,86 +3,39 @@
 </ng-container>
 
 <form class="form container">
-    <div class="col-12">
-  
-                    <div class="row mt-1 mb-3">
-                    <div class="col-sm-3 col-form-label"><label>Confirmation Sent</label></div>
-                    <div class="col-sm-4">  
-                    <input 
-                    id ="confirm-email" 
-                    [value] = "uploadEmail"
-                    class="form-control form-control-lg" 
-                    title="Confirm Email Address" 
-                    disabled/>
-                    </div>
-                    <div class="col-sm-2 col-form-label px-0"><label>Submitted By</label></div>
-                    <div class="col-sm-2 ps-0">
-                    <input 
-                        id="confirm-submitted-by"
-                        [value] = "uploadPerson"
-                        class="form-control form-control-lg ms-0 px-0" 
-                        title="Submitted By"
-                        disabled/>
-                    </div>
-            </div>
-  
-          <div class="row mb-3">
-                    <div class="col-sm-3 col-form-label"><label>Patient</label></div>
-                    <div class="col-sm-8 position-relative">
-                      <div class="input-group">
-                        <input 
-                      id="confirm-patient"
-                      [value]="patient"
-                      class="form-control form-control-lg" 
-                      title="First Name" 
-                      disabled/>
-                        <input 
-                        type="text"
-                        id="birth"
-                        [value]="patientDob"
-                        class="form-control form-control-lg" 
-                        title="DOB" 
-                        disabled/>
-                    
-                      <select 
-                      class="form-select form-select-lg pe-0"
-                      id="confirm-sex"
-                      formControlName="confirm-sex"                    
-                      title="Sex assigned at birth"
-                      disabled
-                      >
-                      <option selected value="1">M</option>
+  <div class="col-12">
+    <h2 class="cinzel text-center">Confirmation</h2>
 
-                    </select>
 
-                    </div>
-                    </div>
-                  </div>
+<table style="cursor:default" class="table table-striped table-hover align-middle">
+<thead>
+      <tr >
+        <th scope="col"></th>
+        <th scope="col" title="Patient"><span class="material-symbols-rounded">person</span></th>
+        <th scope="col" title="Reason"><span class="material-symbols-rounded">psychology_alt</span></th>
+        <th scope="col" title="Submitting Doctor"><span class="material-symbols-rounded">stethoscope</span></th>
+        <!--<th scope="col" title="Office"><span class="material-symbols-rounded">home_health</span></th>-->
+        <th scope="col" title="Upload Person"><span class="material-symbols-rounded">contact_phone</span></th>
+        <th scope="col" title="Report Finished Notification"><span class="material-symbols-rounded">mail</span></th>
+        <th scope="col" title="Patient Imaging"><span class="material-symbols-rounded">photo_library</span></th>
+        <th scope="col" title="Rush | Stat?"><span class="material-symbols-rounded">alarm</span></th>
+      </tr>
+    </thead>
+<tbody>
+  <tr>
+    <th scope="row"></th>
+    <td>Patient Name</td>
+    <td>Reason Category Array</td>
+    <td>Doctor Name</td>
+    <td>Upload Person</td>
+    <td>Email Notification</td>
+    <td>Patient Imaging Filename:SizeMB</td>
+    <td>Rush/Stat?</td>
+  </tr>
+</tbody>
+    </table>
 
-                  <div class="row mb-3">
-                    <div class="col-sm-3 col-form-label"><label>Doctor</label></div>
-                    <div class="col-sm-8 position-relative">
-                      <input 
-                      id="confirm-reason" 
-                      [value]="doctorName"
-                      class="form-control form-control-lg" 
-                      disabled/>
-                    </div>
-            </div>
 
-            <div class="row mb-3">
-                    <div class="col-sm-3 col-form-label"><label>Reason</label></div>
-                    <div class="col-sm-8 position-relative">
-                      <textarea
-                      id="confirm-reason" 
-                      [innerHtml]="reasons"
-                      class="form-control form-control-lg" 
-                      disabled
-                      rows="3" 
-                      >
-                    </textarea>
-                    </div>
-            </div>
-              
-     </div>
+            
+   </div>
 </form> 
